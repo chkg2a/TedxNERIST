@@ -6,7 +6,7 @@ import React, {
   useMemo,
 } from "react";
 import "../css/HeroPhone.css";
-import { Navbar } from "./";
+import Navbar from "./Navbar";
 
 function HeroPhone() {
   const imageRef = useRef(null);

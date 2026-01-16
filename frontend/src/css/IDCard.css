@@ -1,0 +1,117 @@
+.id-card-container {
+  width: 300px;
+  height: 500px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- BLOB STYLES --- */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px); /* Slightly reduced blur so the core is defined */
+  z-index: 0; /* Behind content */
+  /* Performance optimization for moving elements */
+  will-change: transform; 
+}
+
+/* 1. Top Right Blob (Blue) */
+.blob-top-right {
+  width: 300px;
+  height: 300px;
+  top: -40%;
+  right: -40%;
+  /* Brighter core (1.0 alpha), concentrated (stops at 20% then fades fast to 60%) */
+  background: radial-gradient(circle at center, rgba(235, 52, 36, 1.0) 0%, rgba(235, 52, 36, 0.8) 25%, rgba(0,0,0,0) 25%);
+  opacity: 0.7; /* Overall slightly lower opacity so it doesn't blow out the white text too much */
+  /* Long duration animation */
+  animation: moveTopRight 20s ease-in-out infinite alternate;
+}
+
+/* 2. Bottom Left Blob (Red - The brightest one) */
+.blob-bottom-left {
+  width: 350px;
+  height: 350px;
+  bottom: -45%;
+  left: -40%;
+  /* Very bright red core */
+  background: radial-gradient(circle at center, rgba(235, 52, 36, 1.0) 0%, rgba(235, 52, 36, 0.8) 25%, rgba(0,0,0,0) 25%);
+  opacity: 0.9;
+  animation: moveBottomLeft 23s ease-in-out infinite alternate;
+}
+
+/* 3. Bottom Right Blob (Blue/Purple Mix) */
+.blob-bottom-right {
+  width: 300px;
+  height: 300px;
+  bottom: -40%;
+  right: -40%;
+  /* Concentrated blue/purple */
+  background: radial-gradient(circle at center, rgba(80, 36, 235, 1.0) 0%, rgba(80, 36, 235, 0.7) 20%, rgba(0,0,0,0) 25%);
+  opacity: 0.8;
+  animation: moveBottomRight 18s ease-in-out infinite alternate;
+}
+
+/* --- CONTENT STYLES --- */
+.id-card-x {
+  width: 210px;
+  height: auto;
+}
+
+.id-card-bottom {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* --- THE GRADIENT BLUR OVERLAY --- */
+.blur-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 20; 
+
+  /* The smudgy glass effect */
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px);
+
+  /* Transparent on right, Blurry on left */
+  mask-image: linear-gradient(to left, transparent 10%, black 90%);
+  -webkit-mask-image: linear-gradient(to left, transparent 10%, black 90%);
+}
+
+/* --- MOVEMENT ANIMATIONS --- */
+/* Using transform: translate() moves the element relative to its initial 
+   top/left/bottom/right placement.
+   Adding subtle scaling makes them feel more alive like liquid.
+*/
+
+@keyframes moveTopRight {
+    0%   { transform: translate(0, 0) scale(1); }
+    30%  { transform: translate(-100px, 50px) scale(1.1); }
+    70%  { transform: translate(-50px, 150px) scale(0.9); }
+    100% { transform: translate(-120px, 80px) scale(1); }
+}
+
+@keyframes moveBottomLeft {
+    0%   { transform: translate(0, 0) scale(1); }
+    40%  { transform: translate(80px, -100px) scale(1.2); }
+    80%  { transform: translate(150px, -50px) scale(0.9); }
+    100% { transform: translate(50px, -120px) scale(1.1); }
+}
+
+@keyframes moveBottomRight {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(-100px, -100px) scale(0.8); }
+    100% { transform: translate(-150px, 50px) scale(1.1); }
+}

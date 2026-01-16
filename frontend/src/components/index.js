@@ -8,7 +8,7 @@ import ReasonsToAttend from "./ReasonsToAttend.jsx";
 import Footer from "./Footer.jsx";
 import PageDivider from "./PageDivider.jsx";
 import Sponsors from "./Sponsors.jsx";
-import PrivacyPolicy from "./PrivacyPolicy.jsx";
+import PrivacyPolicy from "./PPolicy.jsx";
 import NoRefundPolicy from "./RefundPolicy.jsx";
 import TermsAndConditions from "./TermsAndConditions.jsx";
 import TeamSection from "./TeamSection.jsx";

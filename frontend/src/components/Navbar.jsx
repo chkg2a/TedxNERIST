@@ -1,147 +1,117 @@
 import React, { useState } from "react";
-import "../css/Navbar.css";
 import { Link } from "react-router-dom";
+import "../css/Navbar.css";
+// Import the data
+import { NAV_LINKS, CTA_BUTTON } from "../constants/Navbar";
+
+// Helper component to render specific link types
+const NavLink = ({ link, onClick }) => {
+  const className = "block text-base font-normal text-gray-400 transition-all duration-200 hover:text-white";
+
+  if (link.type === "router") {
+    return (
+      <Link to={link.path} className={className} onClick={onClick}>
+        {link.label}
+      </Link>
+    );
+  }
+
+  // Default to anchor tag
+  return (
+    <a href={link.path} className={className} onClick={onClick}>
+      {link.label}
+    </a>
+  );
+};
+
 const Navbar = () => {
   const [expanded, setExpanded] = useState(false);
 
-  function isPhone() {
-    return screen.width <= 800;
-  }
+  // Consider using window.innerWidth for better accuracy than screen.width
+  const isPhone = () => typeof window !== "undefined" && window.innerWidth <= 800;
+
   return (
-    <>
-      {/* Navbar */}
-      <header
-        className={`py-4 sm:py-6 ${isPhone() ? "-" : ""} header ${
-          expanded ? "bg-black!" : ""
+    <header
+      className={`py-4 sm:py-6 ${isPhone() ? "-" : ""} header ${expanded ? "bg-black!" : ""
         }`}
-      >
-        <div className="px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            <div className="shrink-0">
-              <a href="/" title="" className="flex">
-                <img className="w-auto logo" src="/logo_wl.webp" alt="Logo" />
-              </a>
-            </div>
+    >
+      <div className="px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
 
-            {/* Mobile Menu Toggle */}
-            <div className="flex md:hidden">
-              <button
-                type="button"
-                className="text-white"
-                onClick={() => setExpanded(!expanded)}
-                aria-expanded={expanded}
-              >
-                {expanded ? (
-                  <svg
-                    className="w-7 h-7"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    className="w-7 h-7"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                      d="M4 6h16M4 12h16M4 18h16"
-                    />
-                  </svg>
-                )}
-              </button>
-            </div>
-
-            <nav className="hidden space-x-10 md:flex md:items-center md:justify-center lg:space-x-16">
-              {["Home", "About"].map((label) => (
-                <a
-                  key={label}
-                  href={`/#${label.toLowerCase()}`}
-                  className="block text-base font-normal text-gray-400 transition-all duration-200 hover:text-white "
-                >
-                  {label}
-                </a>
-              ))}
-              <Link
-                to="/team"
-                className="block text-base font-normal text-gray-400 transition-all duration-200 hover:text-white "
-              >
-                Team
-              </Link>
-              <Link
-                to="/contact"
-                className="block text-base font-normal text-gray-400 transition-all duration-200 hover:text-white "
-              >
-                Contact
-              </Link>
-            </nav>
-
-            <div className="hidden md:inline-flex items-center">
-              <Link to="/ticket" className="custom-button">
-                <span className="text">Book Now →</span>
-                <img src={"/arrow.svg"} alt="Arrow" className="arrow-icon" />
-              </Link>
-
-              {/* <button className="custom-button" onClick={tempButtonClick}>
-                <span className="text">Book Now</span>
-                <img src={"/arrow.svg"} alt="Arrow" className="arrow-icon" />
-              </button> */}
-            </div>
+          {/* Logo */}
+          <div className="shrink-0">
+            <a href="/" title="" className="flex">
+              <img className="w-auto logo" src="/logo_wl.webp" alt="Logo" />
+            </a>
           </div>
 
-          {expanded && (
-            <nav className="pt-8 pb-4 space-y-8">
-              {["Home", "About"].map((label) => (
-                <a
-                  key={label}
-                  href={`/#${label.toLowerCase()}`}
-                  className="block text-base font-normal text-gray-400 transition-all duration-200 hover:text-white "
-                >
-                  {label}
-                </a>
-              ))}
-              <Link
-                to="/team"
-                className="block text-base font-normal text-gray-400 transition-all duration-200 hover:text-white "
-              >
-                Team
-              </Link>
-              <Link
-                to="/contact"
-                className="block text-base font-normal text-gray-400 transition-all duration-200 hover:text-white "
-              >
-                Contact
-              </Link>
+          {/* Mobile Menu Toggle */}
+          <div className="flex md:hidden">
+            <button
+              type="button"
+              className="text-white"
+              onClick={() => setExpanded(!expanded)}
+              aria-expanded={expanded}
+            >
+              {expanded ? (
+                <svg className="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
+          </div>
 
-              <div className="relative inline-flex items-center justify-center group">
-                <Link to="/ticket" className="custom-button">
-                  <span className="text">Book Now</span>
-                  <img src={"/arrow.svg"} alt="Arrow" className="arrow-icon" />
-                </Link>
+          {/* DESKTOP NAV */}
+          <nav className="hidden space-x-10 md:flex md:items-center md:justify-center lg:space-x-16">
+            {NAV_LINKS.map((link) => (
+              <NavLink key={link.id} link={link} />
+            ))}
+          </nav>
 
-                {/* <button className="custom-button" onClick={tempButtonClick}>
-                  <span className="text">Book Now</span>
-                  <img src={"/arrow.svg"} alt="Arrow" className="arrow-icon" />
-                </button> */}
-              </div>
-            </nav>
+          {/* DESKTOP CTA BUTTON */}
+          {CTA_BUTTON.length !== 0 && (
+            <div className="hidden md:inline-flex items-center">
+              <Link to={CTA_BUTTON.path} className="custom-button">
+                <span className="text">{CTA_BUTTON.label}</span>
+                {CTA_BUTTON.showArrow && (
+                  <span className="ml-2">→</span> // Or use your <img /> tag here
+                )}
+              </Link>
+            </div>
           )}
         </div>
-      </header>
-    </>
+
+        {/* MOBILE NAV MENU */}
+        {expanded && (
+          <nav className="pt-8 pb-4 space-y-8">
+            {NAV_LINKS.map((link) => (
+              <NavLink
+                key={link.id}
+                link={link}
+                onClick={() => setExpanded(false)} // Close menu on click
+              />
+            ))}
+
+            <div className="relative inline-flex items-center justify-center group">
+              <Link
+                to={CTA_BUTTON.path}
+                className="custom-button"
+                onClick={() => setExpanded(false)}
+              >
+                <span className="text">{CTA_BUTTON.label}</span>
+                {CTA_BUTTON.showArrow && (
+                  <span className="ml-2">→</span> // Or use your <img /> tag here
+                )}
+              </Link>
+            </div>
+          </nav>
+        )}
+      </div>
+    </header>
   );
 };
 
