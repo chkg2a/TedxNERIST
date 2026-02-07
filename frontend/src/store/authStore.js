@@ -71,6 +71,24 @@ export const useAuthStore = create((set, get) => ({
     }),
 
     // ============ ADMIN AUTHENTICATION ============
+
+    // Register a new admin
+    registerAdmin: async (email, password) => {
+        set({ isLoading: true, error: null });
+        try {
+            const response = await axios.post(`${API_URL}/api/admin/register`, {
+                email,
+                password
+            });
+            set({ isLoading: false });
+            return { success: true, message: response.data.message };
+        } catch (error) {
+            const message = error.response?.data?.message || "Registration failed";
+            set({ isLoading: false, error: message });
+            return { success: false, message };
+        }
+    },
+
     login: async (email, password) => {
         set({ isLoading: true, error: null });
         try {

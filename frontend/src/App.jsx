@@ -20,6 +20,9 @@ const PrivacyPolicy = lazy(() => import("./components/PPolicy.jsx"));
 const NoRefundPolicy = lazy(() => import("./components/RefundPolicy.jsx"));
 const TermsAndConditions = lazy(() => import("./components/TermsAndConditions.jsx"));
 const RegisterPage = lazy(() => import("./components/RegisterPage.jsx"));
+const AdminLogin = lazy(() => import("./components/admin/AdminLogin.jsx"));
+const AdminDashboard = lazy(() => import("./components/admin/AdminDashboard.jsx"));
+const AdminRegister = lazy(() => import("./components/admin/AdminRegister.jsx"));
 
 // --- 3. Lazy Load Heavy Home Sections ---
 // These are downloaded only when scrolled into view.
@@ -95,6 +98,12 @@ function App() {
           <Route path="/refund" element={<NoRefundPolicy />} />
           <Route path="/term" element={<TermsAndConditions />} />
           <Route path="/register" element={<RegisterPage />} />
+
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/register" element={<AdminRegister />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin" element={<AdminLogin />} />
 
           <Route
             path="/"
