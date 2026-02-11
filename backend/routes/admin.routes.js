@@ -18,13 +18,14 @@ import { verifyToken } from "../middleware/verifyToken.js";
 const adminRouter = express.Router();
 
 // Public routes (no authentication required)
-adminRouter.post("/register", registerAdmin);
 adminRouter.post("/login", loginAdmin);
 adminRouter.post("/refresh-token", refreshAccessToken);
 
 // Protected routes (authentication required)
 adminRouter.use(verifyToken); // Apply middleware to all routes below
 
+// Only authenticated admins can create new admins
+adminRouter.post("/register", registerAdmin);
 adminRouter.post("/logout", logoutAdmin);
 adminRouter.get("/me", getMe);
 
