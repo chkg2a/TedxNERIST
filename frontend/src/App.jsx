@@ -22,7 +22,7 @@ const TermsAndConditions = lazy(() => import("./components/TermsAndConditions.js
 const RegisterPage = lazy(() => import("./components/RegisterPage.jsx"));
 const AdminLogin = lazy(() => import("./components/admin/AdminLogin.jsx"));
 const AdminDashboard = lazy(() => import("./components/admin/AdminDashboard.jsx"));
-const AdminRegister = lazy(() => import("./components/admin/AdminRegister.jsx"));
+const ProtectedRoute = lazy(() => import("./components/admin/ProtectedRoute.jsx"));
 
 // --- 3. Lazy Load Heavy Home Sections ---
 // These are downloaded only when scrolled into view.
@@ -101,8 +101,7 @@ function App() {
 
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/register" element={<AdminRegister />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminLogin />} />
 
           <Route

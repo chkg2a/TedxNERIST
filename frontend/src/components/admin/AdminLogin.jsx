@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useAuthStore } from "../../store/authStore";
 import "../../css/Admin.css";
@@ -113,12 +113,6 @@ const AdminLogin = () => {
                 </form>
 
                 <div className="admin-login-footer">
-                    <p className="footer-text">
-                        Don't have an account?{" "}
-                        <Link to="/admin/register" className="link-highlight">
-                            Create Account
-                        </Link>
-                    </p>
                     <a href="/">
                         <i className="fas fa-arrow-left"></i>
                         Back to Home

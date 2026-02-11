@@ -13,7 +13,7 @@ const AdminDashboard = () => {
     const {
         admin, isAuthenticated, isLoading, stats, registrations, pagination,
         fetchStats, fetchRegistrations, searchRegistrations, deleteRegistration,
-        checkInUser, exportRegistrations, logout, checkAuth
+        checkInUser, exportRegistrations, logout
     } = useAuthStore();
 
     const [activeTab, setActiveTab] = useState("dashboard");
@@ -23,14 +23,6 @@ const AdminDashboard = () => {
     const [selectedRegistration, setSelectedRegistration] = useState(null);
     const [filters, setFilters] = useState({ verified: "", department: "", year: "" });
     const [deleteConfirm, setDeleteConfirm] = useState(null);
-
-    useEffect(() => {
-        const verifyAuth = async () => {
-            const isValid = await checkAuth();
-            if (!isValid) navigate("/admin/login");
-        };
-        verifyAuth();
-    }, [checkAuth, navigate]);
 
     useEffect(() => {
         if (isAuthenticated) {
