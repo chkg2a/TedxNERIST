@@ -5,6 +5,8 @@ import { useAuthStore } from "../../store/authStore";
 import DashboardTab from "./DashboardTab";
 import RegistrationsTab from "./RegistrationsTab";
 import CheckInTab from "./CheckInTab";
+import AnalyticsTab from "./AnalyticsTab";
+import ToolsTab from "./ToolsTab";
 import { RegistrationModal, DeleteModal } from "./Modals";
 import "../../css/Admin.css";
 
@@ -83,24 +85,42 @@ const AdminDashboard = () => {
         return <div className="admin-loading"><div className="loading-spinner"></div><p>Loading...</p></div>;
     }
 
+    const navItems = [
+        { id: "dashboard", icon: "fa-chart-line", label: "Dashboard" },
+        { id: "registrations", icon: "fa-users", label: "Registrations" },
+        { id: "checkin", icon: "fa-qrcode", label: "Check-In" },
+        { id: "analytics", icon: "fa-chart-area", label: "Analytics" },
+        { id: "tools", icon: "fa-tools", label: "Tools" },
+    ];
+
     return (
         <div className="admin-dashboard">
             <aside className="admin-sidebar">
-                <div className="sidebar-logo"><img src="/logo_wl.webp" alt="TEDxNERIST" /><span>Admin</span></div>
+                <div className="sidebar-logo">
+                    <img src="/logo_wl.webp" alt="TEDxNERIST" />
+                    <span>Admin</span>
+                </div>
                 <nav className="sidebar-nav">
-                    <button className={`nav-item ${activeTab === "dashboard" ? "active" : ""}`} onClick={() => setActiveTab("dashboard")}>
-                        <i className="fas fa-chart-line"></i>Dashboard
-                    </button>
-                    <button className={`nav-item ${activeTab === "registrations" ? "active" : ""}`} onClick={() => setActiveTab("registrations")}>
-                        <i className="fas fa-users"></i>Registrations
-                    </button>
-                    <button className={`nav-item ${activeTab === "checkin" ? "active" : ""}`} onClick={() => setActiveTab("checkin")}>
-                        <i className="fas fa-qrcode"></i>Check-In
-                    </button>
+                    {navItems.map(item => (
+                        <button
+                            key={item.id}
+                            className={`nav-item ${activeTab === item.id ? "active" : ""}`}
+                            onClick={() => setActiveTab(item.id)}
+                        >
+                            <i className={`fas ${item.icon}`}></i>
+                            {item.label}
+                        </button>
+                    ))}
                 </nav>
                 <div className="sidebar-footer">
-                    <div className="admin-info"><i className="fas fa-user-shield"></i><span>{admin?.email?.split("@")[0] || "Admin"}</span></div>
-                    <button className="logout-btn" onClick={handleLogout}><i className="fas fa-sign-out-alt"></i>Logout</button>
+                    <div className="admin-info">
+                        <i className="fas fa-user-shield"></i>
+                        <span>{admin?.email?.split("@")[0] || "Admin"}</span>
+                    </div>
+                    <button className="logout-btn" onClick={handleLogout}>
+                        <i className="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
                 </div>
             </aside>
 
@@ -122,6 +142,8 @@ const AdminDashboard = () => {
                             checkInResult={checkInResult} isLoading={isLoading} stats={stats}
                         />
                     )}
+                    {activeTab === "analytics" && <AnalyticsTab />}
+                    {activeTab === "tools" && <ToolsTab />}
                 </AnimatePresence>
             </main>
 

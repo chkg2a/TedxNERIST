@@ -263,6 +263,40 @@ export const useAuthStore = create((set, get) => ({
         }
     },
 
+    // Timeline data
+    timeline: [],
+    fetchTimeline: async (days = 30) => {
+        try {
+            const response = await axios.get(`${API_URL}/api/admin/timeline?days=${days}`);
+            set({ timeline: response.data.timeline });
+            return { success: true, timeline: response.data.timeline };
+        } catch (error) {
+            return { success: false, message: error.response?.data?.message || "Failed to fetch timeline" };
+        }
+    },
+
+    // Activity log
+    activities: [],
+    fetchActivity: async (limit = 15) => {
+        try {
+            const response = await axios.get(`${API_URL}/api/admin/activity?limit=${limit}`);
+            set({ activities: response.data.activities });
+            return { success: true, activities: response.data.activities };
+        } catch (error) {
+            return { success: false, message: error.response?.data?.message || "Failed to fetch activity" };
+        }
+    },
+
+    // Bulk email
+    sendBulkEmail: async (subject, htmlContent) => {
+        try {
+            const response = await axios.post(`${API_URL}/api/admin/bulk-email`, { subject, htmlContent });
+            return { success: true, ...response.data };
+        } catch (error) {
+            return { success: false, message: error.response?.data?.message || "Failed to send emails" };
+        }
+    },
+
     // Clear error
     clearError: () => set({ error: null })
 }));

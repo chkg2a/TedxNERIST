@@ -77,7 +77,7 @@ function SectionWrapper({ children, className, id }) {
 function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<div className="min-h-screen bg-black" />}>
+      <Suspense fallback={<ComingSoon />}>
         <Routes>
           <Route
             path="/contact"
@@ -108,7 +108,6 @@ function App() {
             path="/"
             element={
               <div id="Home">
-                <Navbar />
                 <Hero />
               </div>
             }
@@ -192,7 +191,7 @@ const ComingSoon = () => (
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.2 }}
     >
-      Lighthouse Apus
+      Metamorphosis
     </motion.h2>
     <motion.p
       className="text-lg mt-2 italic"
@@ -200,7 +199,7 @@ const ComingSoon = () => (
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1.5 }}
     >
-      "The Indomitable Spirit"
+      "Transform · Evolve · Emerge"
     </motion.p>
     <motion.p
       className="text-lg mt-4 font-semibold"

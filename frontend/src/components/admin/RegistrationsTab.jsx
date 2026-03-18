@@ -14,7 +14,10 @@ const RegistrationsTab = ({
             className="registrations-content"
         >
             <header className="content-header">
-                <h1>Registrations</h1>
+                <div>
+                    <h1>Registrations</h1>
+                    <p>{pagination?.total || registrations.length} total entries</p>
+                </div>
                 <button className="export-btn" onClick={handleExport}>
                     <i className="fas fa-download"></i> Export CSV
                 </button>
@@ -63,7 +66,12 @@ const RegistrationsTab = ({
                 </div>
             </div>
 
-            <div className="table-container">
+            <motion.div
+                className="table-container"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15, duration: 0.35 }}
+            >
                 <table className="registrations-table">
                     <thead>
                         <tr>
@@ -78,8 +86,13 @@ const RegistrationsTab = ({
                         </tr>
                     </thead>
                     <tbody>
-                        {registrations.map((reg) => (
-                            <tr key={reg._id}>
+                        {registrations.map((reg, index) => (
+                            <motion.tr
+                                key={reg._id}
+                                initial={{ opacity: 0, y: 8 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.03, duration: 0.25 }}
+                            >
                                 <td>
                                     <div className="user-cell">
                                         <span className="user-avatar">{reg.name?.charAt(0)?.toUpperCase()}</span>
@@ -92,6 +105,7 @@ const RegistrationsTab = ({
                                 <td>{reg.year || "-"}</td>
                                 <td>
                                     <span className={`status-badge ${reg.isVerified ? "verified" : "pending"}`}>
+                                        <i className={`fas ${reg.isVerified ? "fa-check-circle" : "fa-clock"}`} style={{ fontSize: 10 }}></i>
                                         {reg.isVerified ? "Verified" : "Pending"}
                                     </span>
                                 </td>
@@ -106,15 +120,18 @@ const RegistrationsTab = ({
                                         </button>
                                     </div>
                                 </td>
-                            </tr>
+                            </motion.tr>
                         ))}
                     </tbody>
                 </table>
 
                 {registrations.length === 0 && (
-                    <div className="empty-state"><i className="fas fa-inbox"></i><p>No registrations found</p></div>
+                    <div className="empty-state">
+                        <i className="fas fa-inbox"></i>
+                        <p>No registrations found</p>
+                    </div>
                 )}
-            </div>
+            </motion.div>
 
             {pagination && pagination.totalPages > 1 && (
                 <div className="pagination">

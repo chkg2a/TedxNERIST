@@ -6,7 +6,7 @@ export const about = [
       "TEDxNERIST is an independently organized TEDx event held at NERIST, Arunachal Pradesh, celebrating local voices and global ideas through inspiring talks and performances.",
 
     subdescription:
-      "With powerful themes like 'Lighthouse Apus' and a lineup of inspiring speakers from diverse backgrounds, TEDxNERIST fosters creativity, dialogue, and visionary thinking in the Northeast region of India and connects it to the global TEDx movement.",
+      "With powerful themes like 'Metamorphosis' and a lineup of inspiring speakers from diverse backgrounds, TEDxNERIST fosters creativity, dialogue, and visionary thinking in the Northeast region of India and connects it to the global TEDx movement.",
   },
   {
     title: "TED",

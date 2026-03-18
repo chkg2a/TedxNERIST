@@ -1,52 +1,103 @@
-import nodemailer from "nodemailer";
 import { VERIFICATION_EMAIL_TEMPLATE } from "../utils/emailTemplates.js";
 import dotenv from "dotenv";
 dotenv.config();
 
+const BREVO_API_KEY = process.env.BREVO_API_KEY;
+const SMTP_FROM_EMAIL = process.env.SMTP_FROM_EMAIL;
+const SMTP_FROM_NAME = process.env.SMTP_FROM_NAME || "TEDxNERIST";
 
+const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
+const MAX_RETRIES = 3;
+const RETRY_DELAY_MS = 1000; // 1 second base delay
 
-
-let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,  
-        pass: process.env.EMAIL_PASS,  
+/**
+ * Core email sending function using the Brevo (Sendinblue) HTTP API.
+ * Retries up to 3 times on failure with exponential backoff.
+ *
+ * @param {string} to - Recipient email address
+ * @param {string} subject - Email subject line
+ * @param {string} htmlContent - HTML body of the email
+ * @returns {Promise<object>} - Brevo API response
+ */
+export const sendEmail = async (to, subject, htmlContent) => {
+  const payload = {
+    sender: {
+      name: SMTP_FROM_NAME,
+      email: SMTP_FROM_EMAIL,
     },
-    tls: {
-        rejectUnauthorized: false 
-    }
-});
+    to: [
+      {
+        email: to,
+      },
+    ],
+    subject,
+    htmlContent,
+  };
 
-export const sendOtp=async(userEmail,otp)=>{
-    
-    let mailOptions = {
-        from: process.env.EMAIL_USER,  // Sender's email
-        to: userEmail,                 // Recipient's email
-        subject: 'OTP Verification Code',  // Subject line
-        html: VERIFICATION_EMAIL_TEMPLATE.replace("{verificationCode}",otp),
-    };
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-        let info = await transporter.sendMail(mailOptions);
-        
-        return info; 
+      const response = await fetch(BREVO_API_URL, {
+        method: "POST",
+        headers: {
+          "accept": "application/json",
+          "api-key": BREVO_API_KEY,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorBody = await response.text();
+        throw new Error(
+          `Brevo API error (${response.status}): ${errorBody}`
+        );
+      }
+
+      const data = await response.json();
+      console.log(
+        `Email sent successfully to ${to} (attempt ${attempt}):`,
+        data
+      );
+      return data;
     } catch (error) {
-        console.error(`Error: ${error}`);
-        throw error;  
+      lastError = error;
+      console.error(
+        `Email send attempt ${attempt}/${MAX_RETRIES} failed:`,
+        error.message
+      );
+
+      if (attempt < MAX_RETRIES) {
+        const delay = RETRY_DELAY_MS * Math.pow(2, attempt - 1);
+        console.log(`Retrying in ${delay}ms...`);
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      }
     }
-}
+  }
 
+  console.error(
+    `All ${MAX_RETRIES} email send attempts failed for ${to}`
+  );
+  throw lastError;
+};
 
+/**
+ * Send OTP verification email.
+ */
+export const sendOtp = async (userEmail, otp) => {
+  const htmlContent = VERIFICATION_EMAIL_TEMPLATE.replace(
+    "{verificationCode}",
+    otp
+  );
+  return sendEmail(userEmail, "OTP Verification Code", htmlContent);
+};
 
-export const sendWelcomeEmail=async(email,name)=>{
-    console.log("route hitted")
-    const reciepient=[{email}];
-    const data=reciepient[0].email;
-    console.log(reciepient);
-    let mailOptions = {
-        from: process.env.EMAIL_USER,  // Sender's email
-        to: data,                 // Recipient's email
-        subject: 'Weclome email',  // Subject line
-        html: `
+/**
+ * Send welcome email after successful registration.
+ */
+export const sendWelcomeEmail = async (email, name) => {
+  const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -142,15 +193,6 @@ export const sendWelcomeEmail=async(email,name)=>{
   
 </body>
 </html>
-`,  // HTML content (can be a template)
-    };
-    try {
-        // Send email with defined transport object, now using async/await
-        let info = await transporter.sendMail(mailOptions);
-        console.log('Message sent: %s', info.messageId);
-        return info;  // Optionally return the info if needed
-    } catch (error) {
-        console.error(`Error: ${error}`);
-        throw error;  // Optionally rethrow the error to handle it outside
-    }
-}
+`;
+  return sendEmail(email, "Welcome to TEDxNERIST", htmlContent);
+};

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import Admin from "../models/admin.model.js";
 import Registration from "../models/user.model.js";
 import { generateTokensAndSetCookies } from "../utils/generateTokenandCookies.js";
+import { sendEmail } from "../mail-smtp/email.js";
 dotenv.config();
 
 
@@ -342,6 +343,153 @@ export const exportRegistrations = async (req, res) => {
             .sort({ createdAt: -1 });
 
         res.status(200).json({ registrations });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+// Get registration timeline (daily counts for last 30 days)
+export const getRegistrationTimeline = async (req, res) => {
+    try {
+        const days = parseInt(req.query.days) || 30;
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - days);
+        startDate.setHours(0, 0, 0, 0);
+
+        const timeline = await Registration.aggregate([
+            { $match: { createdAt: { $gte: startDate } } },
+            {
+                $group: {
+                    _id: {
+                        $dateToString: { format: "%Y-%m-%d", date: "$createdAt" }
+                    },
+                    total: { $sum: 1 },
+                    verified: {
+                        $sum: { $cond: ["$isVerified", 1, 0] }
+                    }
+                }
+            },
+            { $sort: { _id: 1 } }
+        ]);
+
+        // Fill in missing days with zero counts
+        const filledTimeline = [];
+        const current = new Date(startDate);
+        const today = new Date();
+        today.setHours(23, 59, 59, 999);
+
+        while (current <= today) {
+            const dateStr = current.toISOString().split("T")[0];
+            const existing = timeline.find(t => t._id === dateStr);
+            filledTimeline.push({
+                date: dateStr,
+                total: existing ? existing.total : 0,
+                verified: existing ? existing.verified : 0
+            });
+            current.setDate(current.getDate() + 1);
+        }
+
+        res.status(200).json({ timeline: filledTimeline });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+// Get recent activity log
+export const getActivityLog = async (req, res) => {
+    try {
+        const limit = parseInt(req.query.limit) || 20;
+
+        // Recent registrations
+        const recentRegs = await Registration.find()
+            .sort({ createdAt: -1 })
+            .limit(limit)
+            .select("name email isVerified checkedIn checkedInAt createdAt ticketId department");
+
+        const activities = recentRegs.map(reg => {
+            let type = "registered";
+            let time = reg.createdAt;
+
+            if (reg.checkedIn && reg.checkedInAt) {
+                // If checked in recently (within last hour), show that as primary activity
+                const checkinAge = Date.now() - new Date(reg.checkedInAt).getTime();
+                if (checkinAge < 3600000) {
+                    type = "checked_in";
+                    time = reg.checkedInAt;
+                }
+            } else if (reg.isVerified && reg.ticketId) {
+                type = "verified";
+            }
+
+            return {
+                _id: reg._id,
+                name: reg.name,
+                email: reg.email,
+                department: reg.department,
+                type,
+                time
+            };
+        });
+
+        // Sort by time descending
+        activities.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+        res.status(200).json({ activities: activities.slice(0, limit) });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+// Send bulk email to all verified attendees
+export const sendBulkEmail = async (req, res) => {
+    try {
+        const { subject, htmlContent } = req.body;
+
+        if (!subject || !htmlContent) {
+            return res.status(400).json({ message: "Subject and content are required" });
+        }
+
+        const verifiedUsers = await Registration.find({ isVerified: true })
+            .select("email name");
+
+        if (verifiedUsers.length === 0) {
+            return res.status(400).json({ message: "No verified users to email" });
+        }
+
+        let sent = 0;
+        let failed = 0;
+        const errors = [];
+
+        for (const user of verifiedUsers) {
+            try {
+                // Personalize content
+                const personalizedContent = htmlContent
+                    .replace(/\{name\}/g, user.name)
+                    .replace(/\{email\}/g, user.email);
+
+                await sendEmail(user.email, subject, personalizedContent);
+                sent++;
+            } catch (err) {
+                failed++;
+                errors.push({ email: user.email, error: err.message });
+            }
+
+            // Small delay between emails to avoid rate limiting
+            if (sent + failed < verifiedUsers.length) {
+                await new Promise(resolve => setTimeout(resolve, 200));
+            }
+        }
+
+        res.status(200).json({
+            message: `Emails sent: ${sent} successful, ${failed} failed`,
+            total: verifiedUsers.length,
+            sent,
+            failed,
+            errors: errors.slice(0, 10) // Only return first 10 errors
+        });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Internal server error" });

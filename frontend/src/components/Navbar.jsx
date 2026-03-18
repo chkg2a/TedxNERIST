@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "../css/Navbar.css";
-// Import the data
 import { NAV_LINKS, CTA_BUTTON } from "../constants/Navbar";
 
-// Helper component to render specific link types
-const NavLink = ({ link, onClick }) => {
-  const className = "block text-base font-normal text-gray-400 transition-all duration-200 hover:text-white";
+const NavLink = ({ link, onClick, isActive }) => {
+  const baseClass =
+    "text-[13px] tracking-[0.06em] uppercase transition-colors duration-300";
+  const colorClass = isActive ? "text-white" : "text-gray-400 hover:text-white";
+  const className = `${baseClass} ${colorClass}`;
 
   if (link.type === "router") {
     return (
@@ -16,7 +17,6 @@ const NavLink = ({ link, onClick }) => {
     );
   }
 
-  // Default to anchor tag
   return (
     <a href={link.path} className={className} onClick={onClick}>
       {link.label}
@@ -26,88 +26,99 @@ const NavLink = ({ link, onClick }) => {
 
 const Navbar = () => {
   const [expanded, setExpanded] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
-  // Consider using window.innerWidth for better accuracy than screen.width
-  const isPhone = () => typeof window !== "undefined" && window.innerWidth <= 800;
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const hasCTA = CTA_BUTTON && CTA_BUTTON.label;
 
   return (
     <header
-      className={`py-4 sm:py-6 ${isPhone() ? "-" : ""} header ${expanded ? "bg-black!" : ""
-        }`}
+      className={`header ${scrolled ? "header--scrolled" : ""} ${expanded ? "header--expanded" : ""}`}
     >
-      <div className="px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <div className="px-5 sm:px-8 lg:px-10">
+        <div className="flex items-center justify-between h-[72px]">
 
           {/* Logo */}
-          <div className="shrink-0">
-            <a href="/" title="" className="flex">
-              <img className="w-auto logo" src="/logo_wl.webp" alt="Logo" />
-            </a>
-          </div>
+          <Link to="/" className="shrink-0 flex items-center">
+            <img
+              className="h-[38px] sm:h-[42px] w-auto"
+              src="/logo_wl.webp"
+              alt="TEDxNERIST"
+            />
+          </Link>
 
-          {/* Mobile Menu Toggle */}
-          <div className="flex md:hidden">
-            <button
-              type="button"
-              className="text-white"
-              onClick={() => setExpanded(!expanded)}
-              aria-expanded={expanded}
-            >
-              {expanded ? (
-                <svg className="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg className="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              )}
-            </button>
-          </div>
+          {/* Mobile toggle */}
+          <button
+            type="button"
+            className="flex md:hidden text-white/80 hover:text-white transition-colors p-1"
+            onClick={() => setExpanded(!expanded)}
+            aria-expanded={expanded}
+            aria-label="Toggle menu"
+          >
+            {expanded ? (
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
 
-          {/* DESKTOP NAV */}
-          <nav className="hidden space-x-10 md:flex md:items-center md:justify-center lg:space-x-16">
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-8 lg:gap-12" style={{ fontFamily: "Gilroy-Medium, sans-serif" }}>
             {NAV_LINKS.map((link) => (
-              <NavLink key={link.id} link={link} />
+              <NavLink
+                key={link.id}
+                link={link}
+                isActive={location.pathname === link.path}
+              />
             ))}
           </nav>
 
-          {/* DESKTOP CTA BUTTON */}
-          {CTA_BUTTON.length !== 0 && (
-            <div className="hidden md:inline-flex items-center">
-              <Link to={CTA_BUTTON.path} className="custom-button">
-                <span className="text">{CTA_BUTTON.label}</span>
-                {CTA_BUTTON.showArrow && (
-                  <span className="ml-2">→</span> // Or use your <img /> tag here
-                )}
+          {/* Desktop CTA */}
+          {hasCTA && (
+            <div className="hidden md:flex items-center">
+              <Link
+                to={CTA_BUTTON.path}
+                className="nav-cta"
+                style={{ fontFamily: "Gilroy-Medium, sans-serif" }}
+              >
+                {CTA_BUTTON.label}
+                {CTA_BUTTON.showArrow && <span className="nav-cta__arrow">→</span>}
               </Link>
             </div>
           )}
         </div>
 
-        {/* MOBILE NAV MENU */}
+        {/* Mobile menu */}
         {expanded && (
-          <nav className="pt-8 pb-4 space-y-8">
+          <nav className="md:hidden pb-6 pt-2 space-y-5 border-t border-white/[0.06]" style={{ fontFamily: "Gilroy-Medium, sans-serif" }}>
             {NAV_LINKS.map((link) => (
               <NavLink
                 key={link.id}
                 link={link}
-                onClick={() => setExpanded(false)} // Close menu on click
+                isActive={location.pathname === link.path}
+                onClick={() => setExpanded(false)}
               />
             ))}
-
-            <div className="relative inline-flex items-center justify-center group">
+            {hasCTA && (
               <Link
                 to={CTA_BUTTON.path}
-                className="custom-button"
+                className="nav-cta nav-cta--block"
                 onClick={() => setExpanded(false)}
               >
-                <span className="text">{CTA_BUTTON.label}</span>
-                {CTA_BUTTON.showArrow && (
-                  <span className="ml-2">→</span> // Or use your <img /> tag here
-                )}
+                {CTA_BUTTON.label}
+                {CTA_BUTTON.showArrow && <span className="nav-cta__arrow">→</span>}
               </Link>
-            </div>
+            )}
           </nav>
         )}
       </div>

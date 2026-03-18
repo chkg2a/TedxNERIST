@@ -4,4 +4,6 @@ export { default as AdminRegister } from "./AdminRegister";
 export { default as DashboardTab } from "./DashboardTab";
 export { default as RegistrationsTab } from "./RegistrationsTab";
 export { default as CheckInTab } from "./CheckInTab";
+export { default as AnalyticsTab } from "./AnalyticsTab";
+export { default as ToolsTab } from "./ToolsTab";
 export { RegistrationModal, DeleteModal } from "./Modals";

@@ -11,35 +11,40 @@ import {
     deleteRegistration,
     searchRegistrations,
     checkInUser,
-    exportRegistrations
+    exportRegistrations,
+    getRegistrationTimeline,
+    getActivityLog,
+    sendBulkEmail
 } from "../controllers/admin.controller.js";
 import { verifyToken } from "../middleware/verifyToken.js";
 
 const adminRouter = express.Router();
 
-// Public routes (no authentication required)
+
 adminRouter.post("/login", loginAdmin);
 adminRouter.post("/refresh-token", refreshAccessToken);
 
-// Protected routes (authentication required)
-adminRouter.use(verifyToken); // Apply middleware to all routes below
+adminRouter.use(verifyToken);
 
-// Only authenticated admins can create new admins
+
 adminRouter.post("/register", registerAdmin);
 adminRouter.post("/logout", logoutAdmin);
 adminRouter.get("/me", getMe);
 
-// Registration management routes
+
 adminRouter.get("/registrations", getAllRegistrations);
 adminRouter.get("/registrations/search", searchRegistrations);
 adminRouter.get("/registrations/export", exportRegistrations);
 adminRouter.get("/registrations/:id", getRegistrationById);
 adminRouter.delete("/registrations/:id", deleteRegistration);
 
-// Dashboard and stats
-adminRouter.get("/stats", getDashboardStats);
 
-// Event check-in
+adminRouter.get("/stats", getDashboardStats);
+adminRouter.get("/timeline", getRegistrationTimeline);
+adminRouter.get("/activity", getActivityLog);
+
+
 adminRouter.post("/check-in", checkInUser);
+adminRouter.post("/bulk-email", sendBulkEmail);
 
 export default adminRouter;

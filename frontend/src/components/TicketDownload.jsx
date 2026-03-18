@@ -54,7 +54,7 @@ const TicketDownload = () => {
   const addToGoogleCalendar = () => {
     if (!ticketData) return;
 
-    const eventName = "TEDxNERIST - Lighthouse Apus";
+    const eventName = "TEDxNERIST - Metamorphosis";
     const eventLocation =
       "NERIST Auditorium, NERIST, Nirjuli, Arunachal Pradesh";
     const mapsLink = "https://shorturl.at/CsZzQ";
@@ -100,7 +100,7 @@ const TicketDownload = () => {
           className="w-24 mx-auto mb-2"
         />
         <h1 className="text-red-500 text-2xl font-bold">TEDxNERIST</h1>
-        <h3 className="text-lg mt-2">Lighthouse Apus</h3>
+        <h3 className="text-lg mt-2">Metamorphosis</h3>
         <p className="mt-2 text-sm">
           <strong>Name:</strong> {ticketData.name}
         </p>
