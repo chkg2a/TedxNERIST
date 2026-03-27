@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   NAVBAR — Frosted glass, scroll-aware
+   NAVBAR — Frosted glass, scroll-aware, editorial
 ═══════════════════════════════════════════════════ */
 
 .header {
@@ -8,21 +8,29 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(5, 5, 5, 0.4);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(5, 5, 5, 0);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
   border-bottom: 1px solid rgba(255, 255, 255, 0);
-  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  transition:
+    background 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.5s ease,
+    backdrop-filter 0.5s ease,
+    box-shadow 0.5s ease;
 }
 
 .header--scrolled {
-  background: rgba(5, 5, 5, 0.85);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  background: rgba(5, 5, 5, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 1px 0 rgba(235, 0, 40, 0.15), 0 4px 40px rgba(0, 0, 0, 0.5);
 }
 
 .header--expanded {
-  background: rgba(5, 5, 5, 0.95);
+  background: rgba(5, 5, 5, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
 }
 
 /* ─── CTA Button ─── */
@@ -30,31 +38,33 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 24px;
-  border-radius: 999px;
+  padding: 9px 22px;
+  border-radius: 2px;              /* sharp corners — editorial */
   background: #eb0028;
   color: #fff;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
   white-space: nowrap;
+  font-family: "OverpassMono", monospace;
 }
 
 .nav-cta:hover {
-  background: #d00024;
-  box-shadow: 0 0 30px rgba(235, 0, 40, 0.25);
+  background: #c20022;
+  box-shadow: 0 0 40px rgba(235, 0, 40, 0.3), 0 0 0 1px rgba(235, 0, 40, 0.2);
   transform: translateY(-1px);
 }
 
 .nav-cta:active {
   transform: translateY(0);
+  box-shadow: none;
 }
 
 .nav-cta__arrow {
-  transition: transform 0.3s ease;
+  transition: transform 0.25s ease;
   display: inline-block;
 }
 
@@ -67,4 +77,5 @@
   justify-content: center;
   width: 100%;
   margin-top: 8px;
+  border-radius: 2px;
 }

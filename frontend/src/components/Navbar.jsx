@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import "../css/Navbar.css";
 import { NAV_LINKS, CTA_BUTTON } from "../constants/Navbar";
@@ -24,7 +25,7 @@ const NavLink = ({ link, onClick, isActive }) => {
   );
 };
 
-const Navbar = () => {
+const Navbar = ({ isReady = true }) => {
   const [expanded, setExpanded] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -38,6 +39,12 @@ const Navbar = () => {
   const hasCTA = CTA_BUTTON && CTA_BUTTON.label && location.pathname !== CTA_BUTTON.path;
 
   return (
+    <motion.div
+      initial={{ opacity: 0, y: -12 }}
+      animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: -12 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      style={{ pointerEvents: isReady ? "auto" : "none" }}
+    >
     <header
       className={`header ${scrolled ? "header--scrolled" : ""} ${expanded ? "header--expanded" : ""}`}
     >
@@ -123,6 +130,7 @@ const Navbar = () => {
         )}
       </div>
     </header>
+    </motion.div>
   );
 };
 

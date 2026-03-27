@@ -4,6 +4,7 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import ParticleCanvas from "./ParticleCanvas";
 
 /* ═══════════════════════════════════════════════════════════════════
    DESIGN SYSTEM
@@ -74,26 +75,15 @@ const SectionLabel = ({ number, text }) => (
 
 /* ═══════════════════════════════════════════════════════════════════ */
 
-function Hero() {
+function Hero({ isReady }) {
   const navigate = useNavigate();
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  const particles = useMemo(
-    () => Array.from({ length: 18 }, () => ({
-      size: Math.random() * 1.5 + 0.5,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      duration: Math.random() * 6 + 5,
-      delay: Math.random() * 5,
-    })),
-    []
-  );
-
   return (
-    <div className="relative" style={{ background: COLORS.bg, color: COLORS.white }}>
-      <Navbar />
+    <div className="relative text-white font-sans">
+      <Navbar isReady={isReady} />
       <GrainOverlay />
 
       {/* ═══════════════════════════════════════════════════════
@@ -104,61 +94,78 @@ function Hero() {
         style={{ opacity: heroOpacity }}
         className="relative w-full min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden"
       >
+        <ParticleCanvas isReady={isReady} />
         {/* Ambient red pulse — very subtle */}
         <div
           className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(235,0,40,0.05) 0%, transparent 65%)" }}
         />
 
-        {/* Particles */}
-        {particles.map((p, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full"
-            style={{ width: p.size, height: p.size, left: `${p.x}%`, top: `${p.y}%`, background: "rgba(255,255,255,0.12)" }}
-            animate={{ y: [0, -12, 0], opacity: [0.08, 0.25, 0.08] }}
-            transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: "easeInOut" }}
-          />
-        ))}
-
         {/* ── Content stack ── */}
-        <div className="relative z-10 flex flex-col items-center text-center max-w-3xl mx-auto">
-          {/* Logo */}
-          <motion.img
-            src="/logo.png"
-            alt="TEDxNERIST"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="w-24 sm:w-28 md:w-36 h-auto mb-8"
-            style={{ mixBlendMode: "screen" }}
-          />
+        <div className="relative z-10 flex flex-col items-center text-center max-w-5xl mx-auto w-full">
 
-          {/* Wordmark */}
-          <motion.img
-            src="/logo_wl.webp"
-            alt="TEDxNERIST"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="w-40 sm:w-48 md:w-60 h-auto mb-10"
-          />
+          {/* ── Animated Wordmark: x rises, TED ← and NERIST → ── */}
+          <div
+            className="flex items-center justify-center w-full mb-4"
+            style={{ overflow: "hidden", maxWidth: "100%" }}
+          >
+            {/* TED — slides in from left */}
+            <motion.span
+              initial={{ opacity: 0, x: -80 }}
+              animate={isReady ? { opacity: 1, x: 0 } : { opacity: 0, x: -80 }}
+              transition={{ duration: 0.65, delay: 2.5, ease: [0.22, 1, 0.36, 1] }}
+              className="font-bold leading-none tracking-tight text-white select-none"
+              style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontSize: "clamp(2rem, 8vw, 5.5rem)", fontWeight: 900 }}
+            >
+              TED
+            </motion.span>
+
+            {/* x — rises from below FIRST */}
+            <motion.span
+              initial={{ opacity: 0, y: 70 }}
+              animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 70 }}
+              transition={{ duration: 0.55, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
+              className="font-bold leading-none select-none"
+              style={{
+                fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                fontWeight: 900,
+                fontSize: "clamp(1.4rem, 5.5vw, 3.8rem)",
+                color: "#eb0028",
+                margin: "0 0.03em",
+                alignSelf: "flex-end",
+                paddingBottom: "0.12em",
+              }}
+            >
+              x
+            </motion.span>
+
+            {/* NERIST — slides in from right */}
+            <motion.span
+              initial={{ opacity: 0, x: 80 }}
+              animate={isReady ? { opacity: 1, x: 0 } : { opacity: 0, x: 80 }}
+              transition={{ duration: 0.65, delay: 2.5, ease: [0.22, 1, 0.36, 1] }}
+              className="font-bold leading-none tracking-tight select-none"
+              style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", fontSize: "clamp(2rem, 8vw, 5.5rem)", color: "#eb0028", fontWeight: 900 }}
+            >
+              NERIST
+            </motion.span>
+          </div>
 
           {/* Horizontal rule accent */}
           <motion.div
             initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            animate={isReady ? { scaleX: 1 } : { scaleX: 0 }}
+            transition={{ duration: 0.7, delay: 4.1, ease: [0.22, 1, 0.36, 1] }}
             className="w-16 h-[1px] mb-8 origin-center"
             style={{ background: COLORS.red }}
           />
 
-          {/* Theme title — hero typography */}
+          {/* Theme title */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] font-bold leading-[0.95] tracking-tight"
+            animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.7, delay: 4.2, ease: [0.22, 1, 0.36, 1] }}
+            className="text-[2rem] sm:text-[2.8rem] md:text-[3.8rem] lg:text-[4.5rem] font-bold leading-[0.95] tracking-tight"
             style={{ fontFamily: "Cirka, serif" }}
           >
             METAMORPHOSIS
@@ -167,19 +174,19 @@ function Hero() {
           {/* Tagline */}
           <motion.p
             initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.7 }}
+            animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
+            transition={{ duration: 0.6, delay: 4.4 }}
             className="mt-5 text-[11px] sm:text-xs tracking-[0.4em] uppercase"
             style={{ fontFamily: "OverpassMono, monospace", color: COLORS.grey }}
           >
             Transform · Evolve · Emerge
           </motion.p>
 
-          {/* Event meta — minimal, typographic */}
+          {/* Event meta */}
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
+            animate={isReady ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.7, delay: 4.6 }}
             className="mt-8 flex items-center gap-3 text-[10px] sm:text-[11px] tracking-[0.2em] uppercase"
             style={{ fontFamily: "OverpassMono, monospace", color: COLORS.greyDim }}
           >
@@ -193,8 +200,8 @@ function Hero() {
           {/* CTA */}
           <motion.button
             initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.1 }}
+            animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
+            transition={{ duration: 0.6, delay: 4.8 }}
             whileHover={{ scale: 1.03, boxShadow: `0 0 60px ${COLORS.red}30` }}
             whileTap={{ scale: 0.97 }}
             onClick={() => navigate("/register")}
@@ -203,10 +210,10 @@ function Hero() {
           >
             <span className="relative z-10">Register Now</span>
             <ArrowRight size={16} strokeWidth={2.5} className="relative z-10 group-hover:translate-x-0.5 transition-transform" />
-            {/* Hover sweep */}
             <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
           </motion.button>
         </div>
+
 
         {/* Scroll cue */}
         <motion.div
@@ -224,7 +231,7 @@ function Hero() {
       {/* ═══════════════════════════════════════════════════════
           THEME
       ═══════════════════════════════════════════════════════ */}
-      <section className="relative px-6 sm:px-10 md:px-16 py-32 md:py-40" style={{ background: COLORS.bgAlt }}>
+      <section className="relative px-6 sm:px-10 md:px-16 py-32 md:py-40 bg-[#050505]">
         {/* Top accent line */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-20" style={{ background: `linear-gradient(to bottom, transparent, ${COLORS.red}40, transparent)` }} />
 
@@ -287,7 +294,7 @@ function Hero() {
       {/* ═══════════════════════════════════════════════════════
           ABOUT
       ═══════════════════════════════════════════════════════ */}
-      <section className="relative px-6 sm:px-10 md:px-16 py-32 md:py-40" style={{ background: COLORS.bg }}>
+      <section className="relative px-6 sm:px-10 md:px-16 py-32 md:py-40 bg-[#050505]">
         <div className="max-w-6xl mx-auto">
           <Reveal>
             <SectionLabel number="02" text="About" />
@@ -357,7 +364,7 @@ function Hero() {
       {/* ═══════════════════════════════════════════════════════
           EXPERIENCE
       ═══════════════════════════════════════════════════════ */}
-      <section className="relative px-6 sm:px-10 md:px-16 py-32 md:py-40" style={{ background: COLORS.bgAlt }}>
+      <section className="relative px-6 sm:px-10 md:px-16 py-32 md:py-40 bg-[#050505]">
         <div className="max-w-6xl mx-auto">
           <Reveal>
             <SectionLabel number="03" text="Experience" />
@@ -430,7 +437,7 @@ function Hero() {
       {/* ═══════════════════════════════════════════════════════
           CTA — Cinematic closer
       ═══════════════════════════════════════════════════════ */}
-      <section className="relative px-6 py-36 md:py-44 overflow-hidden" style={{ background: COLORS.bg }}>
+      <section className="relative px-6 sm:px-10 md:px-16 py-32 md:py-40 bg-[#050505]">
         {/* Ambient glow */}
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] pointer-events-none"

@@ -1,6 +1,6 @@
-import { useEffect, useRef, lazy, Suspense } from "react";
+import { useEffect, useRef, lazy, Suspense, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./App.css";
 
@@ -10,7 +10,8 @@ import "./App.css";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import HeroPhone from "./components/HeroPhone.jsx";
-import NotFoundPage from "./components/404.jsx"; // derived from your index listing
+import NotFoundPage from "./components/404.jsx";
+import ButterflySequence from "./components/ButterflySequence.jsx";
 
 // --- 2. Lazy Load Pages (Routes) ---
 // These are only downloaded when the route is visited.
@@ -26,14 +27,7 @@ const AdminDashboard = lazy(() => import("./components/admin/AdminDashboard.jsx"
 const ProtectedRoute = lazy(() => import("./components/admin/ProtectedRoute.jsx"));
 
 // --- 3. Lazy Load Heavy Home Sections ---
-// These are downloaded only when scrolled into view.
 const Hero = lazy(() => import("./components/Hero.jsx"));
-const VideoSection = lazy(() => import("./components/VideoSection.jsx"));
-const Theme = lazy(() => import("./components/Theme.jsx"));
-const TicketSection = lazy(() => import("./components/TicketSection.jsx"));
-const About = lazy(() => import("./components/About.jsx"));
-const Test = lazy(() => import("./components/TestSpeaker.jsx"));
-const ReasonsToAttend = lazy(() => import("./components/ReasonsToAttend.jsx"));
 const ThreeDViewer = lazy(() => import("./components/ThreeDViewer"));
 
 const isPhone = window.innerWidth >= 800;
@@ -44,6 +38,44 @@ const LoadingFallback = () => (
     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
   </div>
 );
+
+/* ═══════════════════════════════════════════════════════════════
+   LOADING SCREEN
+   logo_load.png:
+     1. Enters blurred (blur 24px → 0) + fades in over 0.8s
+     2. Holds sharp for ~0.5s
+     3. Exit: blurs back out (0 → 20px) + opacity 1→0 over 0.7s
+   Background stays black; app content is already mounted below.
+═══════════════════════════════════════════════════════════════ */
+const LoadingScreen = ({ onDone }) => {
+  useEffect(() => {
+    // Total time before we signal "done": enter(800) + hold(600) = 1400ms
+    // AnimatePresence will then run the exit animation (700ms)
+    const timer = setTimeout(onDone, 1400);
+    return () => clearTimeout(timer);
+  }, [onDone]);
+
+  return (
+    <motion.div
+      key="loader"
+      className="fixed inset-0 z-[9999] flex items-center justify-center"
+      style={{ background: "#050505" }}
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0, filter: "blur(20px)", scale: 1.04 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <motion.img
+        src="/logo_load.png"
+        alt="TEDxNERIST"
+        style={{ width: "clamp(120px, 20vw, 260px)", height: "auto" }}
+        initial={{ opacity: 0, filter: "blur(24px)", scale: 0.96 }}
+        animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+        exit={{ opacity: 0, filter: "blur(20px)", scale: 1.04 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      />
+    </motion.div>
+  );
+};
 
 function TrackPageViews() {
   return null;
@@ -76,101 +108,63 @@ function SectionWrapper({ children, className, id }) {
 }
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  const [isReady, setIsReady] = useState(false);
+
   return (
-    <BrowserRouter>
-      <Suspense fallback={<ComingSoon />}>
-        <Routes>
-          <Route
-            path="/contact"
-            element={
-              <>
-                <Navbar />
-                <div className="mt-8">
-                  <ContactUs />
-                </div>
-                <Footer />
-              </>
-            }
-          />
-          <Route path="*" element={<NotFoundPage />} />
+    <>
+      <AnimatePresence>
+        {loading && <LoadingScreen onDone={() => setLoading(false)} />}
+      </AnimatePresence>
 
-          <Route path="/feedback" element={<FeedbackForm />} />
-          <Route path="/policy" element={<PrivacyPolicy />} />
-          <Route path="/refund" element={<NoRefundPolicy />} />
-          <Route path="/term" element={<TermsAndConditions />} />
-          <Route path="/register" element={<RegisterPage />} />
+      {/* Always mounted — stays alive as ghost background after sequence */}
+      <ButterflySequence onDone={() => setIsReady(true)} />
 
-          {/* Admin Routes */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          
-          <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-          <Route path="/admin" element={<AdminLogin />} />
+      <BrowserRouter>
+        {/* Global theme elements */}
+        <div className="bg-noise"></div>
+        <div className="ambient-glow ambient-glow-1"></div>
+        <div className="ambient-glow ambient-glow-2"></div>
 
-          <Route
-            path="/"
-            element={
-              <div id="Home">
-                <Hero />
-              </div>
-            }
-          />
-
-          <Route
-            path="/testhome"
-            element={
-              <div id="Home">
-                {/* Hero Logic */}
-                {false ? (
-                  <Suspense fallback={<LoadingFallback />}>
-                    <Hero />
-                  </Suspense>
-                ) : (
-                  <>
-                    <Navbar /> <HeroPhone />
-                  </>
-                )}
-
-                <div className="page-container">
-                  <SectionWrapper className="trailer-section">
-                    <VideoSection
-                      videoUrl="https://storage.googleapis.com/maiu/trailer_final.mp4"
-                      thumbnail="/images/thumbnail1.jpg"
-                    />
-                  </SectionWrapper>
-
-                  <SectionWrapper className="theme-section">
-                    <Theme />
-                  </SectionWrapper>
-
-                  <SectionWrapper className="ticket-sections">
-                    <TicketSection />
-                  </SectionWrapper>
-
-                  <SectionWrapper className="about-section" id="about">
-                    <About id="about" />
-                  </SectionWrapper>
-                </div>
-
-                <SectionWrapper className="speaker-section mt-32">
-                  <Test id="speaker" />
-                </SectionWrapper>
-
-                <SectionWrapper className="reasons-section">
-                  <ReasonsToAttend />
-                </SectionWrapper>
-
-                {/* Footer doesn't need Lazy Loading, just the animation wrapper */}
-                <SectionWrapper className="">
-                  <div id="contact footer">
-                    <Footer />
+        <Suspense fallback={<ComingSoon />}>
+          <Routes>
+            <Route
+              path="/contact"
+              element={
+                <>
+                  <Navbar />
+                  <div className="mt-8">
+                    <ContactUs />
                   </div>
-                </SectionWrapper>
-              </div>
-            }
-          />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+                  <Footer />
+                </>
+              }
+            />
+            <Route path="*" element={<NotFoundPage />} />
+
+            <Route path="/feedback" element={<FeedbackForm />} />
+            <Route path="/policy" element={<PrivacyPolicy />} />
+            <Route path="/refund" element={<NoRefundPolicy />} />
+            <Route path="/term" element={<TermsAndConditions />} />
+            <Route path="/register" element={<RegisterPage />} />
+
+            {/* Admin Routes */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+            <Route path="/admin" element={<AdminLogin />} />
+
+            <Route
+              path="/"
+              element={
+                <div id="Home">
+                  <Hero isReady={isReady} />
+                </div>
+              }
+            />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </>
   );
 }
 
