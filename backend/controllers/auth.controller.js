@@ -16,7 +16,8 @@ export const register = async (req, res) => {
             whatsappNumber,
             areyouneristian,
             rollNo,
-            year
+            year,
+            department
         } = req.body;
 
         if (!name || !email || !whatsappNumber) {
@@ -37,6 +38,7 @@ export const register = async (req, res) => {
             areyouneristian,
             rollNo,
             year,
+            department,
             otp,
             otpExpiresAt: Date.now() + 10 * 60 * 1000 // 10 min
         });

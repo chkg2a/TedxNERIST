@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import Admin from "../models/admin.model.js";
 import Registration from "../models/user.model.js";
 import { generateTokensAndSetCookies } from "../utils/generateTokenandCookies.js";
-import { sendEmail } from "../mail-smtp/email.js";
+
 dotenv.config();
 
 
