@@ -531,10 +531,12 @@ export default function RegisterPage() {
                                                     error={formError.year}
                                                 >
                                                     <option value="">Select Year</option>
-                                                    <option value="1">1st Year</option>
-                                                    <option value="2">2nd Year</option>
-                                                    <option value="3">3rd Year</option>
-                                                    <option value="4">4th Year</option>
+                                                    <option value="BASE 1st">BASE 1st</option>
+                                                    <option value="BASE 2nd">BASE 2nd</option>
+                                                    <option value="BTECH 1st">BTECH 1st</option>
+                                                    <option value="BTECH 2nd">BTECH 2nd</option>
+                                                    <option value="BTECH 3rd">BTECH 3rd</option>
+                                                    <option value="BTECH 4th">BTECH 4th</option>
                                                 </StyledSelect>
                                             </div>
 

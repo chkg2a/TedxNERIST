@@ -35,7 +35,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const hasCTA = CTA_BUTTON && CTA_BUTTON.label;
+  const hasCTA = CTA_BUTTON && CTA_BUTTON.label && location.pathname !== CTA_BUTTON.path;
 
   return (
     <header

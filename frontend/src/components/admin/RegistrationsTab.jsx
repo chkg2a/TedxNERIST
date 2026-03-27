@@ -54,10 +54,12 @@ const RegistrationsTab = ({
 
                     <select value={filters.year} onChange={(e) => setFilters({ ...filters, year: e.target.value })}>
                         <option value="">All Years</option>
-                        <option value="1st">1st Year</option>
-                        <option value="2nd">2nd Year</option>
-                        <option value="3rd">3rd Year</option>
-                        <option value="4th">4th Year</option>
+                        <option value="BASE 1st">BASE 1st</option>
+                        <option value="BASE 2nd">BASE 2nd</option>
+                        <option value="BTECH 1st">BTECH 1st</option>
+                        <option value="BTECH 2nd">BTECH 2nd</option>
+                        <option value="BTECH 3rd">BTECH 3rd</option>
+                        <option value="BTECH 4th">BTECH 4th</option>
                     </select>
 
                     <button className="filter-btn" onClick={handleFilter}>

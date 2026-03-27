@@ -21,6 +21,7 @@ const NoRefundPolicy = lazy(() => import("./components/RefundPolicy.jsx"));
 const TermsAndConditions = lazy(() => import("./components/TermsAndConditions.jsx"));
 const RegisterPage = lazy(() => import("./components/RegisterPage.jsx"));
 const AdminLogin = lazy(() => import("./components/admin/AdminLogin.jsx"));
+const AdminRegister = lazy(() => import("./components/admin/AdminRegister.jsx"));
 const AdminDashboard = lazy(() => import("./components/admin/AdminDashboard.jsx"));
 const ProtectedRoute = lazy(() => import("./components/admin/ProtectedRoute.jsx"));
 
@@ -101,6 +102,7 @@ function App() {
 
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
+          
           <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminLogin />} />
 
