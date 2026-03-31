@@ -35,7 +35,7 @@ export const register = async (req, res) => {
             name,
             email,
             whatsappNumber,
-            areyouneristian,
+            isNeristianStudent: areyouneristian,
             rollNo,
             year,
             department,

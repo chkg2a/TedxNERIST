@@ -13,7 +13,7 @@ const COLORS = {
   bg: "#0a0a0a",
   red: "#eb0028",
   white: "#f0f0f0",
-  grey: "#666",
+  grey: "#d1d5db",
   greyDim: "#1a1a1a",
 };
 

@@ -49,9 +49,24 @@ export const sendWelcomeEmail=async(email,name,ticketId,whatsappNumber,departmen
     const info = await transporter.sendMail(mailOptions);
     return info;
     
-  } catch (error) {
+} catch (error) {
     console.error(`Error: ${error}`);
     return { success: false, message: "Failed to send email" }; 
   }
 }
 
+export const sendEmail = async (email, subject, htmlContent) => {
+  try {
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject,
+      html: htmlContent,
+    };
+    const info = await transporter.sendMail(mailOptions);
+    return info;
+  } catch (error) {
+    console.error(`Error: ${error}`);
+    throw error;
+  }
+};

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Check, Loader } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import toast from "react-hot-toast";
 
 export default function StudentRegForm() {
   const navigate = useNavigate();
@@ -140,6 +141,7 @@ export default function StudentRegForm() {
         const ticketData = await ticketResponse.json();
 
         if (ticketResponse.ok) {
+          toast.success("Successfully registered! Ticket generated.");
           setSubmitted(true);
           const submissionResponse = await fetch(
             "https://node-service-dot-splirx.as.r.appspot.com/api/submission",
@@ -158,14 +160,18 @@ export default function StudentRegForm() {
 
           await submissionResponse.json();
         } else {
+          toast.error(ticketData.message || "Ticket creation failed.");
           setSubmitMessage(ticketData.message || "Ticket creation failed.");
         }
       } else if (studentResponse.status === 409) {
+        toast.error("You are already registered.");
         setSubmitMessage("You are already registered.");
       } else {
+        toast.error(studentData.message || "Failed to submit form.");
         setSubmitMessage(studentData.message || "Failed to submit form.");
       }
     } catch (error) {
+      toast.error("Error submitting form.");
       setSubmitMessage("Error submitting form.");
     }
 

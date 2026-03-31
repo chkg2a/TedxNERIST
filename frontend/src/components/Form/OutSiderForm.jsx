@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import toast from "react-hot-toast";
 
 // Import the image
 import formImage from "/images/Form.png"; // Adjust the path as needed
@@ -53,9 +54,11 @@ export default function OutSiderForm() {
       await new Promise((resolve) => setTimeout(resolve, 1500));
       console.log("Form Data Submitted:", formData);
       setSubmitMessage("Ticket purchase successful!");
+      toast.success("Ticket purchase successful!");
     } catch (error) {
       console.error("Error submitting form:", error);
       setSubmitMessage("Failed to purchase ticket. Please try again.");
+      toast.error("Failed to purchase ticket. Please try again.");
     } finally {
       setSubmitLoading(false);
     }

@@ -13,8 +13,8 @@ const COLORS = {
   bg: "#0a0a0a",
   red: "#eb0028",
   white: "#f0f0f0",
-  grey: "#666",
-  greyDim: "#222",
+  grey: "#d1d5db",
+  greyDim: "#9ca3af",
 };
 
 const THEME_TEXT = `Metamorphosis captures the profound journey of transformation — the courageous act of shedding what was, to become what must be. Like the winged form emerging from its chrysalis, it celebrates the beauty that arises from change and the strength found in reinvention.`;
@@ -105,7 +105,7 @@ const Theme = () => {
                 fontFamily: "OverpassMono, monospace",
                 fontSize: "11px",
                 letterSpacing: "0.25em",
-                color: "#333",
+                color: "#9ca3af",
               }}
             >
               2026
@@ -145,7 +145,7 @@ const Theme = () => {
                     fontSize: "11px",
                   }}
                 >
-                  Transform · Evolve · Emerge
+                  Transform · Transcend · Triumph
                 </span>
               </motion.div>
             </h2>
@@ -224,7 +224,7 @@ const Theme = () => {
               <div className="w-6 h-[1px]" style={{ background: COLORS.red }} />
               <span
                 className="text-[10px] tracking-[0.35em] uppercase"
-                style={{ fontFamily: "OverpassMono, monospace", color: "#333" }}
+                style={{ fontFamily: "OverpassMono, monospace", color: "#9ca3af" }}
               >
                 TEDxNERIST · March 2026
               </span>

@@ -12,7 +12,7 @@ const COLORS = {
   bgAlt: "#080808",
   red: "#eb0028",
   white: "#f0f0f0",
-  grey: "#555",
+  grey: "#d1d5db",
   greyDim: "#2a2a2a",
   greyFaint: "#131313",
 };
@@ -28,7 +28,7 @@ const Mono = ({ children, className = "", style = {} }) => (
 
 const FooterLink = ({ href, to, children, external = false }) => {
   const cls =
-    "flex items-center gap-1.5 text-[#555] hover:text-[#f0f0f0] transition-colors duration-300 group";
+    "flex items-center gap-1.5 text-[#d1d5db] hover:text-[#f0f0f0] transition-colors duration-300 group";
   const inner = (
     <>
       <span
@@ -65,7 +65,7 @@ const SocialLink = ({ href, label }) => (
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="group flex items-center gap-2 text-[#555] hover:text-[#f0f0f0] transition-colors duration-300"
+    className="group flex items-center gap-2 text-[#d1d5db] hover:text-[#f0f0f0] transition-colors duration-300"
     style={{ fontFamily: "OverpassMono, monospace", fontSize: "11px", letterSpacing: "0.1em" }}
   >
     <span
@@ -142,22 +142,22 @@ function Footer() {
 
             <div className="flex flex-col gap-5">
               {[
-                { label: "Venue", value: "NERIST Auditorium" },
+                { label: "Venue", value: "The Silver Jubilee Hall, NERIST" },
                 { label: "Location", value: "Nirjuli, Arunachal Pradesh" },
-                { label: "Date", value: "March 2026" },
-                { label: "Duration", value: "3-Day Experience" },
+                { label: "Date", value: "11 April 2026" },
+                //  ,
                 { label: "Contact", value: "+91 88220 78464" },
               ].map(({ label, value }) => (
                 <div key={label}>
                   <Mono
                     className="text-[9px] tracking-[0.3em] uppercase block mb-1"
-                    style={{ color: "#333" }}
+                    style={{ color: "#d1d5db" }}
                   >
                     {label}
                   </Mono>
                   <span
-                    className="text-sm"
-                    style={{ fontFamily: "Gilroy-Regular, sans-serif", color: "#888" }}
+                    className="text-sm shadow-sm"
+                    style={{ fontFamily: "Gilroy-Regular, sans-serif", color: "#ffffff" }}
                   >
                     {value}
                   </span>
@@ -227,7 +227,7 @@ function Footer() {
 
             <Mono
               className="text-[10px] tracking-[0.4em] uppercase block mb-4"
-              style={{ color: "#333" }}
+              style={{ color: "#d1d5db" }}
             >
               Legal
             </Mono>
@@ -250,21 +250,20 @@ function Footer() {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <Mono
             className="text-[10px] tracking-[0.25em] uppercase"
-            style={{ color: "#2a2a2a" }}
+            style={{ color: "#9ca3af" }}
           >
             © 2026 TEDxNERIST
           </Mono>
           <Mono
             className="text-[10px] tracking-[0.2em] text-center"
-            style={{ color: "#2a2a2a" }}
+            style={{ color: "#9ca3af" }}
           >
             Independently organized under license from TED
           </Mono>
           <div className="flex items-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full" style={{ background: COLORS.red }} />
             <Mono
-              className="text-[10px] tracking-[0.25em] uppercase"
-              style={{ color: "#2a2a2a" }}
+              className="text-[10px] tracking-[0.25em] uppercase font-semibold text-white drop-shadow-md"
             >
               Ideas Worth Spreading
             </Mono>

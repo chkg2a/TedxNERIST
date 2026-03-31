@@ -291,8 +291,10 @@ export const useAuthStore = create((set, get) => ({
     sendBulkEmail: async (subject, htmlContent) => {
         try {
             const response = await axios.post(`${API_URL}/api/admin/bulk-email`, { subject, htmlContent });
+            console.log(response);
             return { success: true, ...response.data };
         } catch (error) {
+            console.log(error);
             return { success: false, message: error.response?.data?.message || "Failed to send emails" };
         }
     },

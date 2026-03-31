@@ -19,9 +19,9 @@ const COLORS = {
   red: "#eb0028",
   redDark: "#c20022",
   white: "#f0f0f0",
-  grey: "#666",
-  greyDim: "#333",
-  greyFaint: "#1a1a1a",
+  grey: "#d1d5db",
+  greyDim: "#9ca3af",
+  greyFaint: "#4b5563",
 };
 
 /* ─── Noise SVG for filmic grain overlay ─── */
@@ -179,7 +179,7 @@ function Hero({ isReady }) {
             className="mt-5 text-[11px] sm:text-xs tracking-[0.4em] uppercase"
             style={{ fontFamily: "OverpassMono, monospace", color: COLORS.grey }}
           >
-            Transform · Evolve · Emerge
+            Transform · Transcend · Triumph
           </motion.p>
 
           {/* Event meta */}

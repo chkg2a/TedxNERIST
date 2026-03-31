@@ -7,7 +7,7 @@ import { NAV_LINKS, CTA_BUTTON } from "../constants/Navbar";
 const NavLink = ({ link, onClick, isActive }) => {
   const baseClass =
     "text-[13px] tracking-[0.06em] uppercase transition-colors duration-300";
-  const colorClass = isActive ? "text-white" : "text-gray-400 hover:text-white";
+  const colorClass = isActive ? "text-white" : "text-gray-300 hover:text-white";
   const className = `${baseClass} ${colorClass}`;
 
   if (link.type === "router") {

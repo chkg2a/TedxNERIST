@@ -45,18 +45,241 @@ const ToolsTab = () => {
     const templates = [
         {
             name: "Event Reminder",
-            subject: "Reminder: TEDxNERIST Event Tomorrow! 🎤",
-            body: `We're excited to remind you that TEDxNERIST is happening tomorrow!\n\nPlease arrive at the venue by 9:00 AM with your ticket ID ready.\n\nDon't forget to bring your college ID card.\n\nSee you there!`
+            subject: "Reminder: TEDxNERIST Event Tomorrow",
+            body: `
+<!DOCTYPE html>
+<html>
+<body style="margin:0; padding:0; background:#f4f4f4;">
+<table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 10px;">
+<tr><td align="center">
+
+<table width="600" style="background:#ffffff; border-radius:4px; overflow:hidden;">
+  
+  <!-- Header -->
+  <tr>
+    <td align="center" style="background:#000; padding:50px;">
+      <h1 style="color:#EB0028; margin:0;">TED<span style="color:#fff;">x</span><span style="color:#fff;">NERIST</span></h1>
+      <p style="color:#aaa; font-size:12px;">Ideas Worth Spreading</p>
+    </td>
+  </tr>
+
+  <!-- Content -->
+  <tr>
+    <td style="padding:40px; font-family:Arial; color:#444;">
+      
+      <h2>Event Reminder</h2>
+
+      <p>Dear \${name},</p>
+
+      <p>
+        Greetings from <strong>TEDxNERIST</strong>, hosted under the 
+        North Eastern Regional Institute of Science and Technology (NERIST).
+      </p>
+
+      <p>
+        This is a reminder that the TEDxNERIST event is scheduled for tomorrow.
+      </p>
+
+      <p>
+        Please arrive at the venue by <strong>9:00 AM</strong> with your ticket ID ready.
+        Kindly carry your valid college ID card for entry.
+      </p>
+
+      <p>
+        We look forward to welcoming you to an inspiring experience.
+      </p>
+
+      <!-- CTA -->
+      <div style="text-align:center; margin-top:30px;">
+        <a href="\${platformUrl}" style="background:#EB0028; color:#fff; padding:12px 25px; text-decoration:none;">
+          View Event Details
+        </a>
+      </div>
+
+    </td>
+  </tr>
+
+  <!-- Closing -->
+  <tr>
+    <td style="padding:0 40px 40px; font-family:Arial;">
+      Warm regards,<br>
+      <strong>Team TEDxNERIST</strong><br>
+      <span style="font-size:12px; color:#777;">
+        North Eastern Regional Institute of Science and Technology (NERIST)
+      </span>
+    </td>
+  </tr>
+
+  <!-- Footer -->
+  <tr>
+    <td align="center" style="background:#1a1a1a; padding:30px; color:#aaa; font-size:11px;">
+      © 2026 TEDxNERIST. All rights reserved.
+    </td>
+  </tr>
+
+</table>
+
+</td></tr>
+</table>
+</body>
+</html>
+`
         },
+
         {
             name: "Schedule Update",
-            subject: "TEDxNERIST: Event Schedule Update 📋",
-            body: `Important update regarding the TEDxNERIST event schedule.\n\nPlease check our website for the latest speaker lineup and timings.\n\nWe look forward to seeing you!`
+            subject: "TEDxNERIST: Important Schedule Update",
+            body: `
+<!DOCTYPE html>
+<html>
+<body style="margin:0; padding:0; background:#f4f4f4;">
+<table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 10px;">
+<tr><td align="center">
+
+<table width="600" style="background:#ffffff; border-radius:4px; overflow:hidden;">
+  
+  <!-- Header -->
+  <tr>
+    <td align="center" style="background:#000; padding:50px;">
+      <h1 style="color:#EB0028; margin:0;">TED<span style="color:#fff;">x</span><span style="color:#fff;">NERIST</span></h1>
+      <p style="color:#aaa; font-size:12px;">Ideas Worth Spreading</p>
+    </td>
+  </tr>
+
+  <!-- Content -->
+  <tr>
+    <td style="padding:40px; font-family:Arial; color:#444;">
+      
+      <h2>Schedule Update</h2>
+
+      <p>Dear \${name},</p>
+
+      <p>
+        Greetings from TEDxNERIST.
+      </p>
+
+      <p>
+        Please note that there has been an update to the event schedule, including
+        changes to speaker lineup and session timings.
+      </p>
+
+      <p>
+        We request you to check the updated schedule on our platform.
+      </p>
+
+      <!-- CTA -->
+      <div style="text-align:center; margin-top:30px;">
+        <a href="\${platformUrl}" style="background:#EB0028; color:#fff; padding:12px 25px; text-decoration:none;">
+          View Updated Schedule
+        </a>
+      </div>
+
+    </td>
+  </tr>
+
+  <!-- Closing -->
+  <tr>
+    <td style="padding:0 40px 40px; font-family:Arial;">
+      Warm regards,<br>
+      <strong>Team TEDxNERIST</strong><br>
+      <span style="font-size:12px; color:#777;">
+        North Eastern Regional Institute of Science and Technology (NERIST)
+      </span>
+    </td>
+  </tr>
+
+  <!-- Footer -->
+  <tr>
+    <td align="center" style="background:#1a1a1a; padding:30px; color:#aaa; font-size:11px;">
+      © 2026 TEDxNERIST. All rights reserved.
+    </td>
+  </tr>
+
+</table>
+
+</td></tr>
+</table>
+</body>
+</html>
+`
         },
+
         {
             name: "Thank You",
-            subject: "Thank You for Attending TEDxNERIST! 🙏",
-            body: `Thank you for being part of TEDxNERIST!\n\nWe hope you enjoyed the talks and took away some ideas worth spreading.\n\nYour feedback means a lot to us. Please take a moment to share your experience.`
+            subject: "Thank You for Attending TEDxNERIST",
+            body: `
+<!DOCTYPE html>
+<html>
+<body style="margin:0; padding:0; background:#f4f4f4;">
+<table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 10px;">
+<tr><td align="center">
+
+<table width="600" style="background:#ffffff; border-radius:4px; overflow:hidden;">
+  
+  <!-- Header -->
+  <tr>
+    <td align="center" style="background:#000; padding:50px;">
+      <h1 style="color:#EB0028; margin:0;">TED<span style="color:#fff;">x</span><span style="color:#fff;">NERIST</span></h1>
+      <p style="color:#aaa; font-size:12px;">Ideas Worth Spreading</p>
+    </td>
+  </tr>
+
+  <!-- Content -->
+  <tr>
+    <td style="padding:40px; font-family:Arial; color:#444;">
+      
+      <h2>Thank You</h2>
+
+      <p>Dear \${name},</p>
+
+      <p>
+        Thank you for attending TEDxNERIST.
+      </p>
+
+      <p>
+        Your presence contributed to making the event meaningful and inspiring.
+        We hope you gained valuable insights and ideas worth spreading.
+      </p>
+
+      <p>
+        We would appreciate your feedback to help us improve future events.
+      </p>
+
+      <!-- CTA -->
+      <div style="text-align:center; margin-top:30px;">
+        <a href="\${platformUrl}" style="background:#EB0028; color:#fff; padding:12px 25px; text-decoration:none;">
+          Share Feedback
+        </a>
+      </div>
+
+    </td>
+  </tr>
+
+  <!-- Closing -->
+  <tr>
+    <td style="padding:0 40px 40px; font-family:Arial;">
+      Warm regards,<br>
+      <strong>Team TEDxNERIST</strong><br>
+      <span style="font-size:12px; color:#777;">
+        North Eastern Regional Institute of Science and Technology (NERIST)
+      </span>
+    </td>
+  </tr>
+
+  <!-- Footer -->
+  <tr>
+    <td align="center" style="background:#1a1a1a; padding:30px; color:#aaa; font-size:11px;">
+      © 2026 TEDxNERIST. All rights reserved.
+    </td>
+  </tr>
+
+</table>
+
+</td></tr>
+</table>
+</body>
+</html>
+`
         }
     ];
 

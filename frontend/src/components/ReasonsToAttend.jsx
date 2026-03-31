@@ -13,8 +13,8 @@ const COLORS = {
   bgAlt: "#0a0a0a",
   red: "#eb0028",
   white: "#f0f0f0",
-  grey: "#666",
-  greyFaint: "#111",
+  grey: "#d1d5db",
+  greyFaint: "#6b7280",
 };
 
 /* Column spans for alternating layout — creates editorial bento feel */

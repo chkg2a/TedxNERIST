@@ -6,6 +6,7 @@ import { useAuthStore } from "../store/authStore";
 import { id as studentList } from "../constants/StudentList";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import toast from "react-hot-toast";
 
 const tedxRed = "#eb0028";
 const tedxRedLight = "#ff1a3d";
@@ -215,7 +216,10 @@ export default function RegisterPage() {
         });
 
         if (result.success) {
+            toast.success("OTP sent! Please check your email.");
             setStep(2);
+        } else {
+            toast.error(result.message || "Registration failed.");
         }
     };
 
@@ -228,7 +232,10 @@ export default function RegisterPage() {
 
         const result = await verifyEmail(registrationEmail || formData.email, otp);
         if (result.success) {
+            toast.success("Email verified successfully!");
             setStep(3);
+        } else {
+            toast.error(result.message || "Verification failed.");
         }
     };
 

@@ -1,101 +1,196 @@
 export const VERIFICATION_EMAIL_TEMPLATE = `
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verify Your Email</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no">
+  <title>Verify Your Email - TEDxNERIST</title>
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:AllowPNG/>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+  <style>
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+    body { margin: 0 !important; padding: 0 !important; width: 100% !important; }
+
+    @media only screen and (max-width: 600px) {
+      .email-container { width: 100% !important; max-width: 100% !important; }
+      .outer-pad { padding: 16px 12px !important; }
+      .header-pad { padding: 28px 20px 24px 20px !important; }
+      .body-pad { padding: 28px 20px !important; }
+      .section-pad { padding: 0 20px 20px 20px !important; }
+      .footer-pad { padding: 20px !important; }
+      .otp-code { font-size: 30px !important; letter-spacing: 10px !important; padding: 14px 20px !important; }
+      .otp-wrap { padding: 24px 16px !important; }
+    }
+  </style>
 </head>
 
-<body style="font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
-  
-  <div style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-    
-    <!-- Header -->
-    <div style="background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); padding: 40px 30px; text-align: center;">
-      <div style="display: inline-block; background-color: #EB0028; padding: 8px 20px; border-radius: 4px; margin-bottom: 15px;">
-        <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700; letter-spacing: 1px;">
-          TED<span style="font-size: 24px;">x</span>NERIST
-        </h1>
-      </div>
-      <p style="color: #ffffff; margin: 0; font-size: 18px; font-weight: 300;">Verify Your Email</p>
-    </div>
-    
-    <!-- Content -->
-    <div style="padding: 40px 30px; background-color: #ffffff;">
-      
-      <p style="color: #333; font-size: 16px; margin: 0 0 10px 0;">Hello,</p>
-      <p style="color: #666; font-size: 15px; margin: 0 0 30px 0; line-height: 1.6;">
-        Welcome to TEDxNERIST! To complete your registration, please use the verification code below:
-      </p>
-      
-      <!-- OTP Box -->
-      <div style="background: linear-gradient(to right, #f9f9f9, #ffffff); border-left: 4px solid #EB0028; padding: 26px; border-radius: 8px; text-align: center; margin: 30px 0;">
-        
-        <p style="color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 12px 0;">
-          Your Verification Code
-        </p>
-        
-        <div style="
-          font-size: 34px;
-          font-weight: 800;
-          letter-spacing: 5px;
-          color: #000000;
-          font-family: 'Courier New', monospace;
-          margin: 8px 0;
-          white-space: nowrap;
-          word-break: keep-all;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        ">
-          {verificationCode}
-        </div>
+<body style="margin:0;padding:0;background-color:#f4f4f4;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;">
 
-        <div style="width: 60px; height: 3px; background-color: #EB0028; margin: 18px auto 0 auto; border-radius: 2px;"></div>
-      </div>
-      
-      <!-- Instructions -->
-      <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 25px 0;">
-        <p style="color: #333; font-size: 14px; margin: 0 0 10px 0; font-weight: 600;">Next Steps:</p>
-        <ul style="color: #666; font-size: 14px; margin: 0; padding-left: 20px; line-height: 1.8;">
-          <li>Enter this code on the verification page</li>
-          <li>This code will expire in <strong>15 minutes</strong></li>
-          <li>Keep this code confidential</li>
-        </ul>
-      </div>
-      
-      <!-- Security Notice -->
-      <div style="background-color: #fff8f8; border-left: 4px solid #EB0028; padding: 20px; border-radius: 8px; margin-top: 25px;">
-        <p style="color: #EB0028; font-size: 14px; margin: 0 0 8px 0; font-weight: 700;">Security Notice</p>
-        <p style="color: #666; font-size: 13px; margin: 0; line-height: 1.6;">
-          If you didn't create an account with us, please ignore this email. Your account will not be created without verification.
-        </p>
-      </div>
-      
-      <p style="color: #333; font-size: 15px; margin: 30px 0 0 0;">
-        Best regards,<br>
-        <strong>TEDxNERIST Team</strong>
-      </p>
-      
-    </div>
-    
-    <!-- Footer -->
-    <div style="background-color: #000000; padding: 25px; text-align: center;">
-      <p style="color: #ffffff; margin: 0 0 8px 0; font-size: 14px; font-weight: 600;">Ideas Worth Spreading</p>
-      <p style="color: #999; font-size: 12px; margin: 0;">
-        © 2025 TEDxNERIST. This independent TEDx event is operated under license from TED.
-      </p>
-    </div>
-    
-  </div>
-  
-  <!-- Disclaimer -->
-  <div style="text-align: center; margin-top: 20px; padding: 10px;">
-    <p style="color: #888; font-size: 12px; margin: 0; line-height: 1.6;">
-      This is an automated message, please do not reply to this email.
-    </p>
-  </div>
-  
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:#f4f4f4;">
+    <tr>
+      <td align="center" class="outer-pad" style="padding:32px 16px;">
+
+        <!-- Email Card -->
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="560" class="email-container" style="max-width:560px;width:100%;background-color:#ffffff;border-radius:8px;overflow:hidden;border:1px solid #e0e0e0;">
+
+          <!-- Header -->
+          <tr>
+            <td align="center" class="header-pad" style="background-color:#0a0a0a;padding:32px 30px 28px 30px;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                  <td align="center">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                      <tr>
+                        <td style="background-color:#EB0028;padding:8px 20px;border-radius:4px;">
+                          <span style="color:#ffffff;font-size:22px;font-weight:800;letter-spacing:1px;font-family:'Helvetica Neue',Arial,sans-serif;">TED</span><span style="color:#ffffff;font-size:18px;font-weight:600;font-family:'Helvetica Neue',Arial,sans-serif;">x</span><span style="color:#ffffff;font-size:22px;font-weight:800;letter-spacing:1px;font-family:'Helvetica Neue',Arial,sans-serif;">NERIST</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="padding-top:14px;">
+                    <p style="color:rgba(255,255,255,0.55);margin:0;font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;">Email Verification</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- OTP — shown FIRST for immediate mobile visibility -->
+          <tr>
+            <td align="center" class="otp-wrap" style="padding:36px 30px 28px 30px;background-color:#ffffff;border-bottom:1px solid #f0f0f0;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                  <td align="center">
+                    <p style="color:#888888;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 20px 0;font-weight:600;">Your Verification Code</p>
+                    <div class="otp-code" style="
+                      display:inline-block;
+                      font-size:38px;
+                      font-weight:700;
+                      letter-spacing:14px;
+                      color:#0a0a0a;
+                      font-family:'Courier New','Lucida Console',monospace;
+                      background-color:#fafafa;
+                      border:1.5px solid #e0e0e0;
+                      border-radius:6px;
+                      padding:16px 32px;
+                    ">{verificationCode}</div>
+                    <p style="color:#EB0028;font-size:12px;font-weight:600;margin:16px 0 0 0;">Expires in 15 minutes</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Greeting + Context -->
+          <tr>
+            <td class="body-pad" style="padding:28px 36px 8px 36px;">
+              <p style="color:#1a1a1a;font-size:16px;margin:0 0 10px 0;font-weight:600;">Hello,</p>
+              <p style="color:#555555;font-size:14px;margin:0;line-height:1.7;">
+                Thank you for registering with TEDxNERIST. Enter the code above on the verification page to activate your account.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Steps -->
+          <tr>
+            <td class="section-pad" style="padding:20px 36px 24px 36px;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color:#f8f8f8;border-radius:6px;">
+                <tr>
+                  <td style="padding:20px 22px;">
+                    <p style="color:#1a1a1a;font-size:13px;font-weight:700;margin:0 0 12px 0;text-transform:uppercase;letter-spacing:0.8px;">How to verify</p>
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                      <tr>
+                        <td style="padding:5px 0;vertical-align:top;width:26px;">
+                          <span style="display:inline-block;width:20px;height:20px;background-color:#EB0028;color:#ffffff;border-radius:50%;text-align:center;line-height:20px;font-size:10px;font-weight:700;">1</span>
+                        </td>
+                        <td style="padding:5px 0 5px 8px;color:#444444;font-size:13px;line-height:1.5;vertical-align:top;">
+                          Open the verification page in your browser
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding:5px 0;vertical-align:top;width:26px;">
+                          <span style="display:inline-block;width:20px;height:20px;background-color:#EB0028;color:#ffffff;border-radius:50%;text-align:center;line-height:20px;font-size:10px;font-weight:700;">2</span>
+                        </td>
+                        <td style="padding:5px 0 5px 8px;color:#444444;font-size:13px;line-height:1.5;vertical-align:top;">
+                          Enter the 6-digit code shown above
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding:5px 0;vertical-align:top;width:26px;">
+                          <span style="display:inline-block;width:20px;height:20px;background-color:#EB0028;color:#ffffff;border-radius:50%;text-align:center;line-height:20px;font-size:10px;font-weight:700;">3</span>
+                        </td>
+                        <td style="padding:5px 0 5px 8px;color:#444444;font-size:13px;line-height:1.5;vertical-align:top;">
+                          Your account will be activated immediately
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Security Notice -->
+          <tr>
+            <td class="section-pad" style="padding:0 36px 28px 36px;">
+              <p style="color:#999999;font-size:12px;margin:0;line-height:1.6;border-top:1px solid #f0f0f0;padding-top:20px;">
+                If you did not create a TEDxNERIST account, please ignore this email. Do not share this code with anyone.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Sign-off -->
+          <tr>
+            <td class="section-pad" style="padding:0 36px 32px 36px;">
+              <p style="color:#333333;font-size:14px;margin:0;line-height:1.6;">
+                Best regards,<br>
+                <strong style="color:#0a0a0a;">TEDxNERIST Team</strong>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" class="footer-pad" style="background-color:#0a0a0a;padding:24px 30px;">
+              <p style="color:rgba(255,255,255,0.9);margin:0 0 4px 0;font-size:12px;font-weight:600;letter-spacing:0.5px;">Metamorphosis: Transform, Transcend, Triumph</p>
+              <p style="color:rgba(255,255,255,0.35);font-size:11px;margin:0;">&copy; 2025 TEDxNERIST &middot; Operated under license from TED</p>
+            </td>
+          </tr>
+
+        </table>
+        <!-- End Email Card -->
+
+        <!-- Below-card disclaimer -->
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="560" class="email-container" style="max-width:560px;width:100%;">
+          <tr>
+            <td align="center" style="padding:16px 15px;">
+              <p style="color:#aaaaaa;font-size:11px;margin:0;line-height:1.6;">
+                This is an automated message &mdash; please do not reply.<br>
+                For support, contact <a href="mailto:tedxnerist@gmail.com" style="color:#EB0028;text-decoration:none;">tedxnerist@gmail.com</a>
+              </p>
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
 </body>
 </html>
 `;
@@ -125,7 +220,7 @@ export const WELCOME_TICKET_EMAIL_TEMPLATE = `
       </div>
       
       <p style="color: #ffffff; margin: 15px 0 0 0; font-size: 14px; text-transform: uppercase; letter-spacing: 3px; font-weight: 500;">
-        Ideas Worth Spreading
+        Metamorphosis: Transform, Transcend, Triumph
       </p>
     </div>
     
@@ -140,7 +235,7 @@ export const WELCOME_TICKET_EMAIL_TEMPLATE = `
       </h2>
       
       <p style="color: #666; font-size: 16px; margin: 0; line-height: 1.7;">
-        Your journey to experience ideas worth spreading begins now.<br>
+        Your journey to experience Transform, Transcend, Triumph begins now.<br>
         Here's your exclusive event ticket.
       </p>
     </div>
@@ -293,7 +388,7 @@ export const WELCOME_TICKET_EMAIL_TEMPLATE = `
           TED<span style="font-size: 14px;">x</span>NERIST
         </p>
       </div>
-      <p style="color: #ffffff; margin: 0 0 10px 0; font-size: 16px; font-weight: 600;">Ideas Worth Spreading</p>
+      <p style="color: #ffffff; margin: 0 0 10px 0; font-size: 16px; font-weight: 600;">Metamorphosis: Transform, Transcend, Triumph</p>
       <p style="color: #888; font-size: 12px; margin: 0;">
         © 2025 TEDxNERIST. This independent TEDx event is operated under license from TED.
       </p>
@@ -313,100 +408,172 @@ export const WELCOME_TICKET_EMAIL_TEMPLATE = `
 </html>
 `;
 
+
 export const WELCOME_EMAIL_TEMPLATE = `
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="x-apple-disable-message-reformatting">
   <title>Welcome to TEDxNERIST</title>
+  <style>
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+
+    @media only screen and (max-width: 600px) {
+      .email-container { width: 100% !important; max-width: 100% !important; }
+      .outer-pad { padding: 18px 12px !important; }
+      .header-pad { padding: 34px 22px !important; }
+      .content-pad { padding: 28px 22px !important; }
+      .section-pad { padding: 0 22px 22px !important; }
+      .footer-pad { padding: 24px 22px !important; }
+      .brand-text { font-size: 30px !important; }
+      .hero-title { font-size: 24px !important; }
+      .body-copy { font-size: 13px !important; line-height: 1.65 !important; }
+      .list-copy { font-size: 13px !important; line-height: 1.6 !important; }
+      .quote-copy { font-size: 13px !important; line-height: 1.6 !important; }
+      .closing-copy { font-size: 12px !important; line-height: 1.65 !important; }
+      .cta-link { display: block !important; padding: 12px 18px !important; font-size: 13px !important; }
+    }
+  </style>
 </head>
-<body style="font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
-  
-  <!-- Main Container -->
-  <div style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-    
-    <!-- Header with TEDx Branding -->
-    <div style="background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); padding: 50px 30px; text-align: center; position: relative;">
-      <div style="display: inline-block; background-color: #EB0028; padding: 10px 24px; border-radius: 4px; margin-bottom: 20px;">
-        <h1 style="color: #ffffff; margin: 0; font-size: 32px; font-weight: 700; letter-spacing: 1px;">TED<span style="font-size: 28px;">x</span>NERIST</h1>
-      </div>
-      <p style="color: #ffffff; margin: 0; font-size: 20px; font-weight: 300; letter-spacing: 0.5px;">Welcome to Our Community</p>
-      <div style="width: 80px; height: 3px; background-color: #EB0028; margin: 20px auto 0 auto; border-radius: 2px;"></div>
-    </div>
-    
-    <!-- Content Section -->
-    <div style="padding: 40px 35px; background-color: #ffffff;">
-      
-      <p style="color: #333; font-size: 18px; margin: 0 0 15px 0; font-weight: 600;">Hi \${name},</p>
-      
-      <p style="color: #666; font-size: 15px; margin: 0 0 20px 0; line-height: 1.7;">
-        We're thrilled to welcome you to <strong>TEDxNERIST</strong> – a platform dedicated to spreading <strong>ideas worth spreading</strong> within our vibrant campus community!
-      </p>
-      
-      <!-- Feature Highlights -->
-      <div style="background: linear-gradient(to right, #f9f9f9, #ffffff); border-left: 4px solid #EB0028; padding: 25px; border-radius: 8px; margin: 25px 0;">
-        <h3 style="color: #000; font-size: 16px; margin: 0 0 15px 0; font-weight: 700;">What Awaits You:</h3>
-        <ul style="color: #666; font-size: 14px; margin: 0; padding-left: 20px; line-height: 1.9;">
-          <li><strong>Inspiring Talks:</strong> Access to thought-provoking presentations and speaker events</li>
-          <li><strong>Engage & Connect:</strong> Network with innovators, thinkers, and changemakers at NERIST</li>
-          <li><strong>Exclusive Updates:</strong> Stay informed about upcoming TEDx events and opportunities</li>
-          <li><strong>Community Impact:</strong> Be part of a movement that celebrates ideas and innovation</li>
-        </ul>
-      </div>
-      
-      <!-- Call to Action -->
-      <div style="text-align: center; margin: 35px 0;">
-        <p style="color: #666; font-size: 14px; margin: 0 0 20px 0;">Ready to dive into the world of ideas?</p>
-        <a href="{platformUrl}" style="display: inline-block; background-color: #EB0028; color: #ffffff; text-decoration: none; padding: 14px 40px; border-radius: 6px; font-weight: 600; font-size: 16px; transition: background-color 0.3s;">Explore TEDxNERIST</a>
-      </div>
-      
-      <!-- Support Section -->
-      <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 30px 0 25px 0;">
-        <p style="color: #333; font-size: 14px; margin: 0 0 10px 0; font-weight: 600;">Have Questions?</p>
-        <p style="color: #666; font-size: 14px; margin: 0; line-height: 1.6;">
-          We're here to help! Whether you want to attend an event, become a speaker, or get involved, feel free to <a href="mailto:neriststore@gmail.com" style="color: #EB0028; text-decoration: none; font-weight: 600;">reach out to us</a>.
-        </p>
-      </div>
-      
-      <!-- Quote Section -->
-      <div style="border-left: 3px solid #EB0028; padding-left: 20px; margin: 30px 0;">
-        <p style="color: #666; font-size: 14px; font-style: italic; margin: 0; line-height: 1.6;">
-          "Ideas are the currency of the twenty-first century. Some people are really good at it, some people aren't."
-        </p>
-        <p style="color: #999; font-size: 12px; margin: 8px 0 0 0;">— Robert Metcalfe</p>
-      </div>
-      
-      <p style="color: #333; font-size: 15px; margin: 25px 0 5px 0;">Welcome to the community of idea-spreaders!</p>
-      <p style="color: #333; font-size: 15px; margin: 0;">
-        Best regards,<br>
-        <strong>The TEDxNERIST Team</strong>
-      </p>
-      
-    </div>
-    
-    <!-- Footer -->
-    <div style="background-color: #000000; padding: 30px; text-align: center;">
-      <p style="color: #ffffff; margin: 0 0 10px 0; font-size: 16px; font-weight: 600;">Ideas Worth Spreading</p>
-      <p style="color: #999; font-size: 12px; margin: 0 0 15px 0;">
-        Join us in celebrating innovation, creativity, and meaningful conversations
-      </p>
-      <p style="color: #666; font-size: 11px; margin: 0;">
-        © 2025 TEDxNERIST. This independent TEDx event is operated under license from TED.<br>
-        All rights reserved.
-      </p>
-    </div>
-    
-  </div>
-  
-  <!-- Disclaimer -->
-  <div style="text-align: center; margin-top: 20px; padding: 10px;">
-    <p style="color: #888; font-size: 12px; margin: 0; line-height: 1.6;">
-      You're receiving this email because you joined TEDxNERIST.<br>
-      This is an automated message, please do not reply to this email.
-    </p>
-  </div>
-  
+<body style="margin:0;padding:0;background-color:#080808;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;">
+  <table width="100%" cellspacing="0" cellpadding="0" style="width:100%;background-color:#080808;">
+    <tr>
+      <td align="center" class="outer-pad" style="padding:32px 16px;">
+        <table width="100%" cellspacing="0" cellpadding="0" class="email-container" style="max-width:600px;background-color:#111111;border-radius:16px;overflow:hidden;border:1px solid #232323;">
+          
+          <!-- Header -->
+          <tr>
+            <td align="center" class="header-pad" style="background:linear-gradient(180deg,#050505 0%,#111111 100%);padding:44px 38px;">
+              <h1 class="brand-text" style="margin:0;color:#EB0028;font-size:34px;font-weight:800;letter-spacing:1px;">
+                TED<span style="color:#ffffff;">x</span><span style="color:#ffffff;font-weight:500;">NERIST</span>
+              </h1>
+              <p style="margin-top:12px;color:rgba(255,255,255,0.62);font-size:12px;letter-spacing:2px;text-transform:uppercase;">
+                Welcome to the TEDxNERIST community
+              </p>
+            </td>
+          </tr>
+
+          <!-- Content -->
+          <tr>
+            <td class="content-pad" style="padding:34px 40px 24px;background-color:#111111;">
+              <p style="margin:0 0 10px;color:rgba(255,255,255,0.56);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;">
+                Registration confirmed
+              </p>
+              <h2 class="hero-title" style="margin:0 0 14px;color:#ffffff;font-size:28px;font-weight:700;line-height:1.25;">
+                Welcome, \${name}
+              </h2>
+
+              <p class="body-copy" style="margin:0 0 14px;color:rgba(255,255,255,0.82);font-size:14px;line-height:1.75;">
+                Thank you for joining <strong style="color:#ffffff;">TEDxNERIST</strong>, an independently organized TEDx event hosted at the North Eastern Regional Institute of Science and Technology.
+              </p>
+
+              <p class="body-copy" style="margin:0 0 14px;color:rgba(255,255,255,0.82);font-size:14px;line-height:1.75;">
+                We bring together students, faculty, and thinkers through curated talks, fresh perspectives, and conversations that matter.
+              </p>
+
+              <p class="body-copy" style="margin:0;color:rgba(255,255,255,0.82);font-size:14px;line-height:1.75;">
+                Your registration is confirmed, and we are excited to have you as part of the TEDxNERIST journey.
+              </p>
+
+              <!-- Divider -->
+              <table width="100%" style="margin:26px 0 24px;">
+                <tr>
+                  <td height="1" style="background-color:#262626;"></td>
+                </tr>
+              </table>
+
+              <!-- Benefits -->
+              <p style="margin:0 0 12px;color:#ffffff;font-size:14px;font-weight:600;">
+                As a member of TEDxNERIST, you will have access to:
+              </p>
+
+              <ul class="list-copy" style="margin:0;padding-left:20px;color:rgba(255,255,255,0.82);font-size:13px;line-height:1.75;">
+                <li style="padding-bottom:8px;">Institute-hosted TEDx talks and speaker sessions</li>
+                <li style="padding-bottom:8px;">Early invitations to TEDxNERIST flagship events</li>
+                <li style="padding-bottom:8px;">Opportunities to engage with peers, faculty, and guest speakers</li>
+                <li>A platform to explore and contribute innovative ideas</li>
+              </ul>
+
+              <!-- CTA -->
+              <div style="text-align:center;margin-top:30px;">
+                <a href="\${platformUrl}" class="cta-link" style="display:inline-block;background-color:#EB0028;color:#ffffff;padding:14px 28px;border-radius:999px;text-decoration:none;font-size:14px;font-weight:700;letter-spacing:0.3px;">
+                  Explore TEDxNERIST
+                </a>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Quote -->
+          <tr>
+            <td class="section-pad" style="padding:0 40px 26px;background-color:#111111;">
+              <div style="background-color:#0d0d0d;border-left:4px solid #EB0028;border-radius:12px;padding:18px 20px;">
+                <p class="quote-copy" style="margin:0;font-style:italic;color:#ffffff;font-size:14px;line-height:1.7;">
+                  "Ideas are the currency of the twenty-first century."
+                </p>
+                <p style="margin-top:8px;font-size:11px;color:rgba(255,255,255,0.5);font-weight:700;letter-spacing:0.4px;">
+                  — Robert Metcalfe
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Closing -->
+          <tr>
+            <td class="section-pad" style="padding:0 40px 36px;background-color:#111111;">
+              
+              <p class="closing-copy" style="margin:0;color:rgba(255,255,255,0.76);font-size:13px;line-height:1.8;">
+                Should you require any assistance, please feel free to contact us at
+                <a href="mailto:tedxnerist@gmail.com" style="color:#ffffff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.24);">
+                  tedxnerist@gmail.com
+                </a>.
+              </p>
+
+              <p class="closing-copy" style="margin:14px 0 0;color:rgba(255,255,255,0.76);font-size:13px;line-height:1.8;">
+                We look forward to your active participation in TEDxNERIST initiatives.
+              </p>
+
+              <p class="closing-copy" style="margin-top:18px;color:#ffffff;font-size:13px;line-height:1.8;">
+                Warm regards,<br>
+                <strong style="color:#ffffff;">Team TEDxNERIST</strong><br>
+                <span style="font-size:11px;color:rgba(255,255,255,0.5);">
+                  North Eastern Regional Institute of Science and Technology (NERIST)
+                </span>
+              </p>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" class="footer-pad" style="background-color:#090909;padding:28px 40px;border-top:1px solid #1f1f1f;">
+              <p style="margin:0;color:#ffffff;font-size:12px;font-weight:700;letter-spacing:0.8px;">
+                TEDxNERIST
+              </p>
+              <p style="margin-top:8px;color:rgba(255,255,255,0.4);font-size:11px;line-height:1.6;">
+                This independently organized TEDx event is operated under license from TED.<br>
+                © 2026 TEDxNERIST. All rights reserved.
+              </p>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Disclaimer -->
+        <table width="100%" cellspacing="0" cellpadding="0" class="email-container" style="max-width:600px;">
+          <tr>
+            <td align="center" style="padding:16px 10px 0;color:#7f7f7f;font-size:11px;line-height:1.6;">
+              You are receiving this email because you registered through the official TEDxNERIST platform.<br>
+              North Eastern Regional Institute of Science and Technology (NERIST)
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
 `;

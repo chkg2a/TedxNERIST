@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./App.css";
+import { Toaster } from "react-hot-toast";
 
 // --- 1. CRITICAL: Eager Imports (Above the Fold) ---
 // We import these DIRECTLY from the file (not from ./components/index)
@@ -113,6 +114,7 @@ function App() {
 
   return (
     <>
+      <Toaster position="top-center" />
       <AnimatePresence>
         {loading && <LoadingScreen onDone={() => setLoading(false)} />}
       </AnimatePresence>
@@ -195,7 +197,7 @@ const ComingSoon = () => (
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1.5 }}
     >
-      "Transform · Evolve · Emerge"
+      "Transform · Transcend · Triumph"
     </motion.p>
     <motion.p
       className="text-lg mt-4 font-semibold"
