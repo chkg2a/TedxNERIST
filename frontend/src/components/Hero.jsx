@@ -190,11 +190,11 @@ function Hero({ isReady }) {
             className="mt-8 flex items-center gap-3 text-[10px] sm:text-[11px] tracking-[0.2em] uppercase"
             style={{ fontFamily: "OverpassMono, monospace", color: COLORS.greyDim }}
           >
-            <span>March 2026</span>
+            <span>11 April 2026</span>
+            <span style={{ color: COLORS.red }}>—</span>
+            <span>Silver Jubilee Hall</span>
             <span style={{ color: COLORS.red }}>—</span>
             <span>NERIST, Arunachal Pradesh</span>
-            <span style={{ color: COLORS.red }}>—</span>
-            <span>3 Days</span>
           </motion.div>
 
           {/* CTA */}

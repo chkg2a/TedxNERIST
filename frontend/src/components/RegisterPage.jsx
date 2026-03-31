@@ -223,14 +223,14 @@ export default function RegisterPage() {
         }
     };
 
-    const handleVerifyOtp = async (e) => {
-        e.preventDefault();
-        if (!otp || otp.length !== 6) {
+    const handleVerifyOtp = async (e, otpValue = otp) => {
+        if (e) e.preventDefault();
+        if (!otpValue || otpValue.length !== 6) {
             setFormError({ otp: "Please enter a valid 6-digit OTP" });
             return;
         }
 
-        const result = await verifyEmail(registrationEmail || formData.email, otp);
+        const result = await verifyEmail(registrationEmail || formData.email, otpValue);
         if (result.success) {
             toast.success("Email verified successfully!");
             setStep(3);
@@ -283,7 +283,7 @@ export default function RegisterPage() {
                             className="text-gray-300 mb-6"
                             style={{ fontFamily: "Gilroy-Regular, sans-serif" }}
                         >
-                            Thank you for registering for TEDxNERIST! Your ticket has been generated.
+                            Thank you for registering for TEDxNERIST!
                         </motion.p>
 
 
@@ -296,7 +296,7 @@ export default function RegisterPage() {
                             className="text-gray-400 text-sm mb-8"
                             style={{ fontFamily: "Gilroy-Regular, sans-serif" }}
                         >
-                            A confirmation email with your ticket details has been sent to your email address.
+                            A confirmation email has been sent to your email address with the details.
                         </motion.p>
 
                         <motion.button
@@ -368,6 +368,9 @@ export default function RegisterPage() {
                                         const val = e.target.value.replace(/\D/g, '').slice(0, 6);
                                         setOtp(val);
                                         setFormError({ ...formError, otp: "" });
+                                        if (val.length === 6) {
+                                            handleVerifyOtp(null, val);
+                                        }
                                     }}
                                     placeholder="000000"
                                     className="w-full bg-[#141414] border rounded-xl px-4 py-4 text-white text-center text-2xl tracking-[0.5em] focus:outline-none transition-all duration-300"
@@ -466,8 +469,8 @@ export default function RegisterPage() {
                                 error={formError.userType}
                             >
                                 <option value="">Select User Type</option>
-                                <option value="outsider">Outside Attendee</option>
                                 <option value="neristian">NERIST Student</option>
+                                <option value="outsider">Outside Attendee</option>
                             </StyledSelect>
                         </motion.div>
 

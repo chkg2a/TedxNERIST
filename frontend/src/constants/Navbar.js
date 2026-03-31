@@ -8,8 +8,8 @@ export const NAV_LINKS = [
     {
         id: "about",
         label: "About",
-        path: "/#about",
-        type: "anchor",
+        path: "/about",
+        type: "router",
     },
     {
         id: "contact",

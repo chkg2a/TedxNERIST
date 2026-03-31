@@ -1,5 +1,5 @@
 import { useEffect, useRef, lazy, Suspense, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./App.css";
@@ -17,6 +17,7 @@ import ButterflySequence from "./components/ButterflySequence.jsx";
 // --- 2. Lazy Load Pages (Routes) ---
 // These are only downloaded when the route is visited.
 const ContactUs = lazy(() => import("./components/ContactUs.jsx"));
+const AboutPage = lazy(() => import("./components/About.jsx"));
 const FeedbackForm = lazy(() => import("./components/Feedback.jsx"));
 const PrivacyPolicy = lazy(() => import("./components/PPolicy.jsx"));
 const NoRefundPolicy = lazy(() => import("./components/RefundPolicy.jsx"));
@@ -78,7 +79,13 @@ const LoadingScreen = ({ onDone }) => {
   );
 };
 
-function TrackPageViews() {
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
+
   return null;
 }
 
@@ -123,6 +130,8 @@ function App() {
       <ButterflySequence onDone={() => setIsReady(true)} />
 
       <BrowserRouter>
+        <ScrollToTop />
+
         {/* Global theme elements */}
         <div className="bg-noise"></div>
         <div className="ambient-glow ambient-glow-1"></div>
@@ -138,6 +147,16 @@ function App() {
                   <div className="mt-8">
                     <ContactUs />
                   </div>
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <>
+                  <Navbar />
+                  <AboutPage />
                   <Footer />
                 </>
               }

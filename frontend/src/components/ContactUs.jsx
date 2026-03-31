@@ -16,10 +16,10 @@ const ContactUs = () => {
             <div>
               <h3 className="text-lg font-semibold">Email</h3>
               <a
-                href="mailto:support@tedxnerist.com"
+                href="mailto:tedx@nerist.ac.in"
                 className="text-blue-600 hover:underline"
               >
-                support@tedxnerist.com
+                tedx@nerist.ac.in
               </a>
             </div>
 

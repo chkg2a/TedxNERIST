@@ -3,25 +3,24 @@ export const about = [
     title: "TEDx",
     subtitle: "NERIST",
     description:
-      "TEDxNERIST is an independently organized TEDx event held at NERIST, Arunachal Pradesh, celebrating local voices and global ideas through inspiring talks and performances.",
-
+      "TEDxNERIST is an independently organized TEDx event at NERIST, Arunachal Pradesh, designed to spotlight local voices while connecting them to global ideas worth sharing.",
     subdescription:
-      "With powerful themes like 'Metamorphosis' and a lineup of inspiring speakers from diverse backgrounds, TEDxNERIST fosters creativity, dialogue, and visionary thinking in the Northeast region of India and connects it to the global TEDx movement.",
+      "With themes like 'Metamorphosis' and a cross-disciplinary lineup of speakers, artists, and thinkers, the event creates space for creativity, dialogue, and bold new perspectives across the Northeast.",
   },
   {
     title: "TED",
     subtitle: "",
     description:
-      "TED (Technology, Entertainment, and Design) began with topics like e-books and fractals but has evolved into a global platform for creativity and innovation. It now features a diverse range of voices, including business leaders, scientists, and philosophers.",
+      "TED, which began as Technology, Entertainment, and Design, has grown into a global platform for ideas spanning science, culture, leadership, design, education, and social change.",
     subdescription:
-      "TED’s initiatives, such as TED-Ed for education, TEDGlobal conferences, and the TED Prize for impactful change, continue to inspire inclusivity, progress, and transformative ideas worldwide.",
+      "Through talks, conferences, TED-Ed, fellowships, and community programs, TED continues to amplify voices that challenge assumptions and inspire meaningful action worldwide.",
   },
   {
     title: "TEDx",
     subtitle: "",
     description:
-      'TEDx promotes "ideas worth spreading" through independently organized events worldwide. Driven by passionate individuals, these events bring fresh ideas and stories to inspire and spark meaningful conversations.',
+      'TEDx carries the TED spirit through independently organized events around the world, each built by local teams who believe in the power of "ideas worth spreading."',
     subdescription:
-      "Guided by TED’s principles, TEDx events follow specific guidelines and host over 3,000 events annually, making a global impact at the grassroots level.",
+      "Guided by TED's event principles, TEDx gatherings create meaningful local conversations while contributing to a worldwide culture of curiosity, innovation, and community impact.",
   },
 ];
