@@ -99,9 +99,9 @@ function Footer() {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-16 pb-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-10 lg:px-16 pt-12 sm:pt-16 pb-8 sm:pb-10">
         {/* Main grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 pb-14 border-b border-white/[0.05]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 lg:gap-8 pb-10 sm:pb-14 border-b border-white/[0.05]">
 
           {/* ── Col 1: Brand ── */}
           <div className="lg:col-span-1">
@@ -146,7 +146,7 @@ function Footer() {
                 { label: "Location", value: "Nirjuli, Arunachal Pradesh" },
                 { label: "Date", value: "11 April 2026" },
                 //  ,
-                { label: "Contact", value: "+91 88220 78464" },
+                { label: "Contact", value: "tedx@nerist.ac.in" },
               ].map(({ label, value }) => (
                 <div key={label}>
                   <Mono
@@ -247,7 +247,7 @@ function Footer() {
         </div>
 
         {/* ── Bottom bar ── */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
           <Mono
             className="text-[10px] tracking-[0.25em] uppercase"
             style={{ color: "#9ca3af" }}

@@ -56,7 +56,7 @@ const Reveal = ({ children, className = "", delay = 0 }) => {
 
 /* ─── Section label — editorial numbered marker ─── */
 const SectionLabel = ({ number, text }) => (
-  <div className="flex items-center gap-4 mb-10 md:mb-14">
+  <div className="flex items-center gap-3 sm:gap-4 mb-8 sm:mb-10 md:mb-14">
     <span
       className="text-[10px] tracking-[0.4em] uppercase"
       style={{ fontFamily: "OverpassMono, monospace", color: COLORS.red }}
@@ -92,12 +92,12 @@ function Hero({ isReady }) {
       <motion.section
         ref={heroRef}
         style={{ opacity: heroOpacity }}
-        className="relative w-full min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden"
+        className="relative w-full min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 overflow-hidden"
       >
         <ParticleCanvas isReady={isReady} />
         {/* Ambient red pulse — very subtle */}
         <div
-          className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none"
+          className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(235,0,40,0.05) 0%, transparent 65%)" }}
         />
 
@@ -156,7 +156,7 @@ function Hero({ isReady }) {
             initial={{ scaleX: 0 }}
             animate={isReady ? { scaleX: 1 } : { scaleX: 0 }}
             transition={{ duration: 0.7, delay: 4.1, ease: [0.22, 1, 0.36, 1] }}
-            className="w-16 h-[1px] mb-8 origin-center"
+            className="w-12 sm:w-16 h-[1px] mb-5 sm:mb-8 origin-center"
             style={{ background: COLORS.red }}
           />
 
@@ -187,13 +187,13 @@ function Hero({ isReady }) {
             initial={{ opacity: 0 }}
             animate={isReady ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.7, delay: 4.6 }}
-            className="mt-8 flex items-center gap-3 text-[10px] sm:text-[11px] tracking-[0.2em] uppercase"
+            className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center gap-1.5 sm:gap-3 text-[10px] sm:text-[11px] tracking-[0.2em] uppercase"
             style={{ fontFamily: "OverpassMono, monospace", color: COLORS.greyDim }}
           >
             <span>11 April 2026</span>
-            <span style={{ color: COLORS.red }}>—</span>
+            <span className="hidden sm:inline" style={{ color: COLORS.red }}>—</span>
             <span>Silver Jubilee Hall</span>
-            <span style={{ color: COLORS.red }}>—</span>
+            <span className="hidden sm:inline" style={{ color: COLORS.red }}>—</span>
             <span>NERIST, Arunachal Pradesh</span>
           </motion.div>
 
@@ -205,8 +205,8 @@ function Hero({ isReady }) {
             whileHover={{ scale: 1.03, boxShadow: `0 0 60px ${COLORS.red}30` }}
             whileTap={{ scale: 0.97 }}
             onClick={() => navigate("/register")}
-            className="mt-12 group relative overflow-hidden rounded-full text-white font-semibold text-sm sm:text-base inline-flex items-center gap-2.5 cursor-pointer transition-all duration-300"
-            style={{ fontFamily: "Gilroy-Medium, sans-serif", padding: "16px 40px", background: COLORS.red }}
+            className="mt-8 sm:mt-12 group relative overflow-hidden rounded-full text-white font-semibold text-sm sm:text-base inline-flex items-center gap-2 sm:gap-2.5 cursor-pointer transition-all duration-300"
+            style={{ fontFamily: "Gilroy-Medium, sans-serif", padding: "clamp(12px, 2vw, 16px) clamp(28px, 5vw, 40px)", background: COLORS.red }}
           >
             <span className="relative z-10">Register Now</span>
             <ArrowRight size={16} strokeWidth={2.5} className="relative z-10 group-hover:translate-x-0.5 transition-transform" />
@@ -220,7 +220,7 @@ function Hero({ isReady }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.5, duration: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-10"
+          className="absolute bottom-5 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-10"
         >
           <motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
             <ChevronDown size={14} style={{ color: COLORS.greyDim }} />
@@ -231,7 +231,7 @@ function Hero({ isReady }) {
       {/* ═══════════════════════════════════════════════════════
           THEME
       ═══════════════════════════════════════════════════════ */}
-      <section className="relative px-6 sm:px-10 md:px-16 py-32 md:py-40 bg-[#050505]">
+      <section className="relative px-4 sm:px-10 md:px-16 py-20 sm:py-32 md:py-40 bg-[#050505]">
         {/* Top accent line */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-20" style={{ background: `linear-gradient(to bottom, transparent, ${COLORS.red}40, transparent)` }} />
 
@@ -240,12 +240,12 @@ function Hero({ isReady }) {
             <SectionLabel number="01" text="Theme" />
           </Reveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-20 items-center">
             {/* Left — Title + description (takes more space) */}
             <div className="lg:col-span-7 order-2 lg:order-1">
               <Reveal delay={0.1}>
                 <h2
-                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.05] mb-8"
+                  className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.05] mb-5 sm:mb-8"
                   style={{ fontFamily: "Cirka, serif" }}
                 >
                   Meta<span style={{ color: COLORS.red }}>morphosis</span>
@@ -294,7 +294,7 @@ function Hero({ isReady }) {
       {/* ═══════════════════════════════════════════════════════
           ABOUT
       ═══════════════════════════════════════════════════════ */}
-      <section className="relative px-6 sm:px-10 md:px-16 py-32 md:py-40 bg-[#050505]">
+      <section className="relative px-4 sm:px-10 md:px-16 py-20 sm:py-32 md:py-40 bg-[#050505]">
         <div className="max-w-6xl mx-auto">
           <Reveal>
             <SectionLabel number="02" text="About" />
@@ -302,7 +302,7 @@ function Hero({ isReady }) {
 
           <Reveal delay={0.1}>
             <h2
-              className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1] mb-16 max-w-2xl"
+              className="text-2xl sm:text-4xl md:text-5xl font-bold leading-[1.1] mb-10 sm:mb-16 max-w-2xl"
               style={{ fontFamily: "Cirka, serif" }}
             >
               What is{" "}
@@ -330,19 +330,19 @@ function Hero({ isReady }) {
             ].map((card, i) => (
               <Reveal key={i} delay={i * 0.1}>
                 <div
-                  className="p-7 md:p-8 h-full group transition-colors duration-500 hover:bg-white/[0.02]"
-                  style={{ borderLeft: i > 0 ? `1px solid ${COLORS.greyFaint}` : "none", borderTop: `1px solid ${COLORS.greyFaint}` }}
+                  className={`p-5 sm:p-7 md:p-8 h-full group transition-colors duration-500 hover:bg-white/[0.02] border-t ${i > 0 ? 'md:border-l' : ''}`}
+                  style={{ borderColor: COLORS.greyFaint }}
                 >
                   {/* Roman numeral */}
                   <span
-                    className="text-[10px] tracking-[0.3em] block mb-6"
+                    className="text-[10px] tracking-[0.3em] block mb-4 sm:mb-6"
                     style={{ fontFamily: "OverpassMono, monospace", color: COLORS.red }}
                   >
                     {card.num}
                   </span>
 
                   <h3
-                    className="text-lg md:text-xl font-bold mb-4 transition-colors duration-300 group-hover:text-[#eb0028]"
+                    className="text-lg md:text-xl font-bold mb-3 sm:mb-4 transition-colors duration-300 group-hover:text-[#eb0028]"
                     style={{ fontFamily: "Gilroy, sans-serif" }}
                   >
                     {card.title}
@@ -364,7 +364,7 @@ function Hero({ isReady }) {
       {/* ═══════════════════════════════════════════════════════
           EXPERIENCE
       ═══════════════════════════════════════════════════════ */}
-      <section className="relative px-6 sm:px-10 md:px-16 py-32 md:py-40 bg-[#050505]">
+      <section className="relative px-4 sm:px-10 md:px-16 py-20 sm:py-32 md:py-40 bg-[#050505]">
         <div className="max-w-6xl mx-auto">
           <Reveal>
             <SectionLabel number="03" text="Experience" />
@@ -372,14 +372,14 @@ function Hero({ isReady }) {
 
           <Reveal delay={0.1}>
             <h2
-              className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1] mb-16 max-w-2xl"
+              className="text-2xl sm:text-4xl md:text-5xl font-bold leading-[1.1] mb-10 sm:mb-16 max-w-2xl"
               style={{ fontFamily: "Cirka, serif" }}
             >
               What to <span style={{ color: COLORS.red }}>expect</span>
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-14">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 sm:gap-x-12 gap-y-10 sm:gap-y-14">
             {[
               {
                 num: "01",
@@ -437,10 +437,10 @@ function Hero({ isReady }) {
       {/* ═══════════════════════════════════════════════════════
           CTA — Cinematic closer
       ═══════════════════════════════════════════════════════ */}
-      <section className="relative px-6 sm:px-10 md:px-16 py-32 md:py-40 bg-[#050505]">
+      <section className="relative px-4 sm:px-10 md:px-16 py-20 sm:py-32 md:py-40 bg-[#050505] overflow-hidden">
         {/* Ambient glow */}
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] pointer-events-none"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[200px] sm:w-[600px] sm:h-[300px] pointer-events-none"
           style={{ background: `radial-gradient(ellipse, ${COLORS.red}08 0%, transparent 60%)` }}
         />
 
@@ -450,14 +450,14 @@ function Hero({ isReady }) {
             <div className="w-10 h-[1px] mx-auto mb-10" style={{ background: COLORS.red }} />
 
             <h2
-              className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.1] mb-6"
+              className="text-2xl sm:text-4xl md:text-5xl font-bold leading-[1.1] mb-4 sm:mb-6"
               style={{ fontFamily: "Cirka, serif" }}
             >
               Embrace the{" "}
               <span style={{ color: COLORS.red }}>change</span>
             </h2>
             <p
-              className="text-base md:text-lg mb-12 max-w-md mx-auto leading-[1.85]"
+              className="text-sm sm:text-base md:text-lg mb-8 sm:mb-12 max-w-md mx-auto leading-[1.85]"
               style={{ fontFamily: "Gilroy-Regular, sans-serif", color: COLORS.grey }}
             >
               Join us at NERIST for an unforgettable experience of transformation, inspiration, and ideas worth spreading.
@@ -467,8 +467,8 @@ function Hero({ isReady }) {
               whileHover={{ scale: 1.03, boxShadow: `0 0 60px ${COLORS.red}25` }}
               whileTap={{ scale: 0.97 }}
               onClick={() => navigate("/register")}
-              className="group relative overflow-hidden rounded-full text-white font-semibold text-sm sm:text-base inline-flex items-center gap-2.5 cursor-pointer transition-all duration-300"
-              style={{ fontFamily: "Gilroy-Medium, sans-serif", padding: "16px 44px", background: COLORS.red }}
+              className="group relative overflow-hidden rounded-full text-white font-semibold text-sm sm:text-base inline-flex items-center gap-2 sm:gap-2.5 cursor-pointer transition-all duration-300"
+              style={{ fontFamily: "Gilroy-Medium, sans-serif", padding: "clamp(12px, 2vw, 16px) clamp(30px, 5vw, 44px)", background: COLORS.red }}
             >
               <span className="relative z-10">Register Now</span>
               <ArrowRight size={16} strokeWidth={2.5} className="relative z-10 group-hover:translate-x-0.5 transition-transform" />

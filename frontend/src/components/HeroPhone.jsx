@@ -167,7 +167,7 @@ function HeroPhone() {
         // Show only loading animation
         <div className="loading-overlay fixed inset-0 flex items-center justify-center z-50 bg-black">
           <span
-            className="relative text-7xl"
+            className="relative text-3xl sm:text-5xl md:text-7xl"
             style={{ fontFamily: "Gilroy", color: "grey", opacity: "70%" }}
           >
             TEDxNERIST

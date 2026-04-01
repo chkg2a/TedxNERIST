@@ -31,7 +31,7 @@ const StyledInput = ({ label, icon: Icon, error, ...props }) => (
             )}
             <input
                 {...props}
-                className={`w-full bg-[#141414] border rounded-xl px-4 py-4 text-white placeholder-gray-600 focus:outline-none transition-all duration-300 ${Icon ? 'pl-12' : ''}`}
+                className={`w-full bg-[#141414] border rounded-xl px-3 py-3 sm:px-4 sm:py-4 text-sm sm:text-base text-white placeholder-gray-600 focus:outline-none transition-all duration-300 ${Icon ? 'pl-10 sm:pl-12' : ''}`}
                 style={{
                     borderColor: error ? '#ef4444' : borderDefault,
                     fontFamily: "Gilroy-Regular, sans-serif",
@@ -76,7 +76,7 @@ const StyledSelect = ({ label, icon: Icon, error, children, ...props }) => (
             )}
             <select
                 {...props}
-                className={`w-full bg-[#141414] border rounded-xl px-4 py-4 text-white appearance-none cursor-pointer focus:outline-none transition-all duration-300 ${Icon ? 'pl-12' : ''}`}
+                className={`w-full bg-[#141414] border rounded-xl px-3 py-3 sm:px-4 sm:py-4 text-sm sm:text-base text-white appearance-none cursor-pointer focus:outline-none transition-all duration-300 ${Icon ? 'pl-10 sm:pl-12' : ''}`}
                 style={{
                     borderColor: error ? '#ef4444' : borderDefault,
                     fontFamily: "Gilroy-Regular, sans-serif",
@@ -249,28 +249,28 @@ export default function RegisterPage() {
         return (
             <div className="min-h-screen bg-[#0a0a0a]">
                 <Navbar />
-                <div className="flex items-center justify-center min-h-[calc(100vh-80px)] p-4">
+                <div className="flex items-start sm:items-center justify-center min-h-screen px-3 pt-24 pb-8 sm:px-4 sm:pt-28 sm:pb-12">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.5 }}
-                        className="rounded-3xl p-8 md:p-12 max-w-lg w-full text-center bg-[#111111]"
+                        className="rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 max-w-lg w-full text-center bg-[#111111]"
                         style={{ border: `1px solid ${borderDefault}` }}
                     >
                         <motion.div
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                            className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6"
+                            className="w-16 h-16 sm:w-20 sm:h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6"
                         >
-                            <Check size={40} className="text-white" />
+                            <Check className="text-white w-8 h-8 sm:w-10 sm:h-10" />
                         </motion.div>
 
                         <motion.h2
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.3 }}
-                            className="text-3xl md:text-4xl font-bold text-white mb-4"
+                            className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4"
                             style={{ fontFamily: "Cirka, serif" }}
                         >
                             Registration Successful!
@@ -280,7 +280,7 @@ export default function RegisterPage() {
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.4 }}
-                            className="text-gray-300 mb-6"
+                            className="text-gray-300 text-sm sm:text-base mb-4 sm:mb-6"
                             style={{ fontFamily: "Gilroy-Regular, sans-serif" }}
                         >
                             Thank you for registering for TEDxNERIST!
@@ -293,7 +293,7 @@ export default function RegisterPage() {
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.6 }}
-                            className="text-gray-400 text-sm mb-8"
+                            className="text-gray-400 text-xs sm:text-sm mb-6 sm:mb-8"
                             style={{ fontFamily: "Gilroy-Regular, sans-serif" }}
                         >
                             A confirmation email has been sent to your email address with the details.
@@ -306,7 +306,7 @@ export default function RegisterPage() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={handleGoHome}
-                            className="px-8 py-3 rounded-full font-medium transition-all text-white"
+                            className="px-6 py-2.5 sm:px-8 sm:py-3 rounded-full font-medium transition-all text-white text-sm sm:text-base"
                             style={{
                                 backgroundColor: tedxRed,
                                 fontFamily: "Gilroy-Medium, sans-serif",
@@ -326,17 +326,17 @@ export default function RegisterPage() {
         return (
             <div className="min-h-screen bg-[#0a0a0a]">
                 <Navbar />
-                <div className="flex items-center justify-center min-h-[calc(100vh-80px)] p-4">
+                <div className="flex items-start sm:items-center justify-center min-h-screen px-3 pt-24 pb-8 sm:px-4 sm:pt-28 sm:pb-12">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="rounded-3xl p-8 md:p-12 max-w-md w-full bg-[#111111]"
+                        className="rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 max-w-md w-full bg-[#111111]"
                         style={{ border: `1px solid ${borderDefault}` }}
                     >
                         <button
                             onClick={() => { setStep(1); clearError(); }}
-                            className="flex items-center text-gray-400 hover:text-white mb-6 transition-colors"
+                            className="flex items-center text-gray-400 hover:text-white mb-4 sm:mb-6 transition-colors text-sm sm:text-base"
                             style={{ fontFamily: "Gilroy-Regular, sans-serif" }}
                         >
                             <ArrowLeft size={20} className="mr-2" />
@@ -344,12 +344,12 @@ export default function RegisterPage() {
                         </button>
 
                         <h2
-                            className="text-3xl md:text-4xl font-bold text-white mb-2"
+                            className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2"
                             style={{ fontFamily: "Cirka, serif" }}
                         >
                             Verify Email
                         </h2>
-                        <p className="text-gray-400 mb-8" style={{ fontFamily: "Gilroy-Regular, sans-serif" }}>
+                        <p className="text-gray-400 text-sm sm:text-base mb-6 sm:mb-8 break-all sm:break-normal" style={{ fontFamily: "Gilroy-Regular, sans-serif" }}>
                             We've sent a 6-digit OTP to <span style={{ color: tedxRed }}>{registrationEmail || formData.email}</span>
                         </p>
 
@@ -373,7 +373,7 @@ export default function RegisterPage() {
                                         }
                                     }}
                                     placeholder="000000"
-                                    className="w-full bg-[#141414] border rounded-xl px-4 py-4 text-white text-center text-2xl tracking-[0.5em] focus:outline-none transition-all duration-300"
+                                    className="w-full bg-[#141414] border rounded-xl px-3 py-3 sm:px-4 sm:py-4 text-white text-center text-xl sm:text-2xl tracking-[0.3em] sm:tracking-[0.5em] focus:outline-none transition-all duration-300"
                                     style={{
                                         borderColor: borderDefault,
                                         fontFamily: "Gilroy, sans-serif",
@@ -399,7 +399,7 @@ export default function RegisterPage() {
                             <button
                                 type="submit"
                                 disabled={isLoading || otp.length !== 6}
-                                className="w-full disabled:bg-gray-700 disabled:cursor-not-allowed text-white py-4 rounded-xl font-medium transition-all flex items-center justify-center gap-2"
+                                className="w-full disabled:bg-gray-700 disabled:cursor-not-allowed text-white py-3 sm:py-4 rounded-xl font-medium text-sm sm:text-base transition-all flex items-center justify-center gap-2"
                                 style={{
                                     backgroundColor: isLoading || otp.length !== 6 ? undefined : tedxRed,
                                     fontFamily: "Gilroy-Medium, sans-serif",
@@ -426,12 +426,12 @@ export default function RegisterPage() {
     return (
         <div className="min-h-screen bg-[#0a0a0a]">
             <Navbar />
-            <div className="flex items-center justify-center min-h-[calc(100vh-80px)] p-4 py-12">
+            <div className="flex items-start sm:items-center justify-center min-h-screen px-3 pt-24 pb-8 sm:px-4 sm:pt-28 sm:pb-12">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="rounded-3xl p-8 md:p-12 max-w-2xl w-full bg-[#111111]"
+                    className="rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 max-w-2xl w-full bg-[#111111]"
                     style={{ border: `1px solid ${borderDefault}` }}
                 >
                     {/* Header */}
@@ -439,7 +439,7 @@ export default function RegisterPage() {
                         initial={{ y: -20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.2 }}
-                        className="text-3xl md:text-5xl font-bold text-white mb-2"
+                        className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-2"
                         style={{ fontFamily: "Cirka, serif" }}
                     >
                         Register
@@ -448,13 +448,13 @@ export default function RegisterPage() {
                         initial={{ y: -10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.3 }}
-                        className="text-gray-400 mb-10"
+                        className="text-gray-400 text-sm sm:text-base mb-6 sm:mb-10"
                         style={{ fontFamily: "Gilroy-Regular, sans-serif" }}
                     >
                         Register for <span style={{ color: tedxRed, fontWeight: 700 }}>TEDx</span>NERIST — an event filled with ideas worth spreading
                     </motion.p>
 
-                    <form onSubmit={handleSubmit} className="space-y-7">
+                    <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-7">
                         {/* User Type Select — always visible */}
                         <motion.div
                             initial={{ x: -30, opacity: 0 }}
@@ -482,14 +482,14 @@ export default function RegisterPage() {
                                     animate={{ height: "auto", opacity: 1 }}
                                     exit={{ height: 0, opacity: 0 }}
                                     transition={{ duration: 0.4, ease: "easeInOut" }}
-                                    className="space-y-7 overflow-hidden"
+                                    className="space-y-5 sm:space-y-7 overflow-hidden"
                                     key="registration-fields"
                                 >
                                     {/* NERIST Student layout: Roll No + Name, Dept + Year, Email + WhatsApp */}
                                     {userType === "neristian" ? (
                                         <>
                                             {/* Row 1: Roll No + Full Name */}
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-7">
                                                 <StyledInput
                                                     label="Reg. No"
                                                     icon={Hash}
@@ -513,7 +513,7 @@ export default function RegisterPage() {
                                             </div>
 
                                             {/* Row 2: Department + Year */}
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-7">
                                                 <StyledSelect
                                                     label="Department"
                                                     icon={Building2}
@@ -551,7 +551,7 @@ export default function RegisterPage() {
                                             </div>
 
                                             {/* Row 3: Email + WhatsApp */}
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-7">
                                                 <StyledInput
                                                     label="Email Address"
                                                     icon={Mail}
@@ -588,7 +588,7 @@ export default function RegisterPage() {
                                                 error={formError.name}
                                             />
 
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-7">
                                                 <StyledInput
                                                     label="Email Address"
                                                     icon={Mail}
@@ -634,7 +634,7 @@ export default function RegisterPage() {
                                         whileTap={{ scale: 0.98 }}
                                         type="submit"
                                         disabled={isLoading}
-                                        className="w-full disabled:bg-gray-700 disabled:cursor-not-allowed text-white py-4 rounded-xl font-medium transition-all flex items-center justify-center gap-2"
+                                        className="w-full disabled:bg-gray-700 disabled:cursor-not-allowed text-white py-3 sm:py-4 rounded-xl font-medium text-sm sm:text-base transition-all flex items-center justify-center gap-2"
                                         style={{
                                             backgroundColor: isLoading ? undefined : tedxRed,
                                             fontFamily: "Gilroy-Medium, sans-serif",
