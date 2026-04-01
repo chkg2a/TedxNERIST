@@ -83,7 +83,6 @@ const RegistrationsTab = ({
                             <th>Department</th>
                             <th>Year</th>
                             <th>Status</th>
-                            <th>Ticket ID</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -111,7 +110,6 @@ const RegistrationsTab = ({
                                         {reg.isVerified ? "Verified" : "Pending"}
                                     </span>
                                 </td>
-                                <td><code className="ticket-code">{reg.ticketId || "-"}</code></td>
                                 <td>
                                     <div className="action-btns">
                                         <button className="action-btn view" onClick={() => setSelectedRegistration(reg)} title="View Details">
