@@ -12,6 +12,18 @@ export const NAV_LINKS = [
         type: "router",
     },
     {
+        id: "team",
+        label: "Team",
+        path: "/team",
+        type: "router",
+    },
+    {
+        id: "speakers",
+        label: "Speakers",
+        path: "/speakers",
+        type: "router",
+    },
+    {
         id: "contact",
         label: "Contact",
         path: "/contact",

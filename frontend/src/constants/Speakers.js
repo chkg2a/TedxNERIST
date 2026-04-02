@@ -1,4 +1,4 @@
-const speakers = [
+const previousSpeakers = [
   {
     id: "1",
     name: "Aarzoo Shah",
@@ -41,4 +41,4 @@ const speakers = [
   },
 ];
 
-export default speakers;
+export default previousSpeakers;

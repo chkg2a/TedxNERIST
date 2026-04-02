@@ -34,7 +34,7 @@ export default function ButterflySequence({ onDone }) {
     let loaded = 0;
     const images = Array.from({ length: FRAME_COUNT }, (_, i) => {
       const img = new Image();
-      img.src = `/seq_q/ezgif-frame-${String(i + 1).padStart(3, "0")}.jpg`;
+      img.src = `/seq_q/ezgif-frame-${String(i + 1).padStart(3, "0")}.png`;
       img.onload = () => {
         loaded++;
         if (i === 0) paintFrame(img);
@@ -136,10 +136,10 @@ export default function ButterflySequence({ onDone }) {
         animate={{
           opacity: isSeqDone ? 0.10 : 1,
           filter:
-            phase === SPLASH  ? "blur(16px)" :
-            phase === PLAYING ? "blur(0px)"  :
-            phase === FADEOUT ? "blur(20px)" :
-                                "blur(6px)",  // DONE ghost
+            phase === SPLASH ? "blur(16px)" :
+              phase === PLAYING ? "blur(0px)" :
+                phase === FADEOUT ? "blur(20px)" :
+                  "blur(6px)",  // DONE ghost
         }}
         transition={{ duration: phase === PLAYING ? 0.6 : 1.0, ease: "easeInOut" }}
       />

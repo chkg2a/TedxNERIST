@@ -129,7 +129,7 @@ function Hero({ isReady }) {
               style={{
                 fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
                 fontWeight: 900,
-                fontSize: "clamp(1.4rem, 5.5vw, 3.8rem)",
+                fontSize: "clamp(2rem, 5.5vw, 5rem)",
                 color: "#eb0028",
                 margin: "0 0.03em",
                 alignSelf: "flex-end",

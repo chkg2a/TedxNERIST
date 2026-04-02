@@ -26,6 +26,8 @@ const RegisterPage = lazy(() => import("./components/RegisterPage.jsx"));
 const AdminLogin = lazy(() => import("./components/admin/AdminLogin.jsx"));
 const AdminDashboard = lazy(() => import("./components/admin/AdminDashboard.jsx"));
 const ProtectedRoute = lazy(() => import("./components/admin/ProtectedRoute.jsx"));
+const TeamPage = lazy(() => import("./components/TeamPage.jsx"));
+const SpeakersPage = lazy(() => import("./components/SpeakersPage.jsx"));
 
 // --- 3. Lazy Load Heavy Home Sections ---
 const Hero = lazy(() => import("./components/Hero.jsx"));
@@ -78,6 +80,12 @@ const LoadingScreen = ({ onDone }) => {
   );
 };
 
+const ButterflyWrapper = ({ setIsReady }) => {
+  const location = useLocation();
+  if (location.pathname !== "/") return null;
+  return <ButterflySequence onDone={() => setIsReady(true)} />;
+};
+
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -115,7 +123,7 @@ function SectionWrapper({ children, className, id }) {
 }
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(window.location.pathname === "/");
   const [isReady, setIsReady] = useState(false);
 
   return (
@@ -125,10 +133,9 @@ function App() {
         {loading && <LoadingScreen onDone={() => setLoading(false)} />}
       </AnimatePresence>
 
-      {/* Always mounted — stays alive as ghost background after sequence */}
-      <ButterflySequence onDone={() => setIsReady(true)} />
-
       <BrowserRouter>
+        {/* Only mount on home page */}
+        <ButterflyWrapper setIsReady={setIsReady} />
         <ScrollToTop />
 
         {/* Global theme elements */}
@@ -156,6 +163,26 @@ function App() {
                 <>
                   <Navbar />
                   <AboutPage />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/team"
+              element={
+                <>
+                  <Navbar />
+                  <TeamPage />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path="/speakers"
+              element={
+                <>
+                  <Navbar />
+                  <SpeakersPage />
                   <Footer />
                 </>
               }
