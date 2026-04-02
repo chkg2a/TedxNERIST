@@ -234,7 +234,7 @@ function Footer() {
             <ul className="flex flex-col gap-3 text-sm" style={{ fontFamily: "Gilroy-Regular, sans-serif" }}>
               {[
                 { label: "Privacy Policy", to: "/policy" },
-                { label: "Refund Policy", to: "/refund" },
+
                 { label: "Terms & Conditions", to: "/term" },
                 { label: "Contact", to: "/contact" },
               ].map(({ label, to }) => (

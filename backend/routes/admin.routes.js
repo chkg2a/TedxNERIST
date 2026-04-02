@@ -26,7 +26,6 @@ adminRouter.post("/refresh-token", refreshAccessToken);
 
 adminRouter.use(verifyToken);
 
-
 adminRouter.post("/register", registerAdmin);
 adminRouter.post("/logout", logoutAdmin);
 adminRouter.get("/me", getMe);

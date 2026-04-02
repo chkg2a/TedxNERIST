@@ -107,15 +107,32 @@ const Navbar = ({ isReady = true }) => {
 
         {/* Mobile menu */}
         {expanded && (
-          <nav className="md:hidden pb-6 pt-2 space-y-5 border-t border-white/[0.06]" style={{ fontFamily: "Gilroy-Medium, sans-serif" }}>
-            {NAV_LINKS.map((link) => (
-              <NavLink
-                key={link.id}
-                link={link}
-                isActive={location.pathname === link.path}
-                onClick={() => setExpanded(false)}
-              />
-            ))}
+          <nav className="md:hidden flex flex-col gap-5 pb-6 pt-4 border-t border-white/[0.06]" style={{ fontFamily: "Gilroy-Medium, sans-serif" }}>
+            {NAV_LINKS.map((link) => {
+              const isActive = location.pathname === link.path;
+              const className =
+                `block text-[15px] tracking-[0.06em] uppercase transition-colors duration-300 ${isActive ? "text-white font-semibold" : "text-gray-300 hover:text-white"}`;
+
+              return link.type === "router" ? (
+                <Link
+                  key={link.id}
+                  to={link.path}
+                  className={className}
+                  onClick={() => setExpanded(false)}
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.id}
+                  href={link.path}
+                  className={className}
+                  onClick={() => setExpanded(false)}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
             {hasCTA && (
               <Link
                 to={CTA_BUTTON.path}
