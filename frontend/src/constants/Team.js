@@ -30,12 +30,27 @@ export const categorizedTeam = [
     category: "Media Team",
     members: [
       {
+        name: "Maitreya Mayarong Dutta",
+        role: "Designing Head",
+        img: "/images/team/maya.jpeg",
+      },
+      {
         name: "Suman Malick",
         role: "Designing Head",
         img: "/images/team/suman.jpeg",
       },
       {
-        name: "Satya Prakash",
+        name: "Rishava Kashyap Jyoti",
+        role: "Designing Head",
+        img: "/images/team/rishava.jpeg",
+      },
+      {
+        name: "Bikash Deep Tinikuria",
+        role: "Videography",
+        img: "/images/team/bikash.jpeg",
+      },
+      {
+        name: "Satyaprakash Nath",
         role: "Photo/Videography Head",
         img: "/images/team/satya.jpeg",
       },
