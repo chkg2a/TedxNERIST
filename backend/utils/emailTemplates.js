@@ -168,7 +168,7 @@ export const VERIFICATION_EMAIL_TEMPLATE = `
           <tr>
             <td align="center" class="footer-pad" style="background-color:#0a0a0a;padding:24px 30px;">
               <p style="color:rgba(255,255,255,0.9);margin:0 0 4px 0;font-size:12px;font-weight:600;letter-spacing:0.5px;">Metamorphosis: Transform, Transcend, Triumph</p>
-              <p style="color:rgba(255,255,255,0.35);font-size:11px;margin:0;">&copy; 2025 TEDxNERIST &middot; Operated under license from TED</p>
+              <p style="color:rgba(255,255,255,0.35);font-size:11px;margin:0;">&copy; 2026 TEDxNERIST &middot; Operated under license from TED</p>
             </td>
           </tr>
 
@@ -181,7 +181,7 @@ export const VERIFICATION_EMAIL_TEMPLATE = `
             <td align="center" style="padding:16px 15px;">
               <p style="color:#aaaaaa;font-size:11px;margin:0;line-height:1.6;">
                 This is an automated message &mdash; please do not reply.<br>
-                For support, contact <a href="mailto:tedxnerist@gmail.com" style="color:#EB0028;text-decoration:none;">tedxnerist@gmail.com</a>
+                For support, contact <a href="mailto:tedx@nerist.ac.in" style="color:#EB0028;text-decoration:none;">tedx@nerist.ac.in</a>
               </p>
             </td>
           </tr>
@@ -251,7 +251,7 @@ export const WELCOME_TICKET_EMAIL_TEMPLATE = `
         <!-- Ticket Header -->
         <div style="background: linear-gradient(90deg, #EB0028, #ff3d50); padding: 20px 25px; text-align: center;">
           <p style="color: rgba(255,255,255,0.9); font-size: 12px; text-transform: uppercase; letter-spacing: 3px; margin: 0 0 5px 0; font-weight: 500;">Event Ticket</p>
-          <p style="color: #ffffff; font-size: 22px; font-weight: 700; margin: 0; letter-spacing: 1px;">TEDxNERIST 2025</p>
+          <p style="color: #ffffff; font-size: 22px; font-weight: 700; margin: 0; letter-spacing: 1px;">TEDxNERIST 2026</p>
         </div>
         
         <!-- Ticket Body -->
@@ -390,7 +390,7 @@ export const WELCOME_TICKET_EMAIL_TEMPLATE = `
       </div>
       <p style="color: #ffffff; margin: 0 0 10px 0; font-size: 16px; font-weight: 600;">Metamorphosis: Transform, Transcend, Triumph</p>
       <p style="color: #888; font-size: 12px; margin: 0;">
-        © 2025 TEDxNERIST. This independent TEDx event is operated under license from TED.
+        © 2026 TEDxNERIST. This independent TEDx event is operated under license from TED.
       </p>
     </div>
     
@@ -400,7 +400,7 @@ export const WELCOME_TICKET_EMAIL_TEMPLATE = `
   <div style="text-align: center; margin-top: 25px; padding: 15px;">
     <p style="color: #999; font-size: 11px; margin: 0; line-height: 1.6;">
       This is an automated message. Please do not reply to this email.<br>
-      For any queries, contact us at <a href="mailto:tedxnerist@gmail.com" style="color: #EB0028; text-decoration: none;">tedxnerist@gmail.com</a>
+      For any queries, contact us at <a href="mailto:tedx@nerist.ac.in" style="color: #EB0028; text-decoration: none;">tedx@nerist.ac.in</a>
     </p>
   </div>
   
@@ -527,8 +527,8 @@ export const WELCOME_EMAIL_TEMPLATE = `
               
               <p class="closing-copy" style="margin:0;color:rgba(255,255,255,0.76);font-size:13px;line-height:1.8;">
                 Should you require any assistance, please feel free to contact us at
-                <a href="mailto:tedxnerist@gmail.com" style="color:#ffffff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.24);">
-                  tedxnerist@gmail.com
+                <a href="mailto:tedx@nerist.ac.in" style="color:#ffffff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.24);">
+                  tedx@nerist.ac.in
                 </a>.
               </p>
 
