@@ -29,6 +29,11 @@ export const categorizedTeam = [
         role: "Speaker Curator",
         img: "/images/team/champak.jpeg",
       },
+      {
+        name: "Prarthana Borah",
+        role: "Event Director",
+        img: "/images/team/prarthana.jpeg",
+      }
     ],
   },
   {
