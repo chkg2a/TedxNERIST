@@ -24,6 +24,11 @@ export const categorizedTeam = [
         role: "Content Curator & Hospitality Incharge",
         img: "/images/team/sandhya.jpeg",
       },
+      {
+        name: "Champak Changmai",
+        role: "Speaker Curator",
+        img: "/images/team/champak.jpeg",
+      },
     ],
   },
   {
@@ -68,6 +73,11 @@ export const categorizedTeam = [
         name: "Chingkheinganba Haobam",
         role: "Website Developer",
         img: "/images/team/chingkhei.jpeg",
+      },
+      {
+        name: "Sanjeev",
+        role: "Website Developer",
+        img: "/images/team/sanjeev.jpeg",
       },
     ],
   },
