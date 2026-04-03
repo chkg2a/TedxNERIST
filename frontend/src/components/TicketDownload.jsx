@@ -58,9 +58,9 @@ const TicketDownload = () => {
     const eventLocation =
       "NERIST Auditorium, NERIST, Nirjuli, Arunachal Pradesh";
     const mapsLink = "https://shorturl.at/CsZzQ";
-    const eventStart = "20250412T043000Z";
-    const eventEnd = "20250412T113000Z";
-    const eventDetails = `Hey ${ticketData.name},\n\nYour TEDxNERIST ticket is confirmed!\n\n📍 Event: ${eventName}\n🏢 Location: ${eventLocation}\n📍 Directions: ${mapsLink}\n🎟️ Ticket No: #${ticketData.ticketNumber}\n📅 Date & Time: April 10, 2025 | 10:00 AM - 5:00 PM\n\nMake sure to bring this ticket or scan the QR code for entry. See you there!\n\n🔗 Ticket URL: https://tedxnerist.com/ticket/${id}`;
+    const eventStart = "20260412T043000Z";
+    const eventEnd = "20260412T113000Z";
+    const eventDetails = `Hey ${ticketData.name},\n\nYour TEDxNERIST ticket is confirmed!\n\n📍 Event: ${eventName}\n🏢 Location: ${eventLocation}\n📍 Directions: ${mapsLink}\n🎟️ Ticket No: #${ticketData.ticketNumber}\n📅 Date & Time: April 10, 2026 | 10:00 AM - 5:00 PM\n\nMake sure to bring this ticket or scan the QR code for entry. See you there!\n\n🔗 Ticket URL: https://tedxnerist.com/ticket/${id}`;
 
     const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
       eventName

@@ -2,10 +2,10 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//TEDxNERIST//EN
 BEGIN:VEVENT
-UID:TEDxNERIST2025
-DTSTAMP:20250301T120000Z
-DTSTART:20250412T043000Z
-DTEND:20250412T113000Z
+UID:TEDxNERIST2026
+DTSTAMP:20260301T120000Z
+DTSTART:20260412T043000Z
+DTEND:20260412T113000Z
 SUMMARY:TEDx NERIST
 DESCRIPTION:Join us for TEDx NERIST, where bold ideas, fearless curiosity, and boundless ambition come together to inspire and ignite change. Don’t miss this opportunity to explore the unexplored!
 LOCATION:NERIST Auditorium, 4PMW+J86, North Eastern Regional Institute of Science and Technology, Nirjuli, Arunachal Pradesh 791109

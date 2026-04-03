@@ -40,7 +40,7 @@ const NotFoundPage = () => {
 
         {/* Footer */}
         <p className="text-gray-500 text-sm mt-10">
-          TEDxNERIST &copy; 2025 • This independent TEDx event is operated under
+          TEDxNERIST &copy; 2026 • This independent TEDx event is operated under
           license from TED
         </p>
       </div>
