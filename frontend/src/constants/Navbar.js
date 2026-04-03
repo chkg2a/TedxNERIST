@@ -6,9 +6,9 @@ export const NAV_LINKS = [
         type: "router",
     },
     {
-        id: "about",
-        label: "About",
-        path: "/about",
+        id: "speakers",
+        label: "Speakers",
+        path: "/speakers",
         type: "router",
     },
     {
@@ -17,10 +17,11 @@ export const NAV_LINKS = [
         path: "/team",
         type: "router",
     },
+
     {
-        id: "speakers",
-        label: "Speakers",
-        path: "/speakers",
+        id: "about",
+        label: "About",
+        path: "/about",
         type: "router",
     },
     {
