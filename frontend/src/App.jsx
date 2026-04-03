@@ -13,6 +13,7 @@ import Footer from "./components/Footer.jsx";
 import HeroPhone from "./components/HeroPhone.jsx";
 import NotFoundPage from "./components/404.jsx";
 import ButterflySequence from "./components/ButterflySequence.jsx";
+import SeoManager from "./components/SeoManager.jsx";
 
 // --- 2. Lazy Load Pages (Routes) ---
 // These are only downloaded when the route is visited.
@@ -134,6 +135,7 @@ function App() {
       </AnimatePresence>
 
       <BrowserRouter>
+        <SeoManager />
         {/* Only mount on home page */}
         <ButterflyWrapper setIsReady={setIsReady} />
         <ScrollToTop />

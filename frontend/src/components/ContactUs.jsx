@@ -55,7 +55,13 @@ const ContactUs = () => {
         className="absolute top-1/2 left-1/2 w-[500px] h-[500px] rounded-full pointer-events-none opacity-5 -translate-x-1/2 -translate-y-1/2 mix-blend-screen blur-[100px]" 
         style={{ background: tedxRed }} 
       />
-      <div className="absolute inset-0 pointer-events-none bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(0deg, transparent, transparent 22px, rgba(255,255,255,0.18) 22px, rgba(255,255,255,0.18) 23px), repeating-linear-gradient(90deg, transparent, transparent 22px, rgba(255,255,255,0.18) 22px, rgba(255,255,255,0.18) 23px)",
+        }}
+      />
       
       {/* The Central Card */}
       <motion.div 

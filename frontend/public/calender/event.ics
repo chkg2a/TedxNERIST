@@ -4,11 +4,11 @@ PRODID:-//TEDxNERIST//EN
 BEGIN:VEVENT
 UID:TEDxNERIST2026
 DTSTAMP:20260301T120000Z
-DTSTART:20260412T043000Z
-DTEND:20260412T113000Z
-SUMMARY:TEDx NERIST
-DESCRIPTION:Join us for TEDx NERIST, where bold ideas, fearless curiosity, and boundless ambition come together to inspire and ignite change. Don’t miss this opportunity to explore the unexplored!
-LOCATION:NERIST Auditorium, 4PMW+J86, North Eastern Regional Institute of Science and Technology, Nirjuli, Arunachal Pradesh 791109
-URL:https://www.google.com/maps/place/NERIST+Auditorium/@27.1242346,93.740833,17z/data=!3m1!4b1!4m6!3m5!1s0x3743ff771f0446b5:0x14fa96c700366cf5!8m2!3d27.1242346!4d93.740833!16s%2Fg%2F11j8kpyw1n?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D
+DTSTART;VALUE=DATE:20260411
+DTEND;VALUE=DATE:20260412
+SUMMARY:TEDxNERIST 2026: Metamorphosis
+DESCRIPTION:Join TEDxNERIST at Silver Jubilee Hall, NERIST, for a day of talks, performances, and ideas worth spreading around the 2026 theme Metamorphosis.
+LOCATION:Silver Jubilee Hall, NERIST, Nirjuli, Arunachal Pradesh 791109, India
+URL:https://tedxnerist.com/
 END:VEVENT
 END:VCALENDAR

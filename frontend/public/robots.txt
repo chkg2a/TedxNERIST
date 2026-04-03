@@ -1,6 +1,7 @@
 User-agent: *
-Disallow: /admin/
-Disallow: /api/private/
 Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /feedback
 
 Sitemap: https://tedxnerist.com/sitemap.xml
