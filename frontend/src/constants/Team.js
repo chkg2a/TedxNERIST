@@ -24,6 +24,11 @@ export const categorizedTeam = [
         role: "Content Curator & Hospitality Incharge",
         img: "/images/team/sandhya.jpeg",
       },
+      {
+        name: "Champak Changmai",
+        role: "Speaker Curator",
+        img: "/images/team/champak.jpeg",
+      }
     ],
   },
   {
@@ -75,9 +80,9 @@ export const categorizedTeam = [
 
 // Keep original structure for backwards compatibility if needed elsewhere
 export const Team = [
-  ...categorizedTeam[0].members.map(m => ({...m, category: "NA"})),
-  ...categorizedTeam[1].members.map(m => ({...m, category: "NA"})),
-  ...categorizedTeam[2].members.map(m => ({...m, category: "NA"}))
+  ...categorizedTeam[0].members.map(m => ({ ...m, category: "NA" })),
+  ...categorizedTeam[1].members.map(m => ({ ...m, category: "NA" })),
+  ...categorizedTeam[2].members.map(m => ({ ...m, category: "NA" }))
 ];
 
 export const Category = ["NA"];
