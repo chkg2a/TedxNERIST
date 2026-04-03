@@ -111,7 +111,7 @@ const TermAndCondition = () => {
         {
           title: "SECTION 19 - CHANGES TO TERMS OF SERVICE",
           content:
-            "You can review the most current version of the Terms of Service at any time at this page. We reserve the right, at our sole discretion, to update, change or replace any part of these Terms of Service by posting updates and changes to our website tedxnerist.com. It is your responsibility to check our website periodically for changes.",
+            "You can review the most current version of the Terms of Service at any time at this page. We reserve the right, at our sole discretion, to update, change or replace any part of these Terms of Service by posting updates and changes to our website tedx.nerist.ac.in. It is your responsibility to check our website periodically for changes.",
         },
         {
           title: "SECTION 20 - CONTACT INFORMATION",

@@ -4,4 +4,4 @@ Disallow: /admin
 Disallow: /admin/
 Disallow: /feedback
 
-Sitemap: https://tedxnerist.com/sitemap.xml
+Sitemap: https://tedx.nerist.ac.in/sitemap.xml

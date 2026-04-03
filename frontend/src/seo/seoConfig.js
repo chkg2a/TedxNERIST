@@ -1,4 +1,4 @@
-const SITE_URL = "https://tedxnerist.com";
+const SITE_URL = "https://tedx.nerist.ac.in";
 const SITE_NAME = "TEDxNERIST";
 const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
