@@ -11,7 +11,7 @@ const upcomingSpeakers = [
     id: 2,
     name: "Captain Shruti Chauhan",
     title: "Commercial Pilot & Aviation Trailblazer",
-    image: "/images/speakers/shruti-chauhan.jpg",
+    image: "/images/speakers/cap.jpeg",
     bio: "Captain Shruti Chauhan is a commercial pilot known for breaking barriers in the aviation industry. She has inspired many through her journey in a traditionally male-dominated field, advocating for women in aviation and STEM. With strong flying experience and a passion for mentorship, she encourages young aspirants to pursue their dreams fearlessly.",
     revealDate: "2026-04-03T10:00:00",
   },
