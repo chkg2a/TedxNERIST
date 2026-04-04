@@ -144,43 +144,213 @@ function About() {
                 </p>
               </Reveal>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="lg:col-span-5">
-              <Reveal delay={0.2}>
+      <section className="relative px-6 sm:px-10 md:px-16 py-24 md:py-28">
+        <div className="max-w-6xl mx-auto">
+          <Reveal>
+            <SectionLabel number="02" text="About the Theme" />
+          </Reveal>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {/* 2026 Theme - Primary */}
+            <div className="lg:col-span-7">
+              <Reveal delay={0.08}>
                 <div
-                  className="relative rounded-[28px] border p-7 md:p-8 overflow-hidden"
-                  style={{ background: "linear-gradient(180deg, rgba(17,17,17,0.98), rgba(10,10,10,0.95))", borderColor: "rgba(255,255,255,0.08)" }}
+                  className="relative rounded-[28px] border p-7 md:p-9 overflow-hidden group"
+                  style={{
+                    background: "linear-gradient(180deg, rgba(20,20,20,0.98), rgba(10,10,10,0.96))",
+                    borderColor: "rgba(235,0,40,0.12)",
+                    boxShadow: "0 0 120px rgba(235,0,40,0.06), 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03)",
+                  }}
                 >
+                  {/* Gradient borders */}
                   <div
                     className="absolute inset-x-0 top-0 h-px"
                     style={{ background: "linear-gradient(to right, transparent, rgba(235,0,40,0.8), transparent)" }}
                   />
-                  <span
-                    className="text-[10px] tracking-[0.34em] uppercase block mb-5"
-                    style={{ fontFamily: "OverpassMono, monospace", color: COLORS.red }}
-                  >
-                    2026 Theme
-                  </span>
-                  <p
-                    className="text-2xl md:text-3xl leading-[1.15]"
-                    style={{ fontFamily: "Cirka, serif", color: COLORS.white }}
-                  >
-                    Metamorphosis
-                  </p>
-                  <p
-                    className="mt-4 text-sm leading-[1.85]"
-                    style={{ fontFamily: "Gilroy-Regular, sans-serif", color: COLORS.grey }}
-                  >
-                    A call to embrace change, move through uncertainty, and emerge stronger, clearer, and more alive to possibility.
-                  </p>
-                  <div className="mt-8 flex items-center gap-3">
-                    <div className="w-10 h-px" style={{ background: COLORS.red }} />
-                    <span
-                      className="text-[10px] tracking-[0.26em] uppercase"
-                      style={{ fontFamily: "OverpassMono, monospace", color: COLORS.greyDim }}
+                  <div
+                    className="absolute inset-x-0 bottom-0 h-px"
+                    style={{ background: "linear-gradient(to right, transparent, rgba(235,0,40,0.2), transparent)" }}
+                  />
+
+                  {/* Subtle red accent glow */}
+                  <div
+                    className="absolute top-0 right-0 w-64 h-64 rounded-full pointer-events-none opacity-30 blur-3xl"
+                    style={{ background: "radial-gradient(circle, rgba(235,0,40,0.15), transparent 70%)" }}
+                  />
+
+                  {/* Header */}
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-6">
+                      <span
+                        className="text-[10px] tracking-[0.34em] uppercase"
+                        style={{ fontFamily: "OverpassMono, monospace", color: COLORS.red }}
+                      >
+                        This Year's Theme — 2026
+                      </span>
+                      <div
+                        className="w-9 h-9 rounded-full flex items-center justify-center"
+                        style={{
+                          background: "linear-gradient(135deg, rgba(235,0,40,0.12), rgba(235,0,40,0.04))",
+                          border: "1px solid rgba(235,0,40,0.15)",
+                        }}
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={COLORS.red} strokeWidth="1.5">
+                          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                        </svg>
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    <p
+                      className="text-3xl md:text-4xl lg:text-5xl leading-[1.05]"
+                      style={{ fontFamily: "Cirka, serif", color: COLORS.white }}
                     >
-                      Transform / Transcend / Triumph
-                    </span>
+                      Metamorphosis
+                    </p>
+
+                    {/* Description */}
+                    <p
+                      className="mt-6 text-sm md:text-base leading-[1.9]"
+                      style={{ fontFamily: "Gilroy-Regular, sans-serif", color: COLORS.grey }}
+                    >
+                      True transformation rarely feels comfortable. It asks us to shed what no longer serves us — old mindsets, 
+                      familiar certainties, and the comfort of staying the same. Metamorphosis is about walking through the 
+                      chrysalis of change: uncertain, uncomfortable, but unbroken. This year's theme is an invitation to stop 
+                      waiting for the perfect moment and start becoming in the present.
+                    </p>
+
+                    {/* Three pillars */}
+                    <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      {[
+                        { title: "Transformation", desc: "Shedding the old", icon: "01" },
+                        { title: "Transcendence", desc: "Rising beyond limits", icon: "02" },
+                        { title: "Triumph", desc: "Emerging stronger", icon: "03" },
+                      ].map((item, index) => (
+                        <div
+                          key={item.title}
+                          className="relative p-4 rounded-xl transition-all duration-300"
+                          style={{
+                            background: "linear-gradient(135deg, rgba(235,0,40,0.06), rgba(235,0,40,0.02))",
+                            border: "1px solid rgba(235,0,40,0.08)",
+                          }}
+                        >
+                          <div className="flex items-center gap-3">
+                            <div
+                              className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                              style={{
+                                background: "linear-gradient(135deg, rgba(235,0,40,0.18), rgba(235,0,40,0.06))",
+                                border: "1px solid rgba(235,0,40,0.2)",
+                              }}
+                            >
+                              <span
+                                className="text-[9px]"
+                                style={{ fontFamily: "OverpassMono, monospace", color: COLORS.red }}
+                              >
+                                {item.icon}
+                              </span>
+                            </div>
+                            <div>
+                              <span
+                                className="text-xs block mb-0.5"
+                                style={{ fontFamily: "Gilroy-Medium, sans-serif", color: COLORS.white }}
+                              >
+                                {item.title}
+                              </span>
+                              <span
+                                className="text-[10px]"
+                                style={{ fontFamily: "Gilroy-Regular, sans-serif", color: COLORS.greyDim }}
+                              >
+                                {item.desc}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+
+            {/* 2025 Theme - Secondary */}
+            <div className="lg:col-span-5">
+              <Reveal delay={0.16}>
+                <div
+                  className="relative rounded-[28px] border p-7 md:p-8 overflow-hidden h-full"
+                  style={{
+                    background: "linear-gradient(180deg, rgba(17,17,17,0.65), rgba(10,10,10,0.6))",
+                    borderColor: "rgba(255,255,255,0.04)",
+                    opacity: 0.7,
+                    boxShadow: "0 10px 40px rgba(0,0,0,0.2)",
+                  }}
+                >
+                  <div
+                    className="absolute inset-x-0 top-0 h-px"
+                    style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent)" }}
+                  />
+
+                  {/* Subtle decorative element */}
+                  <div
+                    className="absolute bottom-0 right-0 w-48 h-48 rounded-full pointer-events-none opacity-20 blur-3xl"
+                    style={{ background: "radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%)" }}
+                  />
+
+                  <div className="relative z-10">
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-5">
+                      <span
+                        className="text-[10px] tracking-[0.34em] uppercase"
+                        style={{ fontFamily: "OverpassMono, monospace", color: COLORS.greyDim }}
+                      >
+                        Past Theme — 2025
+                      </span>
+                      <div
+                        className="w-7 h-7 rounded-full flex items-center justify-center"
+                        style={{ background: "rgba(255,255,255,0.03)" }}
+                      >
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={COLORS.greyDim} strokeWidth="1.5">
+                          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                        </svg>
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    <p
+                      className="text-xl md:text-2xl leading-[1.15]"
+                      style={{ fontFamily: "Cirka, serif", color: COLORS.grey }}
+                    >
+                      Lighthouse Apus
+                    </p>
+
+                    {/* Description */}
+                    <p
+                      className="mt-4 text-sm leading-[1.85]"
+                      style={{ fontFamily: "Gilroy-Regular, sans-serif", color: COLORS.greyDim }}
+                    >
+                      "Lighthouse Apus" blends two powerful ideas: a guiding light (Lighthouse) that helps find direction in uncertainty, and the Bird of Paradise constellation (Apus) that represents limitless curiosity and bold exploration.
+                    </p>
+
+                    {/* Tags */}
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {["Guidance", "Exploration", "Innovation"].map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[9px] px-2.5 py-1 rounded-full"
+                          style={{
+                            fontFamily: "OverpassMono, monospace",
+                            color: COLORS.greyDim,
+                            background: "rgba(255,255,255,0.03)",
+                            border: "1px solid rgba(255,255,255,0.04)",
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </Reveal>
@@ -192,7 +362,7 @@ function About() {
       <section className="relative px-6 sm:px-10 md:px-16 py-24 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
-            <SectionLabel number="02" text="Who We Are" />
+            <SectionLabel number="03" text="Who We Are" />
           </Reveal>
 
           <Reveal delay={0.08}>
@@ -249,7 +419,7 @@ function About() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
           <div className="lg:col-span-5">
             <Reveal>
-              <SectionLabel number="03" text="Why It Matters" />
+              <SectionLabel number="04" text="Why It Matters" />
             </Reveal>
 
             <Reveal delay={0.08}>
@@ -309,7 +479,7 @@ function About() {
       <section className="relative px-6 sm:px-10 md:px-16 py-24 md:py-28">
         <div className="max-w-6xl mx-auto">
           <Reveal>
-            <SectionLabel number="04" text="Experience" />
+            <SectionLabel number="05" text="Experience" />
           </Reveal>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 items-start">

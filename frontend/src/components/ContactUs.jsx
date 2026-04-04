@@ -7,37 +7,37 @@ const tedxRedDim = "rgba(235, 0, 40, 0.15)";
 const borderDefault = "rgba(255, 255, 255, 0.08)";
 
 const ContactInfo = ({ icon: Icon, title, content, link, delay = 0 }) => (
-  <motion.div 
+  <motion.div
     initial={{ opacity: 0, x: -10 }}
     animate={{ opacity: 1, x: 0 }}
     transition={{ delay, duration: 0.5 }}
     className="flex items-start gap-4 p-4 rounded-xl bg-[#111111] group hover:bg-[#161616] transition-colors duration-500"
     style={{ border: `1px solid ${borderDefault}` }}
   >
-    <div 
-      className="p-2 sm:p-2.5 rounded-lg transition-colors duration-500 group-hover:bg-[#eb0028]" 
+    <div
+      className="p-2 sm:p-2.5 rounded-lg transition-colors duration-500 group-hover:bg-[#eb0028]"
       style={{ backgroundColor: tedxRedDim, color: "#d1d5db" }}
     >
       <Icon size={18} className="group-hover:text-white transition-colors duration-500" />
     </div>
     <div className="flex-1">
-      <h3 
-        className="text-[8px] sm:text-[9px] font-bold tracking-[0.2em] uppercase mb-1.5" 
+      <h3
+        className="text-[8px] sm:text-[9px] font-bold tracking-[0.2em] uppercase mb-1.5"
         style={{ color: "#d1d5db", fontFamily: "OverpassMono, monospace" }}
       >
         {title}
       </h3>
       {link ? (
-        <a 
-          href={link} 
-          className="text-sm md:text-base text-white hover:text-[#eb0028] transition-colors block font-semibold" 
+        <a
+          href={link}
+          className="text-sm md:text-base text-white hover:text-[#eb0028] transition-colors block font-semibold"
           style={{ fontFamily: "Gilroy-Medium, sans-serif" }}
         >
           {content}
         </a>
       ) : (
-        <p 
-          className="text-sm md:text-base text-white font-semibold" 
+        <p
+          className="text-sm md:text-base text-white font-semibold"
           style={{ fontFamily: "Gilroy-Medium, sans-serif", lineHeight: 1.4 }}
         >
           {content}
@@ -51,9 +51,9 @@ const ContactUs = () => {
   return (
     <div className="min-h-[calc(100vh-80px)] w-full bg-[#050505] flex items-center justify-center p-4 py-12 relative overflow-hidden">
       {/* Background Graphic elements */}
-      <div 
-        className="absolute top-1/2 left-1/2 w-[500px] h-[500px] rounded-full pointer-events-none opacity-5 -translate-x-1/2 -translate-y-1/2 mix-blend-screen blur-[100px]" 
-        style={{ background: tedxRed }} 
+      <div
+        className="absolute top-1/2 left-1/2 w-[500px] h-[500px] rounded-full pointer-events-none opacity-5 -translate-x-1/2 -translate-y-1/2 mix-blend-screen blur-[100px]"
+        style={{ background: tedxRed }}
       />
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay"
@@ -62,9 +62,9 @@ const ContactUs = () => {
             "repeating-linear-gradient(0deg, transparent, transparent 22px, rgba(255,255,255,0.18) 22px, rgba(255,255,255,0.18) 23px), repeating-linear-gradient(90deg, transparent, transparent 22px, rgba(255,255,255,0.18) 22px, rgba(255,255,255,0.18) 23px)",
         }}
       />
-      
+
       {/* The Central Card */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -72,20 +72,20 @@ const ContactUs = () => {
         style={{ border: `1px solid ${borderDefault}` }}
       >
         <div className="mb-8 pl-1">
-          <span 
-            className="text-[8px] sm:text-[9px] font-bold tracking-[0.3em] uppercase block mb-3" 
+          <span
+            className="text-[8px] sm:text-[9px] font-bold tracking-[0.3em] uppercase block mb-3"
             style={{ color: tedxRed, fontFamily: "OverpassMono, monospace" }}
           >
             Get In Touch
           </span>
-          <h2 
-            className="text-3xl md:text-5xl text-white mb-3 leading-none" 
+          <h2
+            className="text-3xl md:text-5xl text-white mb-3 leading-none"
             style={{ fontFamily: "Cirka, serif" }}
           >
             Contact
           </h2>
-          <p 
-            className="max-w-xl text-gray-300 text-sm sm:text-base leading-relaxed" 
+          <p
+            className="max-w-xl text-gray-300 text-sm sm:text-base leading-relaxed"
             style={{ fontFamily: "Gilroy-Regular, sans-serif" }}
           >
             Have questions about the event, ticketing, or partnerships? Reach out to our team at TEDxNERIST.
@@ -95,41 +95,41 @@ const ContactUs = () => {
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
           {/* Contact Details List */}
           <div className="flex flex-col gap-3">
-            <ContactInfo 
-              icon={Mail} 
-              title="Email" 
-              content="tedx@nerist.ac.in" 
-              link="mailto:tedx@nerist.ac.in" 
+            <ContactInfo
+              icon={Mail}
+              title="Email"
+              content="tedx@nerist.ac.in"
+              link="mailto:tedx@nerist.ac.in"
               delay={0.1}
             />
-            <ContactInfo 
-              icon={Phone} 
-              title="Phone" 
-              content="+91 88220 78464" 
-              link="tel:+918822078464" 
+            <ContactInfo
+              icon={Phone}
+              title="Phone"
+              content="+91 96129 94233"
+              link="tel:+919612994233"
               delay={0.2}
             />
-            <ContactInfo 
-              icon={MapPin} 
-              title="Address" 
+            <ContactInfo
+              icon={MapPin}
+              title="Address"
               content={
                 <>
                   Silver Jubilee Hall, NERIST<br />
                   Nirjuli, AP 791109
                 </>
-              } 
+              }
               delay={0.3}
             />
-            <ContactInfo 
-              icon={Clock} 
-              title="Business Hours" 
-              content="Mon - Fri: 9:00 AM - 6:00 PM" 
+            <ContactInfo
+              icon={Clock}
+              title="Business Hours"
+              content="Mon - Fri: 9:00 AM - 6:00 PM"
               delay={0.4}
             />
           </div>
 
           {/* Map Section */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -138,7 +138,7 @@ const ContactUs = () => {
           >
             {/* Overlay to darken map for aesthetic */}
             <div className="absolute inset-0 bg-black/10 pointer-events-none z-10 group-hover:bg-transparent transition-colors duration-700" />
-            
+
             <iframe
               title="TEDx NERIST Location"
               width="100%"
