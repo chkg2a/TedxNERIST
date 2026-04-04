@@ -27,7 +27,7 @@ const upcomingSpeakers = [
     id: 4,
     name: "Dr. Nilima Roy Chowdhury",
     title: "Startup Founder & TEDx Speaker",
-    image: "/images/speakers/nilima-roy.jpg",
+    image: "/images/team/dr.jpeg",
     bio: "Dr. Nilima Roy Chowdhury is a FaithTech startup founder, TEDx and Josh Talks speaker, and mentor associated with initiatives like NITI Aayog WEP. A former professor in clinical research, she is an alumna of the Goldman Sachs 10,000 Women program at IIM Bangalore and ISB.",
     revealDate: "2026-04-03T10:00:00",
   },

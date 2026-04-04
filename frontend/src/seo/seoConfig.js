@@ -5,7 +5,7 @@ const WEBSITE_ID = `${SITE_URL}/#website`;
 const EVENT_ID = `${SITE_URL}/#event`;
 const VENUE_ID = `${SITE_URL}/#venue`;
 
-const DEFAULT_IMAGE_PATH = "/images/thumbnail1.jpg";
+const DEFAULT_IMAGE_PATH = "/logo_load.png";
 const DEFAULT_ROBOTS =
   "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1";
 const NOINDEX_ROBOTS = "noindex,nofollow,noarchive,nosnippet";
