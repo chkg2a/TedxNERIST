@@ -26,7 +26,7 @@ export const categorizedTeam = [
       },
       {
         name: "Sandhya Genwali",
-        role: "Content Curator & Hospitality Incharge",
+        role: "Hospitality Incharge",
         img: "/images/team/sandhya.jpeg",
       },
       {
