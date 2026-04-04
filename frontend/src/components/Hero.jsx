@@ -5,6 +5,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ParticleCanvas from "./ParticleCanvas";
+import SpeakerReveal from "./SpeakerReveal";
 
 /* ═══════════════════════════════════════════════════════════════════
    DESIGN SYSTEM
@@ -435,10 +436,14 @@ function Hero({ isReady }) {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
+          SPEAKER REVEAL
+      ═══════════════════════════════════════════════════════ */}
+      <SpeakerReveal />
+
+      {/* ═══════════════════════════════════════════════════════
           CTA — Cinematic closer
       ═══════════════════════════════════════════════════════ */}
       <section className="relative px-4 sm:px-10 md:px-16 py-20 sm:py-32 md:py-40 bg-[#050505] overflow-hidden">
-        {/* Ambient glow */}
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[200px] sm:w-[600px] sm:h-[300px] pointer-events-none"
           style={{ background: `radial-gradient(ellipse, ${COLORS.red}08 0%, transparent 60%)` }}
@@ -446,7 +451,6 @@ function Hero({ isReady }) {
 
         <Reveal>
           <div className="max-w-2xl mx-auto text-center relative z-10">
-            {/* Red accent line */}
             <div className="w-10 h-[1px] mx-auto mb-10" style={{ background: COLORS.red }} />
 
             <h2
@@ -475,7 +479,6 @@ function Hero({ isReady }) {
               <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
             </motion.button>
 
-            {/* Seats indicator */}
             <p
               className="mt-8 text-[10px] tracking-[0.3em] uppercase"
               style={{ fontFamily: "OverpassMono, monospace", color: COLORS.greyDim }}
