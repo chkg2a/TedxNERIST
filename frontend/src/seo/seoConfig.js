@@ -280,7 +280,7 @@ export const baseStructuredData = [
 
 const routeDefinitions = {
   "/": {
-    title: "TEDxNERIST 2026 | Metamorphosis | Ideas Worth Spreading",
+    title: "TEDxNERIST 2026 | Metamorphosis | Transform · Transcend · Triumph",
     description:
       "Join TEDxNERIST 2026 at Silver Jubilee Hall, NERIST in Arunachal Pradesh. Explore the Metamorphosis theme, event details, speakers, and registration.",
     keywords: [
