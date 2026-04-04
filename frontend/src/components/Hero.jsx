@@ -274,10 +274,10 @@ function Hero({ isReady }) {
             {/* Right — Logo with dramatic glow */}
             <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end">
               <Reveal delay={0.15}>
-                <div className="relative">
+                <div className="relative phone-glow">
                   <div
-                    className="absolute inset-[-40%] rounded-full pointer-events-none"
-                    style={{ background: `radial-gradient(circle, ${COLORS.red}12 0%, transparent 65%)`, filter: "blur(60px)" }}
+                    className="absolute inset-[-40%] rounded-full pointer-events-none logo-glow"
+                    style={{ background: `radial-gradient(circle, ${COLORS.red}30 0%, transparent 65%)`, filter: "blur(60px)" }}
                   />
                   <img
                     src="/logo.png"

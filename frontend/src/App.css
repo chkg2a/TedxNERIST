@@ -96,6 +96,19 @@ html {
   animation-delay: -5s;
 }
 
+/* Phone logo glow fix */
+.phone-glow {
+  position: relative;
+}
+
+@media (max-width: 1023px) {
+  .phone-glow .logo-glow {
+    background: radial-gradient(circle, rgba(235, 0, 40, 0.5) 0%, transparent 65%) !important;
+    filter: blur(40px) !important;
+    -webkit-filter: blur(40px) !important;
+  }
+}
+
 @keyframes morph {
   0% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(5%, 10%) scale(1.1); }
