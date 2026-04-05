@@ -29,6 +29,7 @@ const AdminDashboard = lazy(() => import("./components/admin/AdminDashboard.jsx"
 const ProtectedRoute = lazy(() => import("./components/admin/ProtectedRoute.jsx"));
 const TeamPage = lazy(() => import("./components/TeamPage.jsx"));
 const SpeakersPage = lazy(() => import("./components/SpeakersPage.jsx"));
+const AdminRegister = lazy(() => import("./components/admin/AdminRegister.jsx"));
 
 // --- 3. Lazy Load Heavy Home Sections ---
 const Hero = lazy(() => import("./components/Hero.jsx"));
@@ -196,10 +197,11 @@ function App() {
             <Route path="/refund" element={<NoRefundPolicy />} />
             <Route path="/term" element={<TermsAndConditions />} />
             <Route path="/register" element={<RegisterPage />} />
-             {/* Admin Routes */}
-             <Route path="/admin/login" element={<AdminLogin />} />
-             <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-             <Route path="/admin" element={<AdminLogin />} />
+            {/* Admin Routes */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+            <Route path="/admin" element={<AdminLogin />} />
+            <Route path="/admin/register" element={<AdminRegister />} />
 
             <Route
               path="/"
