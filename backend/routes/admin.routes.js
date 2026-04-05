@@ -23,7 +23,7 @@ const adminRouter = express.Router();
 
 adminRouter.post("/login", loginAdmin);
 adminRouter.post("/refresh-token", refreshAccessToken);
-adminRouter.post("/register", registerAdmin); // Temporarily open for first admin creation
+adminRouter.post("/register", verifyToken, registerAdmin); // Protected: only authenticated admins can create new admins
 
 adminRouter.use(verifyToken);
 adminRouter.post("/logout", logoutAdmin);
