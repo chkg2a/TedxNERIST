@@ -177,7 +177,7 @@ function Hero({ isReady }) {
             initial={{ opacity: 0, y: 14 }}
             animate={isReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
             transition={{ duration: 0.6, delay: 4.4 }}
-            className="mt-5 text-[11px] sm:text-xs tracking-[0.4em] uppercase"
+            className="mt-5 text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.4em] uppercase"
             style={{ fontFamily: "OverpassMono, monospace", color: COLORS.grey }}
           >
             Transform · Transcend · Triumph
