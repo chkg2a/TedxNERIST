@@ -23,10 +23,9 @@ const adminRouter = express.Router();
 
 adminRouter.post("/login", loginAdmin);
 adminRouter.post("/refresh-token", refreshAccessToken);
+adminRouter.post("/register", registerAdmin); // Temporarily open for first admin creation
 
 adminRouter.use(verifyToken);
-
-adminRouter.post("/register", registerAdmin);
 adminRouter.post("/logout", logoutAdmin);
 adminRouter.get("/me", getMe);
 
