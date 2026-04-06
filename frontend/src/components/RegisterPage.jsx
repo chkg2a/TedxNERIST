@@ -172,8 +172,7 @@ export default function RegisterPage() {
         const value = e.target.value;
         
         if (value === "outsider") {
-            navigate("/buy-ticket");
-            return;
+            // Optional: navigate("/buy-ticket"); // removed redirect so outsider form shows
         }
         
         setUserType(value);
