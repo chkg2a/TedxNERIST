@@ -157,6 +157,8 @@ export default function BuyTicketPage() {
             address: formData.address,
         });
 
+        console.log("=== FRONTEND LOG: Result from authStore ===", result);
+
         if (!result.success) {
             toast.error(result.message || "Failed to create order");
             return;

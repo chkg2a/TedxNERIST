@@ -314,6 +314,7 @@ export const useAuthStore = create((set, get) => ({
         set({ isLoading: true, error: null });
         try {
             const response = await axios.post(`${API_URL}/api/tickets/purchase`, ticketData);
+            console.log("=== FRONTEND LOG: Axios Response from Backend ===", response.data);
             set({ isLoading: false });
             return { 
                 success: true, 
