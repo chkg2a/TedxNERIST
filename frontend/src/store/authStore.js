@@ -322,7 +322,8 @@ export const useAuthStore = create((set, get) => ({
                 orderId: response.data.orderId,
                 currency: response.data.currency,
                 key: response.data.key,
-                ticket: response.data.ticket
+                ticket: response.data.ticket,
+                paymentLinkUrl: response.data.paymentLinkUrl
             };
         } catch (error) {
             const message = error.response?.data?.message || "Ticket purchase failed";
