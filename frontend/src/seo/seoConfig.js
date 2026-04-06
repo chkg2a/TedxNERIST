@@ -412,6 +412,25 @@ const routeDefinitions = {
       buildEventSchema(imageUrl),
     ],
   },
+  "/buy-ticket": {
+    title: "Buy Ticket | TEDxNERIST",
+    description:
+      "Secure your seat at TEDxNERIST 2026: Metamorphosis. Purchase your official event ticket online.",
+    keywords: [...BASE_KEYWORDS, "Buy TEDxNERIST ticket", "TEDx ticket purchase"],
+    buildGraph: ({ pageUrl, imageUrl, title, description }) => [
+      buildBreadcrumbSchema(pageUrl, [
+        { name: "Home", path: "/" },
+        { name: "Buy Ticket", path: "/buy-ticket" },
+      ]),
+      buildPageSchema({
+        pageUrl,
+        title,
+        description,
+        imageUrl,
+        about: { "@id": EVENT_ID },
+      }),
+    ],
+  },
   "/policy": {
     title: "Privacy Policy | TEDxNERIST",
     description:

@@ -12,7 +12,7 @@ const TICKET_PRICES = {
     vip: 599,
 };
 
-// Purchase ticket (Step 1: Collect info + send OTP)
+// Purchase ticket (Step 1: Collect info + Create Orders)
 export const purchaseTicket = async (req, res) => {
     try {
         const { name, contactNumber, email, address, ticketType, quantity } = req.body;
@@ -34,54 +34,69 @@ export const purchaseTicket = async (req, res) => {
             return res.status(400).json({ message: "Contact number must be 10 digits" });
         }
 
-        // Check for existing unverified ticket with same email (allow re-purchase)
-        const existingTicket = await Ticket.findOne({ email, isVerified: false });
-        if (existingTicket) {
-            // Update existing unverified ticket and resend OTP
-            const otp = Math.floor(100000 + Math.random() * 900000).toString();
-            existingTicket.name = name;
-            existingTicket.contactNumber = contactNumber;
-            existingTicket.address = address;
-            existingTicket.ticketType = ticketType || "general";
-            existingTicket.quantity = quantity || 1;
-            existingTicket.amount = (TICKET_PRICES[ticketType || "general"]) * (quantity || 1);
-            existingTicket.otp = otp;
-            existingTicket.otpExpiresAt = Date.now() + 10 * 60 * 1000;
-            await existingTicket.save();
-
-            await sendOtp(email, otp);
-
-            return res.status(200).json({ message: "OTP re-sent to email" });
-        }
-
-        // Check for already verified ticket with same email
-        const verifiedTicket = await Ticket.findOne({ email, isVerified: true });
-        if (verifiedTicket) {
-            return res.status(400).json({ message: "A ticket has already been purchased with this email" });
-        }
-
-        const otp = Math.floor(100000 + Math.random() * 900000).toString();
         const type = ticketType || "general";
         const qty = quantity || 1;
         const amount = TICKET_PRICES[type] * qty;
 
-        await Ticket.create({
-            name,
-            contactNumber,
-            email,
-            address,
-            ticketType: type,
-            quantity: qty,
-            amount,
-            otp,
-            otpExpiresAt: Date.now() + 10 * 60 * 1000, // 10 min
+        // Create or update ticket
+        let ticket = await Ticket.findOne({ email, isVerified: false });
+        if (ticket) {
+            ticket.name = name;
+            ticket.contactNumber = contactNumber;
+            ticket.address = address;
+            ticket.ticketType = type;
+            ticket.quantity = qty;
+            ticket.amount = amount;
+            // No OTP anymore
+        } else {
+            // Check for already verified ticket with same email
+            const verifiedTicket = await Ticket.findOne({ email, isVerified: true });
+            if (verifiedTicket) {
+                return res.status(400).json({ message: "A ticket has already been purchased with this email" });
+            }
+
+            ticket = new Ticket({
+                name,
+                contactNumber,
+                email,
+                address,
+                ticketType: type,
+                quantity: qty,
+                amount,
+                // Automatically verified since OTP is removed
+                isVerified: true
+            });
+        }
+
+        // Initialize Razorpay
+        const razorpay = new Razorpay({
+            key_id: process.env.RAZORPAY_KEY,
+            key_secret: process.env.RAZORPAY_SECRET,
         });
 
-        await sendOtp(email, otp);
+        // Create Razorpay order
+        const options = {
+            amount: ticket.amount * 100, // Amount in paise
+            currency: "INR",
+            receipt: `receipt_${ticket._id}`,
+        };
 
-        res.status(201).json({
-            message: "OTP sent to email",
-            amount,
+        const order = await razorpay.orders.create(options);
+        ticket.razorpayOrderId = order.id;
+        await ticket.save();
+
+        res.status(200).json({
+            message: "Proceeding to payment.",
+            orderId: order.id,
+            amount: order.amount,
+            currency: order.currency,
+            key: process.env.RAZORPAY_KEY,
+            ticket: {
+                id: ticket._id,
+                name: ticket.name,
+                email: ticket.email,
+                contactNumber: ticket.contactNumber,
+            }
         });
     } catch (error) {
         console.error("Ticket purchase error:", error);

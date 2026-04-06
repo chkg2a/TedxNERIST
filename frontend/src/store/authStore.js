@@ -301,13 +301,20 @@ export const useAuthStore = create((set, get) => ({
 
     // ============ TICKET PURCHASE (Public) ============
 
-    // Purchase a ticket (sends OTP to email)
     purchaseTicket: async (ticketData) => {
         set({ isLoading: true, error: null });
         try {
             const response = await axios.post(`${API_URL}/api/tickets/purchase`, ticketData);
             set({ isLoading: false });
-            return { success: true, message: response.data.message, amount: response.data.amount };
+            return { 
+                success: true, 
+                message: response.data.message, 
+                amount: response.data.amount,
+                orderId: response.data.orderId,
+                currency: response.data.currency,
+                key: response.data.key,
+                ticket: response.data.ticket
+            };
         } catch (error) {
             const message = error.response?.data?.message || "Ticket purchase failed";
             set({ isLoading: false, error: message });

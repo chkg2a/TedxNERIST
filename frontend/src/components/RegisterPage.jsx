@@ -170,6 +170,12 @@ export default function RegisterPage() {
 
     const handleUserTypeChange = (e) => {
         const value = e.target.value;
+        
+        if (value === "outsider") {
+            navigate("/buy-ticket");
+            return;
+        }
+        
         setUserType(value);
         setFormData({
             ...formData,

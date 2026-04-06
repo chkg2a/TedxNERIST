@@ -120,7 +120,6 @@ export default function BuyTicketPage() {
         contactNumber: "",
         address: "",
     });
-    const [otp, setOtp] = useState("");
     const [formError, setFormError] = useState({});
     const [purchaseResult, setPurchaseResult] = useState(null);
 
@@ -158,34 +157,8 @@ export default function BuyTicketPage() {
             address: formData.address,
         });
 
-        if (result.success) {
-            toast.success("OTP sent! Check your email.");
-            setStep(2);
-        } else {
-            toast.error(result.message || "Something went wrong");
-        }
-    };
-
-    const loadRazorpay = () => {
-        return new Promise((resolve) => {
-            const script = document.createElement("script");
-            script.src = "https://checkout.razorpay.com/v1/checkout.js";
-            script.onload = () => resolve(true);
-            script.onerror = () => resolve(false);
-            document.body.appendChild(script);
-        });
-    };
-
-    const handleVerifyOtp = async (e, otpValue = otp) => {
-        if (e) e.preventDefault();
-        if (!otpValue || otpValue.length !== 6) {
-            setFormError({ otp: "Please enter a valid 6-digit OTP" });
-            return;
-        }
-
-        const result = await verifyTicketPurchase(formData.email, otpValue);
         if (!result.success) {
-            toast.error(result.message || "Verification failed");
+            toast.error(result.message || "Failed to create order");
             return;
         }
 
@@ -239,6 +212,18 @@ export default function BuyTicketPage() {
             toast.error(response.error.description || "Payment failed");
         });
     };
+
+    const loadRazorpay = () => {
+        return new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+            document.body.appendChild(script);
+        });
+    };
+
+
 
     const handleGoHome = () => {
         navigate("/");
@@ -349,118 +334,7 @@ export default function BuyTicketPage() {
         );
     }
 
-    // ============ STEP 2: OTP ============
-    if (step === 2) {
-        return (
-            <div className="min-h-screen bg-[#0a0a0a]">
-                <Navbar />
-                <div className="flex items-start sm:items-center justify-center min-h-screen px-3 pt-24 pb-8 sm:px-4 sm:pt-28 sm:pb-12">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 max-w-md w-full relative overflow-hidden"
-                        style={{ background: "#111111", border: `1px solid ${borderDefault}` }}
-                    >
-                        {/* Subtle top glow */}
-                        <div className="absolute inset-0 pointer-events-none" style={{
-                            background: "radial-gradient(circle at 50% 0%, rgba(235, 0, 40, 0.08) 0%, transparent 50%)"
-                        }} />
 
-                        <button
-                            onClick={() => { setStep(1); clearError(); }}
-                            className="flex items-center text-gray-400 hover:text-white mb-4 sm:mb-6 transition-colors text-sm sm:text-base relative z-10"
-                            style={{ fontFamily: "Gilroy-Regular, sans-serif" }}
-                        >
-                            <ArrowLeft size={20} className="mr-2" />
-                            Back
-                        </button>
-
-                        <div className="relative z-10">
-                            <div className="flex items-center gap-3 mb-2">
-                                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: tedxRedSubtle }}>
-                                    <Shield size={20} style={{ color: tedxRed }} />
-                                </div>
-                                <h2
-                                    className="text-2xl sm:text-3xl font-bold text-white"
-                                    style={{ fontFamily: "Cirka, serif" }}
-                                >
-                                    Verify Email
-                                </h2>
-                            </div>
-                            <p className="text-gray-400 text-sm sm:text-base mb-6 sm:mb-8" style={{ fontFamily: "Gilroy-Regular, sans-serif" }}>
-                                We've sent a 6-digit OTP to <span style={{ color: tedxRed }}>{formData.email}</span>
-                            </p>
-
-                            <form onSubmit={handleVerifyOtp} className="space-y-6">
-                                <div>
-                                    <label
-                                        className="block text-xs font-semibold tracking-[0.15em] uppercase mb-3"
-                                        style={{ color: tedxRed, fontFamily: "Gilroy-Medium, sans-serif" }}
-                                    >
-                                        Enter OTP
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={otp}
-                                        onChange={(e) => {
-                                            const val = e.target.value.replace(/\D/g, '').slice(0, 6);
-                                            setOtp(val);
-                                            setFormError({ ...formError, otp: "" });
-                                            if (val.length === 6) {
-                                                handleVerifyOtp(null, val);
-                                            }
-                                        }}
-                                        placeholder="000000"
-                                        className="w-full bg-[#141414] border rounded-xl px-3 py-3 sm:px-4 sm:py-4 text-white text-center text-xl sm:text-2xl tracking-[0.3em] sm:tracking-[0.5em] focus:outline-none transition-all duration-300"
-                                        style={{
-                                            borderColor: borderDefault,
-                                            fontFamily: "OverpassMono, monospace",
-                                        }}
-                                        onFocus={(e) => {
-                                            e.target.style.borderColor = tedxRed;
-                                            e.target.style.boxShadow = `0 0 0 3px ${tedxRedSubtle}`;
-                                        }}
-                                        onBlur={(e) => {
-                                            e.target.style.borderColor = borderDefault;
-                                            e.target.style.boxShadow = 'none';
-                                        }}
-                                        maxLength={6}
-                                    />
-                                    {formError.otp && (
-                                        <p className="text-red-400 text-sm mt-2" style={{ fontFamily: "Gilroy-Regular, sans-serif" }}>{formError.otp}</p>
-                                    )}
-                                    {error && (
-                                        <p className="text-red-400 text-sm mt-2" style={{ fontFamily: "Gilroy-Regular, sans-serif" }}>{error}</p>
-                                    )}
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    disabled={isLoading || otp.length !== 6}
-                                    className="w-full disabled:bg-gray-700 disabled:cursor-not-allowed text-white py-3 sm:py-4 rounded-xl font-medium text-sm sm:text-base transition-all flex items-center justify-center gap-2"
-                                    style={{
-                                        backgroundColor: isLoading || otp.length !== 6 ? undefined : tedxRed,
-                                        fontFamily: "Gilroy-Medium, sans-serif",
-                                    }}
-                                >
-                                    {isLoading ? (
-                                        <Loader className="animate-spin" size={24} />
-                                    ) : (
-                                        <>
-                                            Confirm Purchase
-                                            <ArrowRight size={20} />
-                                        </>
-                                    )}
-                                </button>
-                            </form>
-                        </div>
-                    </motion.div>
-                </div>
-                <Footer />
-            </div>
-        );
-    }
 
     // ============ STEP 1: FORM ============
     return (
