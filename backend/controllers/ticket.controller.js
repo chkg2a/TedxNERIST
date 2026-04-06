@@ -172,9 +172,9 @@ export const capturePayment = async (req, res) => {
             return res.status(404).json({ message: "Ticket order not found" });
         }
 
-        // Verify signature
+        // Verify signature (use .trim() defensively to protect against whitespace in .env files)
         const expectedSignature = crypto
-            .createHmac("sha256", process.env.RAZORPAY_SECRET)
+            .createHmac("sha256", process.env.RAZORPAY_SECRET.trim())
             .update(razorpay_order_id + "|" + razorpay_payment_id)
             .digest("hex");
 
