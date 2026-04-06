@@ -13,7 +13,7 @@ const tedxRedDim = "rgba(235, 0, 40, 0.35)";
 const tedxRedSubtle = "rgba(235, 0, 40, 0.12)";
 const borderDefault = "rgba(255, 255, 255, 0.12)";
 
-const TICKET_PRICE = 299;
+const TICKET_PRICE = 1;
 
 // Reusable styled input component
 const StyledInput = ({ label, icon: Icon, error, ...props }) => (
