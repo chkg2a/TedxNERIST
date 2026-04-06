@@ -65,6 +65,12 @@ export const categorizedTeam = [
         role: "Photo/Videography Head",
         img: "/images/team/satya.jpeg",
       },
+      {
+        name: "Chuimeithui Sangkhro",
+        role: "Editorial Head",
+        img: "/images/team/chui.jpeg",
+      },
+
     ],
   },
   {

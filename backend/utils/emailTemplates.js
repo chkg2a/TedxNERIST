@@ -577,3 +577,229 @@ export const WELCOME_EMAIL_TEMPLATE = `
 </body>
 </html>
 `;
+
+export const TICKET_PURCHASE_EMAIL_TEMPLATE = `
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="x-apple-disable-message-reformatting">
+  <title>Ticket Confirmation - TEDxNERIST</title>
+  <style>
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+
+    @media only screen and (max-width: 600px) {
+      .email-container { width: 100% !important; max-width: 100% !important; }
+      .outer-pad { padding: 18px 12px !important; }
+      .header-pad { padding: 34px 22px !important; }
+      .content-pad { padding: 28px 22px !important; }
+      .section-pad { padding: 0 22px 22px !important; }
+      .footer-pad { padding: 24px 22px !important; }
+      .brand-text { font-size: 30px !important; }
+      .hero-title { font-size: 24px !important; }
+      .body-copy { font-size: 13px !important; line-height: 1.65 !important; }
+      .ticket-id { font-size: 20px !important; letter-spacing: 3px !important; }
+      .detail-label { font-size: 10px !important; }
+      .detail-value { font-size: 13px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#080808;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;">
+  <table width="100%" cellspacing="0" cellpadding="0" style="width:100%;background-color:#080808;">
+    <tr>
+      <td align="center" class="outer-pad" style="padding:32px 16px;">
+        <table width="100%" cellspacing="0" cellpadding="0" class="email-container" style="max-width:600px;background-color:#111111;border-radius:16px;overflow:hidden;border:1px solid #232323;">
+          
+          <!-- Header -->
+          <tr>
+            <td align="center" class="header-pad" style="background:linear-gradient(180deg,#050505 0%,#111111 100%);padding:44px 38px;">
+              <h1 class="brand-text" style="margin:0;color:#EB0028;font-size:34px;font-weight:800;letter-spacing:1px;">
+                TED<span style="color:#ffffff;">x</span><span style="color:#ffffff;font-weight:500;">NERIST</span>
+              </h1>
+              <p style="margin-top:12px;color:rgba(255,255,255,0.62);font-size:12px;letter-spacing:2px;text-transform:uppercase;">
+                Ticket Purchase Confirmation
+              </p>
+            </td>
+          </tr>
+
+          <!-- Content -->
+          <tr>
+            <td class="content-pad" style="padding:34px 40px 24px;background-color:#111111;">
+              <p style="margin:0 0 10px;color:rgba(255,255,255,0.56);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;">
+                🎟️ Ticket Confirmed
+              </p>
+              <h2 class="hero-title" style="margin:0 0 14px;color:#ffffff;font-size:28px;font-weight:700;line-height:1.25;">
+                Thank you, {buyerName}
+              </h2>
+
+              <p class="body-copy" style="margin:0 0 14px;color:rgba(255,255,255,0.82);font-size:14px;line-height:1.75;">
+                Your ticket for <strong style="color:#ffffff;">TEDxNERIST</strong> has been successfully booked. We are thrilled to have you join us for an unforgettable experience of ideas worth spreading.
+              </p>
+
+              <!-- Divider -->
+              <table width="100%" style="margin:26px 0 24px;">
+                <tr>
+                  <td height="1" style="background-color:#262626;"></td>
+                </tr>
+              </table>
+
+              <!-- Ticket ID Card -->
+              <div style="background-color:#0d0d0d;border:1px solid #2a2a2a;border-radius:16px;overflow:hidden;margin-bottom:24px;">
+                
+                <!-- Ticket ID Header -->
+                <div style="background:linear-gradient(135deg,#EB0028 0%,#c70022 100%);padding:16px 24px;text-align:center;">
+                  <p style="margin:0 0 4px;color:rgba(255,255,255,0.7);font-size:10px;text-transform:uppercase;letter-spacing:2px;font-weight:600;">Your Ticket ID</p>
+                  <p class="ticket-id" style="margin:0;color:#ffffff;font-size:24px;font-weight:800;letter-spacing:5px;font-family:'Courier New','Lucida Console',monospace;">{ticketId}</p>
+                </div>
+
+                <!-- Buyer Details -->
+                <div style="padding:20px 24px;">
+                  <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+                    <tr>
+                      <td style="padding:10px 0;width:50%;vertical-align:top;">
+                        <p class="detail-label" style="margin:0 0 4px;color:rgba(255,255,255,0.45);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;">Name</p>
+                        <p class="detail-value" style="margin:0;color:#ffffff;font-size:14px;font-weight:500;">{buyerName}</p>
+                      </td>
+                      <td style="padding:10px 0;width:50%;vertical-align:top;">
+                        <p class="detail-label" style="margin:0 0 4px;color:rgba(255,255,255,0.45);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;">Contact</p>
+                        <p class="detail-value" style="margin:0;color:#ffffff;font-size:14px;font-weight:500;">{buyerContact}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" style="padding:10px 0;vertical-align:top;">
+                        <p class="detail-label" style="margin:0 0 4px;color:rgba(255,255,255,0.45);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;">Email</p>
+                        <p class="detail-value" style="margin:0;color:#ffffff;font-size:14px;font-weight:500;word-break:break-all;">{buyerEmail}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" style="padding:10px 0;vertical-align:top;">
+                        <p class="detail-label" style="margin:0 0 4px;color:rgba(255,255,255,0.45);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;">Address</p>
+                        <p class="detail-value" style="margin:0;color:rgba(255,255,255,0.85);font-size:14px;font-weight:400;line-height:1.5;">{buyerAddress}</p>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <!-- Amount -->
+                  <div style="margin-top:16px;padding-top:16px;border-top:1px solid #262626;text-align:center;">
+                    <p style="margin:0 0 4px;color:rgba(255,255,255,0.45);font-size:10px;text-transform:uppercase;letter-spacing:2px;font-weight:600;">Amount Paid</p>
+                    <p style="margin:0;color:#EB0028;font-size:28px;font-weight:800;">{amount}</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Event Info -->
+              <div style="background-color:#0d0d0d;border:1px solid #2a2a2a;border-radius:12px;padding:20px 24px;margin-bottom:24px;">
+                <p style="margin:0 0 14px;color:#ffffff;font-size:14px;font-weight:600;">📍 Event Information</p>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td style="padding:6px 0;width:50%;vertical-align:top;">
+                      <p style="margin:0 0 3px;color:rgba(255,255,255,0.45);font-size:10px;text-transform:uppercase;letter-spacing:1px;">📅 Date</p>
+                      <p style="margin:0;color:#ffffff;font-size:13px;font-weight:500;">Coming Soon</p>
+                    </td>
+                    <td style="padding:6px 0;width:50%;vertical-align:top;">
+                      <p style="margin:0 0 3px;color:rgba(255,255,255,0.45);font-size:10px;text-transform:uppercase;letter-spacing:1px;">⏰ Time</p>
+                      <p style="margin:0;color:#ffffff;font-size:13px;font-weight:500;">To Be Announced</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" style="padding:8px 0 0;vertical-align:top;">
+                      <p style="margin:0 0 3px;color:rgba(255,255,255,0.45);font-size:10px;text-transform:uppercase;letter-spacing:1px;">🏟️ Venue</p>
+                      <p style="margin:0;color:#ffffff;font-size:13px;font-weight:500;">NERIST, Nirjuli, Arunachal Pradesh</p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <!-- Important Notes -->
+              <div style="background-color:#0d0d0d;border-left:4px solid #EB0028;border-radius:12px;padding:18px 20px;margin-bottom:24px;">
+                <p style="margin:0 0 10px;color:#EB0028;font-size:13px;font-weight:700;">⚠️ Important Notes</p>
+                <ul style="margin:0;padding-left:18px;color:rgba(255,255,255,0.75);font-size:12px;line-height:1.8;">
+                  <li style="padding-bottom:4px;">Please arrive <strong style="color:#fff;">30 minutes before</strong> the event starts</li>
+                  <li style="padding-bottom:4px;">Carry a <strong style="color:#fff;">valid ID proof</strong> for verification</li>
+                  <li style="padding-bottom:4px;">This ticket is <strong style="color:#fff;">non-transferable</strong></li>
+                  <li>Screenshot this email or present it on your phone at entry</li>
+                </ul>
+              </div>
+
+              <!-- CTA -->
+              <div style="text-align:center;margin-top:30px;">
+                <a href="{platformUrl}" class="cta-link" style="display:inline-block;background-color:#EB0028;color:#ffffff;padding:14px 28px;border-radius:999px;text-decoration:none;font-size:14px;font-weight:700;letter-spacing:0.3px;">
+                  Visit TEDxNERIST
+                </a>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Quote -->
+          <tr>
+            <td class="section-pad" style="padding:0 40px 26px;background-color:#111111;">
+              <div style="background-color:#0d0d0d;border-left:4px solid #EB0028;border-radius:12px;padding:18px 20px;">
+                <p style="margin:0;font-style:italic;color:#ffffff;font-size:14px;line-height:1.7;">
+                  "The secret of getting ahead is getting started."
+                </p>
+                <p style="margin-top:8px;font-size:11px;color:rgba(255,255,255,0.5);font-weight:700;letter-spacing:0.4px;">
+                  — Mark Twain
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Closing -->
+          <tr>
+            <td class="section-pad" style="padding:0 40px 36px;background-color:#111111;">
+              
+              <p style="margin:0;color:rgba(255,255,255,0.76);font-size:13px;line-height:1.8;">
+                Should you require any assistance, please feel free to contact us at
+                <a href="mailto:tedx@nerist.ac.in" style="color:#ffffff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.24);">
+                  tedx@nerist.ac.in
+                </a>.
+              </p>
+
+              <p style="margin:14px 0 0;color:rgba(255,255,255,0.76);font-size:13px;line-height:1.8;">
+                We look forward to seeing you at the event!
+              </p>
+
+              <p style="margin-top:18px;color:#ffffff;font-size:13px;line-height:1.8;">
+                Warm regards,<br>
+                <strong style="color:#ffffff;">Team TEDxNERIST</strong><br>
+                <span style="font-size:11px;color:rgba(255,255,255,0.5);">
+                  North Eastern Regional Institute of Science and Technology (NERIST)
+                </span>
+              </p>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" class="footer-pad" style="background-color:#090909;padding:28px 40px;border-top:1px solid #1f1f1f;">
+              <p style="margin:0;color:#ffffff;font-size:12px;font-weight:700;letter-spacing:0.8px;">
+                TEDxNERIST
+              </p>
+              <p style="margin-top:8px;color:rgba(255,255,255,0.4);font-size:11px;line-height:1.6;">
+                This independently organized TEDx event is operated under license from TED.<br>
+                &copy; 2026 TEDxNERIST. All rights reserved.
+              </p>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Disclaimer -->
+        <table width="100%" cellspacing="0" cellpadding="0" class="email-container" style="max-width:600px;">
+          <tr>
+            <td align="center" style="padding:16px 10px 0;color:#7f7f7f;font-size:11px;line-height:1.6;">
+              You are receiving this email because you purchased a ticket through the official TEDxNERIST platform.<br>
+              North Eastern Regional Institute of Science and Technology (NERIST)
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+`;

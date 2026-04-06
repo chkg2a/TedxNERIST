@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import connectDb from "./db/connectDb.js";
 import authRouter from "./routes/auth.routes.js";
 import adminRouter from "./routes/admin.routes.js";
+import ticketRouter from "./routes/ticket.routes.js";
 dotenv.config();
 
 
@@ -25,6 +26,7 @@ app.use(cookieParser());
 // Routes
 app.use("/api/auth", authRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/tickets", ticketRouter);
 
 // Health check endpoint
 app.get("/api/health", (req, res) => {

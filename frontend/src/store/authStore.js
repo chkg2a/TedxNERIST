@@ -299,6 +299,53 @@ export const useAuthStore = create((set, get) => ({
         }
     },
 
+    // ============ TICKET PURCHASE (Public) ============
+
+    // Purchase a ticket (sends OTP to email)
+    purchaseTicket: async (ticketData) => {
+        set({ isLoading: true, error: null });
+        try {
+            const response = await axios.post(`${API_URL}/api/tickets/purchase`, ticketData);
+            set({ isLoading: false });
+            return { success: true, message: response.data.message, amount: response.data.amount };
+        } catch (error) {
+            const message = error.response?.data?.message || "Ticket purchase failed";
+            set({ isLoading: false, error: message });
+            return { success: false, message };
+        }
+    },
+
+    // Verify ticket purchase with OTP (Creates Razorpay Order)
+    verifyTicketPurchase: async (email, otp) => {
+        set({ isLoading: true, error: null });
+        try {
+            const response = await axios.post(`${API_URL}/api/tickets/verify`, { email, otp });
+            set({ isLoading: false });
+            return {
+                success: true,
+                ...response.data
+            };
+        } catch (error) {
+            const message = error.response?.data?.message || "Verification failed";
+            set({ isLoading: false, error: message });
+            return { success: false, message };
+        }
+    },
+
+    // Capture Payment (Verify Razorpay Signature)
+    capturePayment: async (paymentData) => {
+        set({ isLoading: true, error: null });
+        try {
+            const response = await axios.post(`${API_URL}/api/tickets/verify-payment`, paymentData);
+            set({ isLoading: false });
+            return { success: true, message: response.data.message, ticketId: response.data.ticketId };
+        } catch (error) {
+            const message = error.response?.data?.message || "Payment verification failed";
+            set({ isLoading: false, error: message });
+            return { success: false, message };
+        }
+    },
+
     // Clear error
     clearError: () => set({ error: null })
 }));
