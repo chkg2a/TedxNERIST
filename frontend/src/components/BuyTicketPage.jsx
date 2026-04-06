@@ -162,66 +162,15 @@ export default function BuyTicketPage() {
             return;
         }
 
-        // Load Razorpay
-        const res = await loadRazorpay();
-        if (!res) {
-            toast.error("Razorpay SDK failed to load. Are you online?");
-            return;
+        if (result.paymentLinkUrl) {
+            // Redirect to Razorpay hosted checkout
+            window.location.href = result.paymentLinkUrl;
+        } else {
+            toast.error("Failed to generate payment link.");
         }
-
-        // Proceed to Razorpay checkout
-        const options = {
-            key: result.key, // from backend
-            amount: result.amount, 
-            currency: result.currency,
-            name: "TEDxNERIST",
-            description: "Event Ticket Purchase",
-            image: "https://i.imgur.com/K3ZItL2.png", // TEDx Logo or generic
-            order_id: result.orderId,
-            handler: async function (response) {
-                // Verification after payment
-                const paymentData = {
-                    razorpay_payment_id: response.razorpay_payment_id,
-                    razorpay_order_id: response.razorpay_order_id,
-                    razorpay_signature: response.razorpay_signature,
-                };
-                
-                const captureRes = await capturePayment(paymentData);
-                if (captureRes.success) {
-                    toast.success("Payment successful! Ticket confirmed.");
-                    setPurchaseResult({ ticketId: captureRes.ticketId });
-                    setStep(3); // Success Screen
-                } else {
-                    toast.error(captureRes.message || "Payment verification failed");
-                }
-            },
-            prefill: {
-                name: result.ticket?.name || formData.name,
-                email: result.ticket?.email || formData.email,
-                contact: result.ticket?.contactNumber || formData.contactNumber,
-            },
-            theme: {
-                color: "#eb0028",
-            },
-        };
-
-        const paymentObject = new window.Razorpay(options);
-        paymentObject.open();
-
-        paymentObject.on("payment.failed", function (response) {
-            toast.error(response.error.description || "Payment failed");
-        });
     };
 
-    const loadRazorpay = () => {
-        return new Promise((resolve) => {
-            const script = document.createElement("script");
-            script.src = "https://checkout.razorpay.com/v1/checkout.js";
-            script.onload = () => resolve(true);
-            script.onerror = () => resolve(false);
-            document.body.appendChild(script);
-        });
-    };
+
 
 
 

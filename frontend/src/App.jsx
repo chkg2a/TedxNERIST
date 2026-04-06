@@ -30,6 +30,7 @@ const ProtectedRoute = lazy(() => import("./components/admin/ProtectedRoute.jsx"
 const TeamPage = lazy(() => import("./components/TeamPage.jsx"));
 const SpeakersPage = lazy(() => import("./components/SpeakersPage.jsx"));
 const BuyTicketPage = lazy(() => import("./components/BuyTicketPage.jsx"));
+const PaymentSuccessPage = lazy(() => import("./components/PaymentSuccessPage.jsx"));
 
 
 // --- 3. Lazy Load Heavy Home Sections ---
@@ -199,6 +200,7 @@ function App() {
             <Route path="/term" element={<TermsAndConditions />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/buy-ticket" element={<BuyTicketPage />} />
+            <Route path="/payment-success" element={<PaymentSuccessPage />} />
             {/* Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />

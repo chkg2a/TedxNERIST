@@ -75,22 +75,35 @@ export const purchaseTicket = async (req, res) => {
         });
 
         // Create Razorpay order
-        const options = {
+        // Create Razorpay payment link
+        const paymentLink = await razorpay.paymentLink.create({
             amount: ticket.amount * 100, // Amount in paise
             currency: "INR",
-            receipt: `receipt_${ticket._id}`,
-        };
+            accept_partial: false,
+            description: `TEDxNERIST Ticket - ${ticket.ticketType}`,
+            customer: {
+                name: ticket.name,
+                email: ticket.email,
+                contact: ticket.contactNumber,
+            },
+            notify: {
+                sms: false,
+                email: false,
+            },
+            reminder_enable: false,
+            callback_url: `${process.env.FRONTEND_URL || "http://localhost:5173"}/payment-success?ticket_raw_id=${ticket._id}`,
+            callback_method: "get",
+            notes: {
+                ticket_id: ticket._id.toString()
+            }
+        });
 
-        const order = await razorpay.orders.create(options);
-        ticket.razorpayOrderId = order.id;
+        ticket.razorpayOrderId = paymentLink.id;
         await ticket.save();
 
         res.status(200).json({
             message: "Proceeding to payment.",
-            orderId: order.id,
-            amount: order.amount,
-            currency: order.currency,
-            key: process.env.RAZORPAY_KEY,
+            paymentLinkUrl: paymentLink.short_url,
             ticket: {
                 id: ticket._id,
                 name: ticket.name,
@@ -100,6 +113,73 @@ export const purchaseTicket = async (req, res) => {
         });
     } catch (error) {
         console.error("Ticket purchase error:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+// Webhook for complete payment security
+export const razorpayWebhook = async (req, res) => {
+    try {
+        const secret = process.env.RAZORPAY_WEBHOOK_SECRET;
+        const signature = req.headers["x-razorpay-signature"];
+
+        const bodyString = Buffer.isBuffer(req.body) ? req.body.toString('utf8') : req.body;
+
+        const expectedSignature = crypto
+            .createHmac("sha256", secret.trim())
+            .update(bodyString)
+            .digest("hex");
+
+        if (expectedSignature !== signature) {
+            return res.status(400).json({ message: "Invalid signature" });
+        }
+
+        const payload = JSON.parse(bodyString);
+
+        if (payload.event === "payment_link.paid") {
+            const paymentLinkEntity = payload.payload.payment_link.entity;
+            const ticket_id = paymentLinkEntity.notes.ticket_id;
+
+            const ticket = await Ticket.findById(ticket_id);
+            if (ticket && ticket.paymentStatus !== "completed") {
+                // Generate unique 4-digit ticket ID
+                let generatedTicketId = "";
+                let isUnique = false;
+                while (!isUnique) {
+                    const random4Digit = Math.floor(1000 + Math.random() * 9000); // 1000 to 9999
+                    generatedTicketId = "TEDX-TKT-" + random4Digit;
+                    const existingTicket = await Ticket.findOne({ ticketId: generatedTicketId });
+                    if (!existingTicket) {
+                        isUnique = true;
+                    }
+                }
+
+                ticket.paymentStatus = "completed";
+                ticket.ticketId = generatedTicketId;
+                
+                if (payload.payload.payment && payload.payload.payment.entity) {
+                    ticket.razorpayPaymentId = payload.payload.payment.entity.id;
+                }
+                await ticket.save();
+
+                // Send professional confirmation email using template
+                const platformUrl = process.env.PLATFORM_URL || process.env.FRONTEND_URL || "/";
+                const confirmationHtml = TICKET_PURCHASE_EMAIL_TEMPLATE
+                    .replace(/\{buyerName\}/g, ticket.name)
+                    .replace(/\{buyerEmail\}/g, ticket.email)
+                    .replace(/\{buyerContact\}/g, ticket.contactNumber)
+                    .replace(/\{buyerAddress\}/g, ticket.address)
+                    .replace(/\{ticketId\}/g, generatedTicketId)
+                    .replace(/\{amount\}/g, `₹${ticket.amount}`)
+                    .replace(/\{platformUrl\}/g, platformUrl);
+
+                await sendEmail(ticket.email, "🎟️ Your TEDxNERIST Ticket Confirmation", confirmationHtml);
+            }
+        }
+
+        res.status(200).json({ status: "ok" });
+    } catch (error) {
+        console.error("Webhook processing error:", error);
         res.status(500).json({ message: "Internal server error" });
     }
 };
@@ -241,6 +321,23 @@ export const getTicketByTicketId = async (req, res) => {
         res.status(200).json({ ticket });
     } catch (error) {
         console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+// Get ticket status by raw Mongo ID
+export const getPaymentStatus = async (req, res) => {
+    try {
+        const { rawId } = req.params;
+        const ticket = await Ticket.findById(rawId).select("-otp -otpExpiresAt");
+
+        if (!ticket) {
+            return res.status(404).json({ message: "Ticket not found" });
+        }
+
+        res.status(200).json({ ticket, status: ticket.paymentStatus });
+    } catch (error) {
+        console.error("Payment status poll error:", error);
         res.status(500).json({ message: "Internal server error" });
     }
 };

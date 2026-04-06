@@ -9,6 +9,7 @@ import {
     deleteTicket,
     checkInTicketHolder,
     capturePayment,
+    getPaymentStatus,
 } from "../controllers/ticket.controller.js";
 import { verifyToken } from "../middleware/verifyToken.js";
 
@@ -19,6 +20,7 @@ ticketRouter.post("/purchase", purchaseTicket); // Send OTP
 ticketRouter.post("/verify", verifyTicketPurchase); // Verify OTP, create Order
 ticketRouter.post("/verify-payment", capturePayment); // Verify Razorpay signature
 ticketRouter.get("/details/:ticketId", getTicketByTicketId);
+ticketRouter.get("/status/:rawId", getPaymentStatus);
 
 // Admin routes (protected)
 ticketRouter.use(verifyToken);
