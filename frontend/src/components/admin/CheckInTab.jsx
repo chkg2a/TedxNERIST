@@ -15,7 +15,7 @@ const CheckInTab = ({ ticketId, setTicketId, handleCheckIn, checkInResult, isLoa
         >
             <header className="content-header">
                 <h1>Event Check-In</h1>
-                <p>Scan or enter ticket ID to check in attendees</p>
+                <p>Enter the 4-digit numeric code to check in attendees</p>
             </header>
 
             <motion.div
@@ -32,7 +32,7 @@ const CheckInTab = ({ ticketId, setTicketId, handleCheckIn, checkInResult, isLoa
                     <div className="input-group">
                         <input
                             type="text"
-                            placeholder="Enter Ticket ID (e.g., TED-XXXX)"
+                            placeholder="Enter 4-Digit Ticket Code (e.g., 1024)"
                             value={ticketId}
                             onChange={(e) => setTicketId(e.target.value.toUpperCase())}
                             required

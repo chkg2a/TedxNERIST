@@ -252,6 +252,15 @@ export const useAuthStore = create((set, get) => ({
         }
     },
 
+    fetchCheckedInList: async () => {
+        try {
+            const response = await axios.get(`${API_URL}/api/admin/checked-in-list`);
+            return { success: true, list: response.data.checkedInList };
+        } catch (error) {
+            return { success: false, message: error.response?.data?.message || "Failed to fetch checked-in list" };
+        }
+    },
+
     // Export
     exportRegistrations: async () => {
         try {

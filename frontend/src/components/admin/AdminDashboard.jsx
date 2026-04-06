@@ -6,6 +6,7 @@ import DashboardTab from "./DashboardTab";
 import RegistrationsTab from "./RegistrationsTab";
 import CheckInTab from "./CheckInTab";
 import AnalyticsTab from "./AnalyticsTab";
+import CheckedInListTab from "./CheckedInListTab";
 import ToolsTab from "./ToolsTab";
 import { RegistrationModal, DeleteModal } from "./Modals";
 import "../../css/Admin.css";
@@ -89,6 +90,7 @@ const AdminDashboard = () => {
         { id: "dashboard", icon: "fa-chart-line", label: "Dashboard" },
         { id: "registrations", icon: "fa-users", label: "Registrations" },
         { id: "checkin", icon: "fa-qrcode", label: "Check-In" },
+        { id: "attendance", icon: "fa-clipboard-list", label: "Attendance Log" },
         { id: "analytics", icon: "fa-chart-area", label: "Analytics" },
         { id: "tools", icon: "fa-tools", label: "Tools" },
     ];
@@ -142,6 +144,7 @@ const AdminDashboard = () => {
                             checkInResult={checkInResult} isLoading={isLoading} stats={stats}
                         />
                     )}
+                    {activeTab === "attendance" && <CheckedInListTab />}
                     {activeTab === "analytics" && <AnalyticsTab />}
                     {activeTab === "tools" && <ToolsTab />}
                 </AnimatePresence>

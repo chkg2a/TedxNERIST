@@ -186,9 +186,17 @@ export const capturePayment = async (req, res) => {
             return res.status(400).json({ message: "Payment verification failed" });
         }
 
-        // Generate unique ticket ID
-        const ticketId = "TEDX-TKT-" + Math.random().toString(36).substring(2, 10).toUpperCase();
-
+        // Generate unique 4-digit ticket ID
+        let ticketId = "";
+        let isUnique = false;
+        while (!isUnique) {
+            const random4Digit = Math.floor(1000 + Math.random() * 9000); // 1000 to 9999
+            ticketId = "TEDX-TKT-" + random4Digit;
+            const existingTicket = await Ticket.findOne({ ticketId });
+            if (!existingTicket) {
+                isUnique = true;
+            }
+        }
         ticket.razorpayPaymentId = razorpay_payment_id;
         ticket.razorpaySignature = razorpay_signature;
         ticket.paymentStatus = "completed";

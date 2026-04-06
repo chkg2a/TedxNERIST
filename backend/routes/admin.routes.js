@@ -14,7 +14,8 @@ import {
     exportRegistrations,
     getRegistrationTimeline,
     getActivityLog,
-    sendBulkEmail
+    sendBulkEmail,
+    getCheckedInList
 } from "../controllers/admin.controller.js";
 import { verifyToken } from "../middleware/verifyToken.js";
 
@@ -43,6 +44,7 @@ adminRouter.get("/activity", getActivityLog);
 
 
 adminRouter.post("/check-in", checkInUser);
+adminRouter.get("/checked-in-list", getCheckedInList);
 adminRouter.post("/bulk-email", sendBulkEmail);
 
 export default adminRouter;

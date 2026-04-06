@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import Admin from "../models/admin.model.js";
 import Registration from "../models/user.model.js";
+import Ticket from "../models/ticket.model.js";
 import { generateTokensAndSetCookies } from "../utils/generateTokenandCookies.js";
 import { sendEmail } from "../mail-smtp/email.js";
 
@@ -222,9 +223,9 @@ export const getDashboardStats = async (req, res) => {
             createdAt: { $gte: sevenDaysAgo }
         });
 
-        // Get checked-in count (users with ticketId)
+        // Get checked-in count
         const checkedIn = await Registration.countDocuments({
-            ticketId: { $exists: true, $ne: null }
+            checkedIn: true
         });
 
         res.status(200).json({
@@ -290,43 +291,81 @@ export const searchRegistrations = async (req, res) => {
     }
 }
 
+// Get all checked-in users across NERIST and Paid tickets
+export const getCheckedInList = async (req, res) => {
+    try {
+        const nerist = await Registration.find({ checkedIn: true })
+            .select("name email whatsappNumber department rollNo year ticketId isNeristianStudent checkedInAt createdAt");
+        const paid = await Ticket.find({ checkedIn: true })
+            .select("name email contactNumber ticketType quantity ticketId checkedInAt createdAt");
+
+        // Normalize data format
+        const combined = [
+            ...nerist.map(r => ({ ...r.toObject(), type: "NERIST" })),
+            ...paid.map(t => ({ ...t.toObject(), type: `Paid (${t.ticketType})`, whatsappNumber: t.contactNumber }))
+        ];
+
+        // Sort by check in time descending
+        combined.sort((a, b) => new Date(b.checkedInAt) - new Date(a.checkedInAt));
+
+        res.status(200).json({ checkedInList: combined });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
 // Check-in user (mark attendance at event)
 export const checkInUser = async (req, res) => {
     try {
-        const { ticketId } = req.body;
+        let { ticketId } = req.body;
 
         if (!ticketId) {
             return res.status(400).json({ message: "Ticket ID is required" });
         }
 
-        const registration = await Registration.findOne({ ticketId });
+        let searchIds = [ticketId];
 
-        if (!registration) {
+        // If it's a 4-digit number like "1024", auto-prefix it
+        if (/^\d{4}$/.test(ticketId.trim())) {
+            const num = ticketId.trim();
+            searchIds = [`TEDX-${num}`, `TEDX-TKT-${num}`];
+        }
+
+        // Try to find in Registration (NERIST)
+        let doc = await Registration.findOne({ ticketId: { $in: searchIds } });
+
+        // If not found, try to find in Ticket (Paid)
+        if (!doc) {
+            doc = await Ticket.findOne({ ticketId: { $in: searchIds } });
+        }
+
+        if (!doc) {
             return res.status(404).json({ message: "Invalid ticket ID" });
         }
 
-        if (!registration.isVerified) {
-            return res.status(400).json({ message: "User is not verified" });
+        if (!doc.isVerified) {
+            return res.status(400).json({ message: "Attendee is not verified" });
         }
 
-        if (registration.checkedIn) {
+        if (doc.checkedIn) {
             return res.status(400).json({
-                message: "User already checked in",
-                checkedInAt: registration.checkedInAt
+                message: "Attendee already checked in",
+                checkedInAt: doc.checkedInAt
             });
         }
 
-        registration.checkedIn = true;
-        registration.checkedInAt = new Date();
-        await registration.save();
+        doc.checkedIn = true;
+        doc.checkedInAt = new Date();
+        await doc.save();
 
         res.status(200).json({
             message: "Check-in successful",
             registration: {
-                name: registration.name,
-                email: registration.email,
-                ticketId: registration.ticketId,
-                checkedInAt: registration.checkedInAt
+                name: doc.name,
+                email: doc.email,
+                ticketId: doc.ticketId,
+                checkedInAt: doc.checkedInAt
             }
         });
     } catch (error) {

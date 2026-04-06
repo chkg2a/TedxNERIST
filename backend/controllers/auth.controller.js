@@ -69,8 +69,17 @@ export const verifyEmail = async (req, res) => {
             return res.status(400).json({ message: "Invalid or expired OTP" });
         }
 
-        // Generate ticket
-        const ticketId = "TEDX-" + Math.random().toString(36).substring(2, 10).toUpperCase();
+        // Generate unique 4-digit ticket ID
+        let ticketId = "";
+        let isUnique = false;
+        while (!isUnique) {
+            const random4Digit = Math.floor(1000 + Math.random() * 9000); // 1000 to 9999
+            ticketId = "TEDX-" + random4Digit;
+            const existingUser = await User.findOne({ ticketId });
+            if (!existingUser) {
+                isUnique = true;
+            }
+        }
 
         user.isVerified = true;
         user.otp = null;
