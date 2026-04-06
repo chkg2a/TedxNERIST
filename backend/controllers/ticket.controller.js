@@ -8,8 +8,8 @@ dotenv.config();
 
 // Ticket prices
 const TICKET_PRICES = {
-    general: 299,
-    vip: 599,
+    general: 1,
+    vip: 1,
 };
 
 // Purchase ticket (Step 1: Collect info + Create Orders)
