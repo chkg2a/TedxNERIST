@@ -55,6 +55,18 @@ export const purchaseTicket = async (req, res) => {
                 return res.status(400).json({ message: "A ticket has already been purchased with this email" });
             }
 
+            // Generate unique 4-digit ticket ID
+            let generatedTicketId = "";
+            let isUniqueId = false;
+            while (!isUniqueId) {
+                const random4Digit = Math.floor(1000 + Math.random() * 9000); 
+                generatedTicketId = "TEDX-" + random4Digit;
+                const existingTicketWithId = await Ticket.findOne({ ticketId: generatedTicketId });
+                if (!existingTicketWithId) {
+                    isUniqueId = true;
+                }
+            }
+
             ticket = new Ticket({
                 name,
                 contactNumber,
@@ -63,9 +75,24 @@ export const purchaseTicket = async (req, res) => {
                 ticketType: type,
                 quantity: qty,
                 amount,
-                // Automatically verified since OTP is removed
+                ticketId: generatedTicketId,
                 isVerified: true
             });
+        }
+
+        // Add ticketId to existing unverified records if missing
+        if (ticket && !ticket.ticketId) {
+            let generatedTicketId = "";
+            let isUniqueId = false;
+            while (!isUniqueId) {
+                const random4Digit = Math.floor(1000 + Math.random() * 9000); 
+                generatedTicketId = "TEDX-" + random4Digit;
+                const existingTicketWithId = await Ticket.findOne({ ticketId: generatedTicketId });
+                if (!existingTicketWithId) {
+                    isUniqueId = true;
+                }
+            }
+            ticket.ticketId = generatedTicketId;
         }
 
         // Initialize Razorpay
@@ -142,20 +169,22 @@ export const razorpayWebhook = async (req, res) => {
 
             const ticket = await Ticket.findById(ticket_id);
             if (ticket && ticket.paymentStatus !== "completed") {
-                // Generate unique 4-digit ticket ID
-                let generatedTicketId = "";
-                let isUnique = false;
-                while (!isUnique) {
-                    const random4Digit = Math.floor(1000 + Math.random() * 9000); // 1000 to 9999
-                    generatedTicketId = "TEDX-TKT-" + random4Digit;
-                    const existingTicket = await Ticket.findOne({ ticketId: generatedTicketId });
-                    if (!existingTicket) {
-                        isUnique = true;
+                // Ensure ticketId exists
+                let finalTicketId = ticket.ticketId;
+                if (!finalTicketId) {
+                    let isUnique = false;
+                    while (!isUnique) {
+                        const random4Digit = Math.floor(1000 + Math.random() * 9000); // 1000 to 9999
+                        finalTicketId = "TEDX-" + random4Digit;
+                        const existingTicket = await Ticket.findOne({ ticketId: finalTicketId });
+                        if (!existingTicket) {
+                            isUnique = true;
+                        }
                     }
+                    ticket.ticketId = finalTicketId;
                 }
 
                 ticket.paymentStatus = "completed";
-                ticket.ticketId = generatedTicketId;
                 
                 if (payload.payload.payment && payload.payload.payment.entity) {
                     ticket.razorpayPaymentId = payload.payload.payment.entity.id;
@@ -169,7 +198,7 @@ export const razorpayWebhook = async (req, res) => {
                     .replace(/\{buyerEmail\}/g, ticket.email)
                     .replace(/\{buyerContact\}/g, ticket.contactNumber)
                     .replace(/\{buyerAddress\}/g, ticket.address)
-                    .replace(/\{ticketId\}/g, generatedTicketId)
+                    .replace(/\{ticketId\}/g, finalTicketId)
                     .replace(/\{amount\}/g, `₹${ticket.amount}`)
                     .replace(/\{platformUrl\}/g, platformUrl);
 
@@ -271,7 +300,7 @@ export const capturePayment = async (req, res) => {
         let isUnique = false;
         while (!isUnique) {
             const random4Digit = Math.floor(1000 + Math.random() * 9000); // 1000 to 9999
-            ticketId = "TEDX-TKT-" + random4Digit;
+            ticketId = "TEDX-" + random4Digit;
             const existingTicket = await Ticket.findOne({ ticketId });
             if (!existingTicket) {
                 isUnique = true;
