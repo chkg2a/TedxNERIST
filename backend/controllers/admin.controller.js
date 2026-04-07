@@ -536,3 +536,31 @@ export const sendBulkEmail = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 }
+
+// Get all purchased tickets
+export const getAllPurchasedTickets = async (req, res) => {
+    try {
+        const tickets = await Ticket.find().sort({ createdAt: -1 });
+        res.status(200).json({ tickets });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+// Delete a purchased ticket
+export const deletePurchasedTicket = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const ticket = await Ticket.findByIdAndDelete(id);
+
+        if (!ticket) {
+            return res.status(404).json({ message: "Ticket not found" });
+        }
+
+        res.status(200).json({ message: "Ticket deleted successfully" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}

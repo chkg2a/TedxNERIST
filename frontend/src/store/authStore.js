@@ -14,6 +14,7 @@ export const useAuthStore = create((set, get) => ({
 
     // Registrations state
     registrations: [],
+    purchasedTickets: [],
     pagination: null,
     stats: null,
 
@@ -197,6 +198,38 @@ export const useAuthStore = create((set, get) => ({
             return { success: false, message };
         }
     },
+
+    // Fetch Purchased Tickets (Paid)
+    fetchPurchasedTickets: async () => {
+        set({ isLoading: true, error: null });
+        try {
+            const response = await axios.get(`${API_URL}/api/admin/purchased-tickets`);
+            set({
+                purchasedTickets: response.data.tickets,
+                isLoading: false
+            });
+            return { success: true };
+        } catch (error) {
+            const message = error.response?.data?.message || "Failed to fetch purchased tickets";
+            set({ isLoading: false, error: message });
+            return { success: false, message };
+        }
+    },
+
+    deletePurchasedTicket: async (id) => {
+        try {
+            await axios.delete(`${API_URL}/api/admin/purchased-tickets/${id}`);
+            // Remove from local state
+            set(state => ({
+                purchasedTickets: state.purchasedTickets.filter(t => t._id !== id)
+            }));
+            return { success: true };
+        } catch (error) {
+            const message = error.response?.data?.message || "Failed to delete ticket";
+            return { success: false, message };
+        }
+    },
+
 
     searchRegistrations: async (query) => {
         set({ isLoading: true, error: null });

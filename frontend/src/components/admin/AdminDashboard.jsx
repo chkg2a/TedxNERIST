@@ -8,6 +8,7 @@ import CheckInTab from "./CheckInTab";
 import AnalyticsTab from "./AnalyticsTab";
 import CheckedInListTab from "./CheckedInListTab";
 import ToolsTab from "./ToolsTab";
+import TicketPurchasesTab from "./TicketPurchasesTab";
 import { RegistrationModal, DeleteModal } from "./Modals";
 import "../../css/Admin.css";
 
@@ -89,6 +90,7 @@ const AdminDashboard = () => {
     const navItems = [
         { id: "dashboard", icon: "fa-chart-line", label: "Dashboard" },
         { id: "registrations", icon: "fa-users", label: "Registrations" },
+        { id: "tickets", icon: "fa-ticket-alt", label: "Paid Tickets" },
         { id: "checkin", icon: "fa-qrcode", label: "Check-In" },
         { id: "attendance", icon: "fa-clipboard-list", label: "Attendance Log" },
         { id: "analytics", icon: "fa-chart-area", label: "Analytics" },
@@ -138,6 +140,7 @@ const AdminDashboard = () => {
                             setDeleteConfirm={setDeleteConfirm}
                         />
                     )}
+                    {activeTab === "tickets" && <TicketPurchasesTab />}
                     {activeTab === "checkin" && (
                         <CheckInTab
                             ticketId={ticketId} setTicketId={setTicketId} handleCheckIn={handleCheckIn}

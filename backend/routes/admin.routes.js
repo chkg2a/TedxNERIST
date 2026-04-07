@@ -15,7 +15,9 @@ import {
     getRegistrationTimeline,
     getActivityLog,
     sendBulkEmail,
-    getCheckedInList
+    getCheckedInList,
+    getAllPurchasedTickets,
+    deletePurchasedTicket
 } from "../controllers/admin.controller.js";
 import { verifyToken } from "../middleware/verifyToken.js";
 
@@ -37,6 +39,8 @@ adminRouter.get("/registrations/export", exportRegistrations);
 adminRouter.get("/registrations/:id", getRegistrationById);
 adminRouter.delete("/registrations/:id", deleteRegistration);
 
+adminRouter.get("/purchased-tickets", getAllPurchasedTickets);
+adminRouter.delete("/purchased-tickets/:id", deletePurchasedTicket);
 
 adminRouter.get("/stats", getDashboardStats);
 adminRouter.get("/timeline", getRegistrationTimeline);
