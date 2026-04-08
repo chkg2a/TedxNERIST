@@ -86,11 +86,7 @@ export const categorizedTeam = [
         role: "Website Developer",
         img: "/images/team/chingkhei.jpeg",
       },
-      {
-        name: "Sanjeev",
-        role: "Website Developer",
-        img: "/images/team/sanjeev.jpeg",
-      },
+
     ],
   },
 ];
