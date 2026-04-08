@@ -37,6 +37,7 @@ export const sendWelcomeEmail=async(email,name,ticketId,whatsappNumber,departmen
   try {
     const html = WELCOME_EMAIL_TEMPLATE
       .replace(/\$\{name\}/g, name || "there")
+      .replace(/\$\{ticketId\}/g, ticketId || "N/A")
       .replace(/\{platformUrl\}/g, process.env.PLATFORM_URL || process.env.FRONTEND_URL || "/");
 
     const mailOptions = {

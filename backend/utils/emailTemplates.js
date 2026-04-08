@@ -479,8 +479,19 @@ export const WELCOME_EMAIL_TEMPLATE = `
                 Your registration is confirmed, and we are excited to have you as part of the TEDxNERIST journey.
               </p>
 
+              <!-- Entry ID Card -->
+              <div style="background-color:#0d0d0d;border:1px solid #2a2a2a;border-radius:16px;overflow:hidden;margin:26px 0 24px;text-align:center;">
+                <div style="background:linear-gradient(135deg,#EB0028 0%,#c70022 100%);padding:14px 24px;">
+                  <p style="margin:0 0 4px;color:rgba(255,255,255,0.7);font-size:10px;text-transform:uppercase;letter-spacing:2px;font-weight:600;">Your Entry ID</p>
+                  <p style="margin:0;color:#ffffff;font-size:24px;font-weight:800;letter-spacing:5px;font-family:'Courier New','Lucida Console',monospace;">\${ticketId}</p>
+                </div>
+                <div style="padding:12px 24px;">
+                  <p style="margin:0;color:rgba(255,255,255,0.55);font-size:11px;line-height:1.5;">Present this ID at the event entrance for check-in</p>
+                </div>
+              </div>
+
               <!-- Divider -->
-              <table width="100%" style="margin:26px 0 24px;">
+              <table width="100%" style="margin:0 0 24px;">
                 <tr>
                   <td height="1" style="background-color:#262626;"></td>
                 </tr>
